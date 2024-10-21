@@ -5,9 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <link rel="stylesheet" href="{{ asset('css/all.min.css') }}">
+    <script src="{{ asset('js/all.min.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('css/home.css') }}">
 </head>
 <body>
-    
+    @include('layouts.header')
 </body>
 </html>
