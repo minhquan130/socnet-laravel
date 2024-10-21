@@ -11,5 +11,6 @@
 </head>
 <body>
     @include('layouts.header')
+    @include('layouts.main')
 </body>
 </html>
