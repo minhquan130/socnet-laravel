@@ -10,17 +10,17 @@
 <body>
     <div class="login-container">
         <h2>Đăng Nhập</h2>
-        <form action="#" method="get" class="login-form">
+        <form action="{{ route('') }}" method="get" class="login-form">
             <label style="cursor: text;">
                 <i class="fa-solid fa-envelope"></i>
-                <input type="text" placeholder="Nhập email">
+                <input type="text" placeholder="Nhập email" required>
             </label>
             <label style="cursor: text;">
                 <i class="fa-solid fa-lock"></i>
-                <input type="password" placeholder="Nhập mật khẩu">
+                <input type="password" placeholder="Nhập mật khẩu" required>
             </label>
             <label style="background: none; padding: 0;">
-                <input type="checkbox" name="" id="" style="width: fit-content; cursor: pointer;">
+                <input type="checkbox" name="" id="" style="width: fit-content; cursor: pointer;" required>
                 Nhớ lần đăng nhập.
             </label>
             <label class="btn-submit">
