@@ -28,7 +28,7 @@
             </label>
         </form>
         <div>
-            <div class=""><a href="{{ route('register') }}">Đăng ký</a></div>
+            <div class=""><a href="{{ route('user.register') }}">Đăng ký</a></div>
             <div class="forgot-password"><a href="{{ route('forgetpassword') }}">Bạn quên mật khẩu?</a></div>
         </div>
     </div>
