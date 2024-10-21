@@ -10,9 +10,9 @@ use App\Http\Controllers\UserController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
-Route::post('/login', [UserController::class, 'index'])->name('login');
+Route::post('/login', [LoginController::class, 'store'])->name('login.store');
 
-Route::get('/register', [RegisterController::class, 'index'])->name('user.register');
-Route::post('/register', [RegisterController::class, 'store'])->name('user.store');
+Route::get('/register', [RegisterController::class, 'index'])->name('register');
+Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
 
 Route::get('/forgetpassword', [ForgetPasswordController::class, 'index'])->name('forgetpassword');
