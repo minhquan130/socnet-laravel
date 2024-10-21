@@ -1,8 +1,6 @@
 <main>
     <div class="container_sidebar">
-        <div class="sidebar">
-
-        </div>
+        <div class="sidebar"></div>
     </div>
     <div class="container_posts">
         <div class="posts">
