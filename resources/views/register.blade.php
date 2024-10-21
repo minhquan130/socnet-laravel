@@ -10,7 +10,8 @@
 <body>
     <div class="register-container">
         <h2>Đăng Ký</h2>
-        <form action="#" method="post" class="form-register">
+        <form action="{{ route('user.store') }}" method="post" class="form-register">
+            @csrf
             <label for>
                 <i class="fa-solid fa-envelope"></i>
                 <input type="text" name="email" id="email"
