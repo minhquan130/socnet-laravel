@@ -26,8 +26,65 @@
             </div>
             <hr style="margin: 1rem 0 0 0">
         </div>
-        <div class="followings">
+        <div class="followers">
             <h3>Những người theo dõi bạn</h3>
+            <hr>
+            <div class="list-followers">
+                <div class="item-follower">
+                    <div class="info-follower">
+                        <div class="avarta-follower">
+                            <img src="{{ asset('images/avatar.png') }}" alt="">
+                        </div>
+                        <div class="name-follower">Minh Quân</div>
+                    </div>
+                    <button class="btn-follow">Theo dõi</button>
+                </div>
+                <div class="item-follower">
+                    <div class="info-follower">
+                        <div class="avarta-follower">
+                            <img src="{{ asset('images/avatar.png') }}" alt="">
+                        </div>
+                        <div class="name-follower">Thiên Tú</div>
+                    </div>
+                    <button class="btn-follow">Theo dõi</button>
+                </div>
+                <div class="item-follower">
+                    <div class="info-follower">
+                        <div class="avarta-follower">
+                            <img src="{{ asset('images/avatar.png') }}" alt="">
+                        </div>
+                        <div class="name-follower">Thanh Sang</div>
+                    </div>
+                    <button class="btn-follow">Theo dõi</button>
+                </div>
+                <div class="item-follower">
+                    <div class="info-follower">
+                        <div class="avarta-follower">
+                            <img src="{{ asset('images/avatar.png') }}" alt="">
+                        </div>
+                        <div class="name-follower">Thanh Sang</div>
+                    </div>
+                    <button class="btn-follow">Theo dõi</button>
+                </div>
+                <div class="item-follower">
+                    <div class="info-follower">
+                        <div class="avarta-follower">
+                            <img src="{{ asset('images/avatar.png') }}" alt="">
+                        </div>
+                        <div class="name-follower">Thanh Sang</div>
+                    </div>
+                    <button class="btn-follow">Theo dõi</button>
+                </div>
+                <div class="item-follower">
+                    <div class="info-follower">
+                        <div class="avarta-follower">
+                            <img src="{{ asset('images/avatar.png') }}" alt="">
+                        </div>
+                        <div class="name-follower">Thanh Sang</div>
+                    </div>
+                    <button class="btn-follow">Theo dõi</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
