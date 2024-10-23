@@ -8,7 +8,7 @@ use App\Http\Controllers\ForgetPasswordController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostCotroller;
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/', [PostCotroller::class, 'showPosts'])->name('home');
 Route::post('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
