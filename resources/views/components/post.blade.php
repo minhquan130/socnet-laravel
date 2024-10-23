@@ -1,13 +1,13 @@
 <div class="container_posts">
     <div class="posts">
-        <form action="{{ route('home') }}" method="post" class="post-bar">
+        <form action="{{ route('post.add') }}" method="post" class="post-bar">
             @csrf
             <div class="top-post-bar">
                 <div class="img-avatar">
                     <img src="{{ asset('images/avatar.png') }}" alt="">
                 </div>
                 <div class="form-text-post">
-                    <input type="text" name="" id="" placeholder="Bạn đang nghĩ gì thế?">
+                    <input type="text" name="input-content" id="input-content" placeholder="Bạn đang nghĩ gì thế?">
                 </div>
             </div>
             <hr style="margin: 1rem 0;">
