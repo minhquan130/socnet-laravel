@@ -52,7 +52,7 @@
                         Thật là vui vẻ
                     </div>
                     <div class="content-media">
-                        <img src="{{asset('images/avatar.png')}}" alt="">
+                        <img src="{{asset('images/logo.png')}}" alt="">
                     </div>
                 </div>
 
