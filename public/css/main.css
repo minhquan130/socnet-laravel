@@ -3,6 +3,20 @@ main {
     grid-template-columns: 24rem auto 24rem;
     height: calc(100vh - 70px);
     gap: 1rem;
+    overflow-y: scroll;
+    margin-top: calc(70px);
+}
+
+main::-webkit-scrollbar {
+    width: 5px;
+}
+
+main::-webkit-scrollbar-track {
+    background: #696969;
+}
+
+main::-webkit-scrollbar-thumb {
+    background: #fffd80;
 }
 
 main .container_navbar,
@@ -255,6 +269,7 @@ main .container_posts .posts .post-bar .option-post-bar .option-item:last-child 
 main .container_posts .posts .post-bar .option-post-bar .option-item:last-child:hover {
     background: #fffd80;
     color: #000;
+    box-shadow: 0 0 5px #696969;
 }
 
 main .container_posts .posts .list-posts .post-item {
@@ -262,6 +277,9 @@ main .container_posts .posts .list-posts .post-item {
     background: rgba(255, 255, 255, 0.5);
     border-radius: 1rem;
     padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
 }
 
 main .container_posts .posts .list-posts .post-item .top-post {
@@ -272,7 +290,7 @@ main .container_posts .posts .list-posts .post-item .top-post {
 
 main .container_posts .posts .list-posts .post-item .top-post .top-post-tp1 {
     display: flex;
-    gap: 1rem;
+    gap: .5rem;
 }
 
 main .container_posts .posts .list-posts .post-item .top-post .top-post-tp1 .avarta-post {
@@ -316,3 +334,69 @@ main .container_posts .posts .list-posts .post-item .top-post .top-post-tp2 .oth
 main .container_posts .posts .list-posts .post-item .top-post .top-post-tp2 .other-post:hover {
     background: #efefef;
 }
+
+main .container_posts .posts .list-posts .post-item .content-post .content-text{
+    font-size: 18px;
+}
+
+main .container_posts .posts .list-posts .post-item .content-post .content-media{
+    background: #696969;
+    margin-top: .5rem;
+    width: 100%;
+    max-height: 500px;
+}
+
+main .container_posts .posts .list-posts .post-item .content-post .content-media img{
+    width: 100%;
+    max-height: 500px;
+    object-fit: cover;
+}
+main .container_posts .posts .list-posts .post-item .metrics-post{
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+}
+
+main .container_posts .posts .list-posts .post-item .metrics-post .count-likes{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+}
+
+main .container_posts .posts .list-posts .post-item .metrics-post .count-likes .icon-count-likes{
+    display: inline-flex;
+    color: #ffffff;
+    width: 25px;
+    height: 25px;
+    background: #ff7e7e;
+    border-radius: 50%;
+    font-size: 15px;
+    align-items: center;
+    justify-content: center;
+}
+
+main .container_posts .posts .list-posts .post-item .options-post{
+    display: flex;
+    justify-content: space-between;
+}
+
+main .container_posts .posts .list-posts .post-item .options-post .option{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 5px 20px;
+    border-radius: .5rem;
+    cursor: pointer;
+    transition: .3s;
+}
+
+main .container_posts .posts .list-posts .post-item .options-post .option:hover{
+    background: #c2c2c2;
+}
+
+main .container_posts .posts .list-posts .post-item .options-post .option .option-icon{
+    font-size: 20px;
+}
+
+

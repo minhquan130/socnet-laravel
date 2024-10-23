@@ -5,6 +5,10 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
+    box-shadow: 0 0 6px #696969;
+    position: fixed;
+    top: 0;
+    left: 0;
 }
 
 header .header_container {

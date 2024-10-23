@@ -29,6 +29,7 @@
 
             </div>
         </div>
+
         <div class="list-posts">
             <div class="post-item">
                 <div class="top-post">
@@ -43,6 +44,56 @@
                     </div>
                     <div class="top-post-tp2">
                         <div class="other-post"><i class="fa-solid fa-ellipsis"></i></div>
+                    </div>
+                </div>
+
+                <div class="content-post">
+                    <div class="content-text">
+                        Thật là vui vẻ
+                    </div>
+                    <div class="content-media">
+                        <img src="{{asset('images/avatar.png')}}" alt="">
+                    </div>
+                </div>
+
+                <div class="metrics-post">
+                    <div class="count-likes">
+                        <span class="icon-count-likes">
+                            <i class="fa-solid fa-heart"></i>
+                        </span>
+                        <span>56</span>
+                    </div>
+                    <div class="count-comments">
+                        <span>67 bình luận</span>
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="options-post">
+                    <div class="option option-like">
+                        <span class="option-icon icon-like">
+                            <i class="fa-solid fa-heart"></i>
+                        </span>
+                        <span>Thích</span>
+                    </div>
+                    <div class="option option-comment">
+                        <span class="option-icon icon-comment">
+                            <i class="fa-solid fa-message"></i>
+                        </span>
+                        <span>Bình luận</span>
+                    </div>
+                    <div class="option option-coppy">
+                        <span class="option-icon icon-coppy">
+                            <i class="fa-solid fa-link"></i>
+                        </span>
+                        <span>Sao chép</span>
+                    </div>
+                    <div class="option option-share">
+                        <span class="option-icon icon-share">
+                            <i class="fa-solid fa-share"></i>
+                        </span>
+                        <span>Sao chép</span>
                     </div>
                 </div>
             </div>
