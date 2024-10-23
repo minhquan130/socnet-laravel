@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id('user_id'); // PRIMARY KEY AUTO_INCREMENT
-            $table->string('username', 50)->unique(); // VARCHAR(50) UNIQUE NOT NULL
+            $table->string('username', 50); // VARCHAR(50) NOT NULL
             $table->string('email', 100)->unique(); // VARCHAR(100) UNIQUE NOT NULL
             $table->string('password_hash', 255); // VARCHAR(255) NOT NULL
             $table->string('profile_pic_url', 255)->nullable(); // VARCHAR(255)
+            $table->text('gender')->default('male'); // TEXT
             $table->text('bio')->nullable(); // TEXT
             $table->enum('privacy_setting', ['public', 'friends', 'private'])->default('public'); // ENUM với giá trị mặc định
             $table->timestamps(); // created_at và updated_at
