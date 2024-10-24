@@ -12,8 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('comments', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->id('comment_id'); // PRIMARY KEY AUTO_INCREMENT
+            $table->unsignedBigInteger('post_id'); // ID của bài đăng gốc
+            $table->unsignedBigInteger('user_id'); // ID của người dùng đã đăng bình luận
+            $table->unsignedBigInteger('parent_comment_id')->nullable(); // ID của bình luận cha, có thể là NULL
+            $table->text('content'); // Nội dung của bình luận
+            $table->timestamp('created_at')->useCurrent(); // Thời gian tạo bình luận
+
         });
     }
 
