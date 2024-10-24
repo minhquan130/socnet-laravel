@@ -12,8 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('friends', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->unsignedBigInteger('user_id'); // Kiểu dữ liệu INT
+            $table->unsignedBigInteger('friend_id'); // Kiểu dữ liệu INT
+            $table->enum('status', ['pending', 'accepted', 'blocked'])->default('pending'); // ENUM với giá trị mặc định 'pending'
+            $table->timestamp('created_at')->useCurrent(); // TIMESTAMP với giá trị mặc định là CURRENT_TIMESTAMP
+
+            $table->primary(['user_id', 'friend_id']); // PRIMARY KEY (user_id, friend_id)
         });
     }
 
