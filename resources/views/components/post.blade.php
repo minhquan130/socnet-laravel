@@ -114,7 +114,7 @@
                             </div>
                             <div class="content-top-post">
                                 <span class="name">Tikay</span>
-                                <span class="posted-time">5 min ago</span>
+                                <span class="posted-time">{{ $post->created_at->diffForHumans() }}</span>
                             </div>
                         </div>
                         <div class="top-post-tp2">

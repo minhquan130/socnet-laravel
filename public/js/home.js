@@ -2,9 +2,25 @@ const showMediaPost = document.getElementById('show-media-post');
 const imgShowMediaPost = document.getElementById('img-show-media-post');
 const inputPicture = document.getElementById('input-picture');
 const btnClosePreview = showMediaPost.querySelector('.close');
+const optionLikes = document.querySelectorAll('.option-like');
+
+let isLiked = false;
 
 inputPicture.addEventListener('change', chooseFile);
 btnClosePreview.addEventListener('click', closeFile);
+optionLikes.forEach(optionLike => {
+    optionLike.addEventListener('click', () => {
+        console.log('liked');
+        
+        if (!isLiked) {
+            optionLike.style.color = '#ff7e7e';
+            isLiked = true;
+        }else{
+            optionLike.style.color = '#000';
+            isLiked = false;
+        }
+    });
+});
 
 function chooseFile(){
     if (inputPicture.files && inputPicture.files[0]) {
