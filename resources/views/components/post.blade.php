@@ -166,7 +166,7 @@
                             <span class="option-icon icon-share">
                                 <i class="fa-solid fa-share"></i>
                             </span>
-                            <span>Sao chép</span>
+                            <span>Chia sẻ</span>
                         </div>
                     </div>
                 </div>
