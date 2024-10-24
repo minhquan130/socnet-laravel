@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Quên mật khẩu</title>
     <link rel="stylesheet" href="{{ asset('css/forgetpassword.css') }}">
+    //test git
 </head>
 <body>
     <div class="forgetPassword-contaiter">
