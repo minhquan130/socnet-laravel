@@ -18,8 +18,6 @@ return new class extends Migration
 
             // Thiết lập khóa chính tổng hợp
             $table->primary(['group_id', 'user_id']); // PRIMARY KEY (group_id, user_id)
-
-           
         });
     }
 
