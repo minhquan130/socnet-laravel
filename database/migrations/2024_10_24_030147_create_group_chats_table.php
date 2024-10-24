@@ -11,14 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('group_messages', function (Blueprint $table) {
-            $table->id('message_id'); // PRIMARY KEY AUTO_INCREMENT
-            $table->unsignedBigInteger('group_id'); // ID của nhóm chat
-            $table->unsignedBigInteger('sender_id'); // ID của người gửi tin nhắn
-            $table->text('content'); // Nội dung tin nhắn
-            $table->timestamp('created_at')->useCurrent(); // Thời gian tạo tin nhắn
-
-           
+        Schema::create('group_chats', function (Blueprint $table) {
+            $table->id('group_id'); // PRIMARY KEY AUTO_INCREMENT
+            $table->string('group_name', 50); // Tên nhóm, không được để trống
+            $table->timestamp('created_at')->useCurrent(); // Thời gian tạo nhóm
         });
     }
 
