@@ -20,15 +20,21 @@ class PostCotroller extends Controller
         $post = new Posts();
         $post->user_id = 1; // Hoặc lấy ID người dùng hiện tại
         $post->content = $request->input('input-content', '');
-        if ($request->input('input-picture')) {
-            # code...
-            $image = $request->input('input-picture');
-            // Lấy phần mở rộng của file
-            $extension = pathinfo($image, PATHINFO_EXTENSION);
 
-            $imageData = base64_encode($image);
-            $post->media_url = 'data:image/'.$extension.';base64,' . $imageData; // Lưu hình ảnh dưới dạng base64
+    // Kiểm tra xem người dùng có upload file ảnh hay không
+        if ($request->hasFile('input-picture') && $request->file('input-picture')->isValid()) {
+            $image = $request->file('input-picture');
+
+            // Lấy phần mở rộng của file
+            $extension = $image->getClientOriginalExtension();
+
+            // Lấy nội dung của file và mã hóa base64
+            $imageData = base64_encode(file_get_contents($image->getRealPath()));
+
+            // Lưu ảnh dưới dạng base64
+            $post->media_url = 'data:image/' . $extension . ';base64,' . $imageData;
         }
+        
 
         // Lưu bài viết vào cơ sở dữ liệu
         $post->save();

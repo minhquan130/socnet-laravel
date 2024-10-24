@@ -1,6 +1,6 @@
 <div class="container_posts">
     <div class="posts">
-        <form action="{{ route('post.add') }}" method="post" class="post-bar">
+        <form action="{{ route('post.add') }}" method="post" class="post-bar" enctype="multipart/form-data">
             @csrf
             <div class="top-post-bar">
                 <div class="img-avatar">
