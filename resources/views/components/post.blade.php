@@ -114,7 +114,7 @@
                             </div>
                             <div class="content-top-post">
                                 <span class="name">Tikay</span>
-                                <span class="posted-time">5 min ago</span>
+                                <span class="posted-time">{{ $post->created_at->diffForHumans() }}</span>
                             </div>
                         </div>
                         <div class="top-post-tp2">
@@ -166,7 +166,7 @@
                             <span class="option-icon icon-share">
                                 <i class="fa-solid fa-share"></i>
                             </span>
-                            <span>Sao chép</span>
+                            <span>Chia sẻ</span>
                         </div>
                     </div>
                 </div>
