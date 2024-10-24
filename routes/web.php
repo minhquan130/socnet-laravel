@@ -23,3 +23,4 @@ Route::post('/register', [RegisterController::class, 'store'])->name('register.s
 Route::get('/forgetpassword', [ForgetPasswordController::class, 'index'])->name('forgetpassword');
 
 Route::post('/post', [PostCotroller::class, 'addPost'])->name('post.add');
+Route::get('/post', [PostCotroller::class, 'addPost'])->name('post.like');
