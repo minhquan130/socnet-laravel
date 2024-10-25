@@ -7,6 +7,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ForgetPasswordController;
 // use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostCotroller;
+use App\Http\Controllers\ProfileController;
 
 Route::get('/', [PostCotroller::class, 'showPosts'])->name('home');
 // Route::post('/', [HomeController::class, 'index'])->name('home');
@@ -20,3 +21,5 @@ Route::post('/register', [RegisterController::class, 'store'])->name('register.s
 Route::get('/forgetpassword', [ForgetPasswordController::class, 'index'])->name('forgetpassword');
 
 Route::post('/post', [PostCotroller::class, 'addPost'])->name('post.add');
+
+Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
