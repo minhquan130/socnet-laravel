@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Posts;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 
 class PostCotroller extends Controller
 {
@@ -12,6 +13,7 @@ class PostCotroller extends Controller
     {
         // $posts = Posts::all(); // Lấy tất cả bài viết từ cơ sở dữ liệu
         $posts = Posts::orderBy('created_at', 'desc')->get();
+        // return Cookie::get('laravel_session');
         return view('home', compact('posts')); // Truyền dữ liệu đến view
     }
 
