@@ -10,7 +10,7 @@
 <body>
     <div class="login-container">
         <h2>Đăng Nhập</h2>
-        @if ($errors->any())
+        {{-- @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
                     @foreach ($errors->all() as $error)
@@ -18,17 +18,23 @@
                     @endforeach
                 </ul>
             </div>
-        @endif
+        @endif --}}
         <form action="{{ route('login.store') }}" method="post" class="login-form">
             @csrf
             <label style="cursor: text;">
                 <i class="fa-solid fa-envelope"></i>
-                <input type="text" id="email" name="email" placeholder="Nhập email" required>
+                <input type="text" id="email" name="email" placeholder="Nhập email">
             </label>
+            @if ($errors->any())
+                {{ $errors->first('email') }}
+            @endif
             <label style="cursor: text;">
                 <i class="fa-solid fa-lock"></i>
-                <input type="password" id="password" name="password" placeholder="Nhập mật khẩu" required>
+                <input type="password" id="password" name="password" placeholder="Nhập mật khẩu">
             </label>
+            @if ($errors->any())
+                {{ $errors->first('password') }}
+            @endif
             <label style="background: none; padding: 0;">
                 <input type="checkbox" name="" id="" style="width: fit-content; cursor: pointer;">
                 Nhớ lần đăng nhập.
