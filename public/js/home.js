@@ -24,11 +24,11 @@ optionLikes.forEach(optionLike => {
 
 function chooseFile(){
     if (inputPicture.files && inputPicture.files[0]) {
-        showMediaPost.style.display = 'flex';
         const file = inputPicture.files[0];
-
+        
         // Kiểm tra xem tệp có phải là hình ảnh không
         if (file.type.startsWith('image/')) {
+            showMediaPost.style.display = 'flex';
             const reader = new FileReader();
 
             // Khi tệp được đọc xong, hiển thị ảnh

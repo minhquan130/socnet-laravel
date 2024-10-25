@@ -19,28 +19,37 @@ class PostCotroller extends Controller
 
     public function addPost(Request $request)
     {
-        $post = new Posts();
-        $post->user_id = 1; // Hoặc lấy ID người dùng hiện tại
-        $post->content = $request->input('input-content', '');
+        // return $request->input('input-content').$request->file('input-picture');
+        if ($request->input('input-content') || $request->file('input-picture')) {
 
-    // Kiểm tra xem người dùng có upload file ảnh hay không
-        if ($request->hasFile('input-picture') && $request->file('input-picture')->isValid()) {
-            $image = $request->file('input-picture');
+            // Điều kiện kiểm tra dữ liệu đầu vào
+            $request->validate([
+                'input-content' => 'nullable|string|max:500', // Nội dung bài viết là bắt buộc, tối đa 500 ký tự
+                'input-picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // File ảnh (tùy chọn), chỉ chấp nhận các định dạng ảnh với dung lượng tối đa 2MB
+            ]);
 
-            // Lấy phần mở rộng của file
-            $extension = $image->getClientOriginalExtension();
+            // Tạo đối tượng bài viết mới
+            $post = new Posts();
+            $post->user_id = 1; // Hoặc lấy ID người dùng hiện tại
+            $post->content = $request->input('input-content', '');
 
-            // Lấy nội dung của file và mã hóa base64
-            $imageData = base64_encode(file_get_contents($image->getRealPath()));
+            // Kiểm tra xem người dùng có upload file ảnh hay không
+            if ($request->hasFile('input-picture') && $request->file('input-picture')->isValid()) {
+                $image = $request->file('input-picture');
 
-            // Lưu ảnh dưới dạng base64
-            $post->media_url = 'data:image/' . $extension . ';base64,' . $imageData;
+                // Lấy phần mở rộng của file
+                $extension = $image->getClientOriginalExtension();
+
+                // Lấy nội dung của file và mã hóa base64
+                $imageData = base64_encode(file_get_contents($image->getRealPath()));
+
+                // Lưu ảnh dưới dạng base64
+                $post->media_url = 'data:image/' . $extension . ';base64,' . $imageData;
+            }
+
+            // Lưu bài viết vào cơ sở dữ liệu
+            $post->save();
         }
-        
-
-        // Lưu bài viết vào cơ sở dữ liệu
-        $post->save();
-
         return redirect()->route('home')->with('success', 'Bài viết đã được đăng thành công!');
     }
 }
