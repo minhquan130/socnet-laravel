@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Posts;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cookie;
+// use Illuminate\Support\Facades\Cookie;
 
 class PostCotroller extends Controller
 {
