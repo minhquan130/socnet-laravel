@@ -127,7 +127,7 @@
                         </div>
                         @if($post->media_url)
                             <div class="content-media">
-                                <img src="{{ $post->media_url }}" alt="Hình ảnh bài viết" style="max-width: 300px; max-height: 300px;">
+                                <img src="{{ $post->media_url }}" alt="Hình ảnh bài viết">
                             </div>
                         @endif
                     </div>
