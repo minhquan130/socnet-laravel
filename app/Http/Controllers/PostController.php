@@ -6,7 +6,7 @@ use App\Models\Posts;
 use Illuminate\Http\Request;
 // use Illuminate\Support\Facades\Cookie;
 
-class PostCotroller extends Controller
+class PostController extends Controller
 {
 
     public function showPosts()
@@ -51,5 +51,17 @@ class PostCotroller extends Controller
             $post->save();
         }
         return redirect()->route('home')->with('success', 'Bài viết đã được đăng thành công!');
+    }
+
+    public function deletePost($id)
+    {
+        $post = Posts::where('post_id', $id)->first();
+
+        if (!$post) {
+            return redirect()->back()->with('error', 'Bài viết không tồn tại.');
+        }
+
+        $post->delete();
+        return redirect()->route('home')->with('success', 'Bài viết đã được xóa.');
     }
 }
