@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{{ asset('css/all.min.css') }}">
     <script src="{{ asset('js/all.min.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('css/home.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/profile.css')}}">
 </head>
 <body>
     <!-- Header -->
