@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +9,9 @@
     <link rel="stylesheet" href="{{ asset('css/all.min.css') }}">
     <script src="{{ asset('js/all.min.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('css/home.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/profile.css')}}">
 </head>
+
 <body>
     <!-- Header -->
     <header>
@@ -41,9 +44,13 @@
                 <div class="notification">
                     <i class="fa-solid fa-bell icon-notification"></i>
                 </div>
-                <div class="setting">
-                    <i class="fa-solid fa-circle-chevron-down icon-dropdonw"></i>
-                </div>
+                <a href="{{route('logout')}}">
+                    <div class="setting">
+                        <i class="fa-solid fa-circle-chevron-down icon-dropdonw"></i>
+                    </div>
+                </a>
             </div>
         </div>
+
     </header>
+</body>

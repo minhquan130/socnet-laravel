@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,18 +8,28 @@
     <title>Đăng nhập</title>
     <link rel="stylesheet" href="{{asset('css/login.css')}}">
 </head>
+
 <body>
     <div class="login-container">
         <h2>Đăng Nhập</h2>
-        {{-- @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif --}}
+
+        <!-- Hiển thị thông báo nếu có -->
+        @if(session('status'))
+        <div id="notification" class="alert alert-success">
+            {{ session('status') }}
+        </div>
+        <script>
+        // Hiển thị hộp thông báo và chuyển hướng sau 3 giây
+        setTimeout(function() {
+            // Ẩn thông báo sau 3 giây
+            document.getElementById('notification').style.display = 'none';
+            // Chuyển hướng đến trang login
+            window.location.href = '{{ url("login") }}'; // Hoặc dùng route
+        }, 1000); // Thời gian delay là 3000ms (3 giây)
+        </script>
+        @endif
+
+
         <form action="{{ route('login.store') }}" method="post" class="login-form">
             @csrf
             <label style="cursor: text;">
@@ -49,4 +60,5 @@
         </div>
     </div>
 </body>
+
 </html>

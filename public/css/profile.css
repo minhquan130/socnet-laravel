@@ -1,9 +1,10 @@
 .profile{
     position: relative;
     display: grid;
-    grid-template-columns: 18rem auto 20rem;
+    grid-template-columns: 20rem auto 20rem;
     gap: 1rem;
 }
+
 .profile .profile-left .info-card{
     display: flex;
     flex-direction: column;
@@ -14,48 +15,14 @@
     width: 90%;
 }
 
-
-
-
-
-main {
-    display: grid;
-    grid-template-columns: 24rem auto 24rem;
-    height: calc(100vh - 70px);
-    gap: 1rem;
-    overflow-y: scroll;
-    margin-top: calc(70px);
-}
-
-main::-webkit-scrollbar {
-    width: 5px;
-}
-
-main::-webkit-scrollbar-track {
-    background: #696969;
-}
-
-main::-webkit-scrollbar-thumb {
-    background: #fffd80;
-}
-
-main .container_navbar,
-main .container_posts,
-main .container_sidebar {
+.profile .container_sidebar {
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-main .navbar {
-    background: rgba(255, 255, 255, .5);
-    width: calc(100% - 3rem);
-    height: calc(100% - 2rem);
-    border-radius: 1rem;
-}
-
-main .sidebar {
+.profile .sidebar {
     /* background: rgba(255, 255, 255, .5); */
     overflow: hidden;
     position: fixed;
@@ -65,8 +32,7 @@ main .sidebar {
     width: 20rem;
     border-radius: 1rem;
 }
-
-main .container_sidebar .sidebar .card-profile {
+.profile .container_sidebar .sidebar .card-profile {
     border: 3px #fff solid;
     background: linear-gradient(0deg, #ff7e7e, #fffd80);
     padding: 1rem;
@@ -74,36 +40,36 @@ main .container_sidebar .sidebar .card-profile {
     color: #fff;
 }
 
-main .container_sidebar .sidebar .card-profile .profile-picture {
+.profile .container_sidebar .sidebar .card-profile .profile-picture {
     text-align: center;
 }
 
-main .container_sidebar .sidebar .card-profile .profile-picture img {
+.profile .container_sidebar .sidebar .card-profile .profile-picture img {
     width: 100px;
     height: 100px;
     border-radius: 50%;
     object-fit: cover;
 }
 
-main .container_sidebar .sidebar .card-profile .name {
+.profile .container_sidebar .sidebar .card-profile .name {
     font-size: 24px;
     color: #000000;
     font-weight: bold;
     text-align: center;
 }
 
-main .container_sidebar .sidebar .card-profile .bio {
+.profile .container_sidebar .sidebar .card-profile .bio {
     font-size: 20px;
     color: #696969;
     text-align: center;
 }
 
-main .container_sidebar .sidebar .card-profile .data {
+.profile .container_sidebar .sidebar .card-profile .data {
     display: flex;
     justify-content: space-between;
 }
 
-main .container_sidebar .sidebar .card-profile .data>div {
+.profile .container_sidebar .sidebar .card-profile .data>div {
     width: 6rem;
     display: flex;
     flex-direction: column;
@@ -111,69 +77,69 @@ main .container_sidebar .sidebar .card-profile .data>div {
     align-items: center;
 }
 
-main .container_sidebar .sidebar .card-profile .data>div>span {
+.profile .container_sidebar .sidebar .card-profile .data>div>span {
     font-size: 20px;
     font-weight: bold;
 }
 
-main .container_sidebar .sidebar>.followers {
+.profile .container_sidebar .sidebar>.followers {
     height: calc(100% - 286px - 1rem);
     overflow: hidden;
 }
 
-main .container_sidebar .sidebar>.followers h3 {
+.profile .container_sidebar .sidebar>.followers h3 {
     font-size: 20px;
     padding: 1rem;
 }
 
-main .container_sidebar .sidebar>.followers hr {
+.profile .container_sidebar .sidebar>.followers hr {
     margin: 0 1rem;
 }
 
-main .container_sidebar .sidebar>.followers .list-followers {
+.profile .container_sidebar .sidebar>.followers .list-followers {
     overflow-y: scroll;
     /* padding: 1rem; */
     height: calc(100% - 57px);
 }
 
-main .container_sidebar .sidebar>.followers .list-followers::-webkit-scrollbar {
+.profile .container_sidebar .sidebar>.followers .list-followers::-webkit-scrollbar {
     width: 5px;
 }
 
-main .container_sidebar .sidebar>.followers .list-followers::-webkit-scrollbar-track {
+.profile .container_sidebar .sidebar>.followers .list-followers::-webkit-scrollbar-track {
     background: #696969;
 }
 
-main .container_sidebar .sidebar>.followers .list-followers::-webkit-scrollbar-thumb {
+.profile .container_sidebar .sidebar>.followers .list-followers::-webkit-scrollbar-thumb {
     background: #ff7e7e;
 }
 
-main .container_sidebar .sidebar>.followers .list-followers .item-follower {
+.profile .container_sidebar .sidebar>.followers .list-followers .item-follower {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: .5rem;
 }
 
-main .container_sidebar .sidebar>.followers .list-followers .item-follower .info-follower {
+.profile .container_sidebar .sidebar>.followers .list-followers .item-follower .info-follower {
     display: flex;
     align-items: center;
     gap: 1rem;
 }
 
-main .container_sidebar .sidebar>.followers .list-followers .item-follower .info-follower .avarta-follower img {
+.profile .container_sidebar .sidebar>.followers .list-followers .item-follower .info-follower .avarta-follower img {
     width: 54px;
     height: 54px;
     border-radius: 50%;
     object-fit: cover;
 }
 
-main .container_sidebar .sidebar>.followers .list-followers .item-follower .info-follower .name-follower {
+.profile .container_sidebar .sidebar>.followers .list-followers .item-follower .info-follower .name-follower {
     font-size: 20px;
     font-weight: bold;
 }
 
-main .container_sidebar .sidebar>.followers .list-followers .item-follower .btn-follow {
+.profile .container_sidebar .sidebar>.followers .list-followers .item-follower .btn-follow {
     background: #ff7e7e;
     color: #fff;
     padding: 0.5rem 1rem;
@@ -185,8 +151,9 @@ main .container_sidebar .sidebar>.followers .list-followers .item-follower .btn-
     transition: .3s;
 }
 
-main .container_sidebar .sidebar>.followers .list-followers .item-follower .btn-follow:hover {
+.profile .container_sidebar .sidebar>.followers .list-followers .item-follower .btn-follow:hover {
     background: #fffd80;
     color: #000;
     box-shadow: 0 0 5px #696969;
 }
+
