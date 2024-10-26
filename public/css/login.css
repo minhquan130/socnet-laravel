@@ -81,3 +81,12 @@ body {
     text-decoration: none;
     color: blue;
 }
+.login-container .alert-success{
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+    display: block; /* Đảm bảo hiển thị thông báo */
+}
