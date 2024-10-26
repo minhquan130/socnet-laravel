@@ -29,9 +29,12 @@
             <div class="notification">
                 <i class="fa-solid fa-bell icon-notification"></i>
             </div>
-            <div class="setting">
+            <a href="{{route('logout')}}">     
+                 <div class="setting">
                 <i class="fa-solid fa-circle-chevron-down icon-dropdonw"></i>
             </div>
+            </a>
+           
         </div>
     </div>
 </header>

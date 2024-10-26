@@ -1,0 +1,72 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+body {
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(-135deg, #ff7e7e, #fffd80);
+    overflow: hidden;
+}
+.logout-container{
+    width: 500px;
+    background: rgba(255, 255, 255, .5);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 15px #777;
+    border-radius: 1rem;
+    padding: 5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.logout-container h2{
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+}
+.logout-container h4{
+    color: #777;
+}
+
+
+.logout-container .dangxuat {
+    display: flex; /* Giúp các phần tử nằm cạnh nhau */
+    justify-content: space-between; /* Tạo khoảng cách giữa các phần tử */
+    gap: 20px; /* Tạo khoảng cách giữa các nút */
+}
+
+.logout-container .dangxuat div {
+    border: 2px solid pink;
+    border-radius: 20px;
+    padding: 20px 10px;
+    min-width: 100px; /* Thiết lập chiều rộng tối thiểu cho các nút */
+    text-align: center; /* Canh giữa văn bản trong các nút */
+}
+.logout-container .dangxuat div a{
+    text-decoration: none;
+    color:#fff;
+
+}
+
+.logout-container .dangxuat .back {
+    background-color: #ff7e7e;
+    cursor: pointer; /* Hiển thị con trỏ tay khi di chuột vào */
+}
+
+.logout-container .dangxuat .yes {
+    background-color: #ff7e7e;
+    cursor: pointer; /* Hiển thị con trỏ tay khi di chuột vào */
+}
+.logout-container .dangxuat .yes  button{
+    border: none;
+    background: #ff7e7e;
+    color: #fff;
+    font-size: 16px;
+}
