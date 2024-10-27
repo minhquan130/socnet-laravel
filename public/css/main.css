@@ -287,7 +287,7 @@ main .container_posts .posts .post-bar #show-media-post #img-show-media-post {
     margin-top: .5rem
 }
 
-main .container_posts .posts .post-bar #show-media-post > .close {
+main .container_posts .posts .post-bar #show-media-post>.close {
     font-weight: bold;
     position: absolute;
     width: 25px;
@@ -304,7 +304,7 @@ main .container_posts .posts .post-bar #show-media-post > .close {
     cursor: pointer;
 }
 
-main .container_posts .posts .post-bar #show-media-post > .close:hover {
+main .container_posts .posts .post-bar #show-media-post>.close:hover {
     background: #c2c2c2;
 }
 
@@ -362,7 +362,12 @@ main .container_posts .posts .list-posts .post-item .top-post .top-post-tp1 .con
     color: #696969;
 }
 
+main .container_posts .posts .list-posts .post-item .top-post .top-post-tp2 {
+    position: relative;
+}
+
 main .container_posts .posts .list-posts .post-item .top-post .top-post-tp2 .other-post {
+    position: relative;
     width: 32px;
     height: 32px;
     border-radius: 50%;
@@ -371,6 +376,41 @@ main .container_posts .posts .list-posts .post-item .top-post .top-post-tp2 .oth
     align-items: center;
     cursor: pointer;
     transition: 0.3s;
+}
+
+main .container_posts .posts .list-posts .post-item .top-post .top-post-tp2 .options-item-post {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    background: #fff;
+    list-style: none;
+    width: 200px;
+    right: 0;
+    top: 40px;
+    padding: .5rem;
+    gap: 0.5rem;
+    box-shadow: 0 0 5px #696969;
+    border-radius: 8px;
+}
+
+main .container_posts .posts .list-posts .post-item .top-post .top-post-tp2 .options-item-post li a {
+    font-size: 18px;
+    display: flex;
+    gap: 1rem;
+    padding: 0.5rem 1rem;
+    transition: .3s;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    color: #000;
+    border: none;
+    cursor: pointer;
+    background: none;
+    width: 100%;
+}
+
+main .container_posts .posts .list-posts .post-item .top-post .top-post-tp2 .options-item-post li a:hover {
+    background: #c2c2c2;
 }
 
 main .container_posts .posts .list-posts .post-item .top-post .top-post-tp2 .other-post:hover {
