@@ -120,7 +120,7 @@
                             </span>
                             <span>Thích</span>
                         </div>
-                        <div class="option option-comment">
+                        <div class="option option-comment" data-bs-toggle="modal" data-bs-target="#commentModal">
                             <span class="option-icon icon-comment">
                                 <i class="fa-solid fa-message"></i>
                             </span>
