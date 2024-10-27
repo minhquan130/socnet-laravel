@@ -5,7 +5,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="commentModalLabel">Bình luận</h5>
-                    <button type="button" class="btn-close" da ta-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <h2 class="fs-5">Musa</h2>
@@ -26,7 +26,7 @@
                 <form action="" method="post" class="text-comment">
                     <img src="{{ asset('images/avatar.png') }}" alt="Avatar" class="img-fluid rounded-circle me-2"
                         style="width: 40px; height: 40px;">
-                    <input type="text" name="comment" id="" placeholder=" Bình luận dưới tên Văn Đat"
+                    <input type="text" name="comment" id="input-comment" placeholder=" Bình luận dưới tên Văn Đat"
                     style="width: 100%; height:30px;">
                     <span class="arrow">➤</span>
 

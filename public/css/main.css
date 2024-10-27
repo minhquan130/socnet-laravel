@@ -539,7 +539,7 @@ main .container_posts .posts .list-posts .post-item .options-post .option .optio
     margin-top: 20px; /* Khoảng cách phía trên ô nhập */
 }
 
-input[type="text"] {
+input#input-comment {
     border: 1px solid #ced4da; /* Viền nhẹ cho ô nhập */
     border-radius: 20px; /* Bo góc cho ô nhập */
     padding: 10px; /* Khoảng đệm bên trong ô nhập */
@@ -549,7 +549,7 @@ input[type="text"] {
 }
 
 /* Kiểu dáng khi ô nhập được chọn */
-input[type="text"]:focus {
+input#input-comment:focus {
     border-color: #007bff; /* Thay đổi màu viền khi được chọn */
     outline: none; /* Xóa viền mặc định */
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Thêm bóng khi được chọn */
