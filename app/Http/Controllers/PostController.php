@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Posts;
+use App\Models\Users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -16,8 +17,12 @@ class PostController extends Controller
         $posts = Posts::orderBy('created_at', 'desc')->get();
         // return Cookie::get('laravel_session');
         if (Session::has('user_id') && Session::has('user_email') && Session::has('user_password')) {
-            return view('home', compact('posts')); // Truyền dữ liệu đến view
+            $user = Users::where('user_id', Session::get('user_id'))->first(); // Lấy bản ghi đầu tiên khớp
+            if ($user->email == Session::get('user_email') && $user->password_hash == Session::get('user_password')) {
+                return view('home', compact('posts')); // Truyền dữ liệu đến view
+            }
         }
+        
         return view('login');
     }
 
