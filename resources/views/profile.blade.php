@@ -8,53 +8,71 @@
                 </div>
                 <div class="info">
                     <span>
-                        <b>Trạng thái</b>
+                        <b>Trạng thái: </b>
                     </span>
                     <span>Bạn bè</span>
                 </div>
                 <div class="info">
                     <span>
-                        <b>Nơi ở</b>
+                        <b>Nơi ở: </b>
                     </span>
                     <span>TPHCM</span>
                 </div>
                 <div class="info">
                     <span>
-                        <b>Làm việc ở</b>
+                        <b>Làm việc ở: </b>
                         <span>ESC</span>
                     </span>
                 </div>
+                <div class="info">
+                    <span>
+                        <b>Tình trạng: </b>
+                        <span>Quan hệ mập mờ</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="profile-container">
+            <div class="profile-right">
+                <div class="avatar">
+                    <img src="{{ asset('images/avatar.png') }}" alt="">
+                </div>
+                <div class="info-right">
+                    <span>Thiên Tú</span>
+                    <div class="user-post-follow">
+                        <span class="post">0 Post</span>
+                        <span class="follower">300 follower</span>
+                        <span class="following">50000 following</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="story">
+                <div class="list-story">
+                   <img src="{{ asset('images/background.jpg') }}" alt=""> 
+                   <span>Hello world</span>
+                </div>
+                <div class="list-story">
+                    <img src="{{ asset('images/avatar.png') }}" alt=""> 
+                    <span>Love</span>
+                 </div>
+                 <div class="list-story">
+                    <img src="{{ asset('images/background.jpg') }}" alt=""> 
+                    <span>meo meo</span>
+                 </div>
+                 <div class="list-story">
+                    <img src="{{ asset('images/avatar.png') }}" alt=""> 
+                    <span>work</span>
+                 </div>
+                 <div class="list-story">
+                    <img src="{{ asset('images/background.jpg') }}" alt=""> 
+                    <span>boring</span>
+                 </div>
             </div>
         </div>
         
         <div class="container_sidebar">
             <div class="sidebar">
-                <div class="card-profile">
-                    <div class="profile-picture">
-                        <img src="{{ asset('images/avatar.png') }}" alt="">
-                    </div>
-                    <div class="name">
-                        <span>Victory Tikay</span>
-                    </div>
-                    <div class="bio">
-                        <span>Hello World</span>
-                    </div>
-                    <hr style="margin: 1rem 0">
-                    <div class="data">
-                        <div class="data-followings">
-                            <span>890</span> Followings
-                        </div>
-                        <hr>
-                        <div class="data-followers">
-                            <span>99</span> Followers
-                        </div>
-                        <hr>
-                        <div class="data-posts">
-                            <span>11</span> Posts
-                        </div>
-                    </div>
-                    <hr style="margin: 1rem 0 0 0">
-                </div>
                 <div class="followers">
                     <h3>Những người theo dõi bạn</h3>
                     <hr>
