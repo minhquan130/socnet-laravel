@@ -11,7 +11,6 @@ class PostController extends Controller
 
     public function showPosts()
     {
-        // $posts = Posts::all(); // Lấy tất cả bài viết từ cơ sở dữ liệu
         $posts = Posts::orderBy('created_at', 'desc')->get();
         // return Cookie::get('laravel_session');
         return view('home', compact('posts')); // Truyền dữ liệu đến view
@@ -19,7 +18,6 @@ class PostController extends Controller
 
     public function addPost(Request $request)
     {
-        // return $request->input('input-content').$request->file('input-picture');
         if ($request->input('input-content') || $request->file('input-picture')) {
 
             // Điều kiện kiểm tra dữ liệu đầu vào
