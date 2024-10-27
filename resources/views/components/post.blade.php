@@ -1,7 +1,4 @@
 <div class="container_posts">
-
-    <!--  làm phàm modal hiển thie bosstrap-->
-
     <!-- Modal -->
     <div class="modal fade" id="commentModal" tabindex="-1" aria-labelledby="commentModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -13,16 +10,16 @@
                 <div class="modal-body">
                     <h2 class="fs-5">Musa</h2>
                     <p>
-                    <img src="{{ asset('images/musa.jpg') }}" alt="Avatar" class="img-fluid rounded-circle me-2"
-                    style="width: 40px; height: 40px;"> 
-                    <span>bà sáu xinh quá nhen</span>
+                        <img src="{{ asset('images/musa.jpg') }}" alt="Avatar" class="img-fluid rounded-circle me-2"
+                            style="width: 40px; height: 40px;">
+                        <span>bà sáu xinh quá nhen</span>
                     </p>
                     <hr>
                     <h2 class="fs-5">Shizuka</h2>
                     <p>
-                    <img src="{{ asset('images/Shizuka.png') }}" alt="Avatar" class="img-fluid rounded-circle me-2"
-                    style="width: 40px; height: 40px;"> 
-                    <span>Cái môi bả sáu dễ sợ</span>
+                        <img src="{{ asset('images/Shizuka.png') }}" alt="Avatar"
+                            class="img-fluid rounded-circle me-2" style="width: 40px; height: 40px;">
+                        <span>Cái môi bả sáu dễ sợ</span>
                     </p>
                 </div>
                 <form action="" method="get">
@@ -34,11 +31,6 @@
             </div>
         </div>
     </div>
-
-
-
-    <!--  -->
-
     <div class="posts">
         <form action="{{ route('post.add') }}" method="post" class="post-bar" enctype="multipart/form-data">
             @csrf
@@ -71,13 +63,13 @@
             </div>
             <div id="show-media-post">
                 <div class="close">✖</div>
-                <img src="" alt="" id="img-show-media-post">
+                <img src="{{ asset('#') }}" alt="" id="img-show-media-post">
             </div>
         </form>
 
         <div class="list-posts">
-            @foreach($posts as $post)
-            <div class="post-item">
+            @foreach ($posts as $post)
+                <div class="post-item">
                     <div class="top-post">
                         <div class="top-post-tp1">
                             <div class="avarta-post">
@@ -93,7 +85,8 @@
                                 <i class="fa-solid fa-ellipsis"></i>
                             </div>
                             <ul class="options-item-post">
-                                <li><a href="{{ route('post.delete', ['id' => $post->post_id]) }}"><i class="fa-solid fa-trash"></i>Xóa bài viết</a></li>
+                                <li><a href="{{ route('post.delete', ['id' => $post->post_id]) }}"><i
+                                            class="fa-solid fa-trash"></i>Xóa bài viết</a></li>
                                 <li><a href=""><i class="fa-solid fa-pen"></i>Sửa bài viết</a></li>
                             </ul>
                         </div>
@@ -102,7 +95,7 @@
                         <div class="content-text">
                             {{ $post->content }}
                         </div>
-                        @if($post->media_url)
+                        @if ($post->media_url)
                             <div class="content-media">
                                 <img src="{{ $post->media_url }}" alt="Hình ảnh bài viết">
                             </div>
@@ -148,9 +141,6 @@
                     </div>
                 </div>
             @endforeach
-        </div>        
+        </div>
     </div>
-    @endforeach
-</div>
-</div>
 </div>
