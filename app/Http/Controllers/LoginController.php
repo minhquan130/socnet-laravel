@@ -5,11 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\Users; // Sử dụng lớp Users
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
     public function index()
     {
+        if (Session::has('user_id') && Session::has('user_email') && Session::has('user_password')) {
+            return redirect()->route('home')->with('success', 'Đăng nhập thành công!');
+        }
         return view('login');
     }
 
@@ -45,8 +49,10 @@ class LoginController extends Controller
         }
 
         // Tạo session cho người dùng (nếu bạn muốn sử dụng session để lưu thông tin đăng nhập)
-        session(['user_id' => $user->id]);
-
+        Session::put(['user_id' => $user->user_id]);
+        Session::put(['user_email' => $user->email]);
+        Session::put(['user_password' => $user->password_hash]);
+        // dd(Session::all());
         // Chuyển hướng đến trang chính
         return redirect()->route('home')->with('success', 'Đăng nhập thành công!');
     }

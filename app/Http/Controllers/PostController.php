@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Posts;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+
 // use Illuminate\Support\Facades\Cookie;
 
 class PostController extends Controller
@@ -13,13 +15,15 @@ class PostController extends Controller
     {
         $posts = Posts::orderBy('created_at', 'desc')->get();
         // return Cookie::get('laravel_session');
-        return view('home', compact('posts')); // Truyền dữ liệu đến view
+        if (Session::has('user_id') && Session::has('user_email') && Session::has('user_password')) {
+            return view('home', compact('posts')); // Truyền dữ liệu đến view
+        }
+        return view('login');
     }
 
     public function addPost(Request $request)
     {
         if ($request->input('input-content') || $request->file('input-picture')) {
-
             // Điều kiện kiểm tra dữ liệu đầu vào
             $request->validate([
                 'input-content' => 'nullable|string|max:500', // Nội dung bài viết là bắt buộc, tối đa 500 ký tự
