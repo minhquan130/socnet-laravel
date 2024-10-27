@@ -1,4 +1,44 @@
 <div class="container_posts">
+
+    <!--  làm phàm modal hiển thie bosstrap-->
+
+    <!-- Modal -->
+    <div class="modal fade" id="commentModal" tabindex="-1" aria-labelledby="commentModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="commentModalLabel">Bình luận</h5>
+                    <button type="button" class="btn-close" da ta-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h2 class="fs-5">Musa</h2>
+                    <p>
+                    <img src="{{ asset('images/musa.jpg') }}" alt="Avatar" class="img-fluid rounded-circle me-2"
+                    style="width: 40px; height: 40px;"> 
+                    <span>bà sáu xinh quá nhen</span>
+                    </p>
+                    <hr>
+                    <h2 class="fs-5">Shizuka</h2>
+                    <p>
+                    <img src="{{ asset('images/Shizuka.png') }}" alt="Avatar" class="img-fluid rounded-circle me-2"
+                    style="width: 40px; height: 40px;"> 
+                    <span>Cái môi bả sáu dễ sợ</span>
+                    </p>
+                </div>
+                <form action="" method="get">
+                    <img src="{{ asset('images/avatar.png') }}" alt="Avatar" class="img-fluid rounded-circle me-2"
+                        style="width: 40px; height: 40px;">
+                    <input type="text" name="comment" id="" placeholder=" Bình luận dưới tên Văn Đat"
+                        style="width: 100%; height:20px;">
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!--  -->
+
     <div class="posts">
         <form action="{{ route('post.add') }}" method="post" class="post-bar" enctype="multipart/form-data">
             @csrf
@@ -25,7 +65,7 @@
                     <i class="fa-solid fa-location-dot"></i>
                     <span>Địa điểm</span>
                 </div>
-                <button type="submit" class="option-item" >
+                <button type="submit" class="option-item">
                     <span>Đăng</span>
                 </button>
             </div>
@@ -110,4 +150,7 @@
             @endforeach
         </div>        
     </div>
+    @endforeach
+</div>
+</div>
 </div>
