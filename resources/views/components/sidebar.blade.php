@@ -11,7 +11,12 @@
                 @if ($user->bio)
                     <span>{{ $user->bio }}</span>
                 @else
-                    <span>Bạn chưa có tiểu sử <i class="fa-solid fa-pen-to-square"></i></span>
+                    <span style="display: inline-flex; gap: 1rem;">
+                        Bạn chưa có tiểu sử
+                        <a href="#">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </a>
+                    </span>
                 @endif
             </div>
             <hr style="margin: 1rem 0">
