@@ -480,3 +480,101 @@ main .container_posts .posts .list-posts .post-item .options-post .option:hover 
 main .container_posts .posts .list-posts .post-item .options-post .option .option-icon {
     font-size: 20px;
 }
+
+/* css modal */
+/* Kiểu dáng chung cho Modal */
+.modal-content {
+    border-radius: 10px; /* Bo góc modal */
+    overflow: hidden; /* Ẩn phần tràn ra ngoài */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Đổ bóng cho modal */
+}
+
+.modal-header {
+    background-color: #f8f9fa; /* Nền sáng cho header */
+    border-bottom: 1px solid #dee2e6; /* Viền nhẹ cho header */
+}
+
+.modal-title {
+    font-size: 1.25rem; /* Tăng kích thước tiêu đề */
+    color: #343a40; /* Màu văn bản tối hơn */
+}
+
+.btn-close {
+    background-color: transparent; /* Nền trong suốt cho nút đóng */
+    border: none; /* Không có viền */
+    color: #6c757d; /* Màu xám */
+    font-size: 1.5rem; /* Kích thước lớn hơn cho nút đóng */
+}
+
+.btn-close:hover {
+    color: #dc3545; /* Thay đổi màu khi hover */
+}
+
+/* Kiểu dáng cho phần thân modal */
+.modal-body {
+    padding: 20px; /* Thêm khoảng đệm */
+    background-color: #ffffff; /* Nền trắng cho phần thân */
+}
+
+/* Kiểu dáng cho phần bình luận */
+.fs-5 {
+    margin: 0; /* Xóa khoảng cách mặc định */
+    color: #495057; /* Màu tối hơn cho tên */
+}
+
+.modal-body p {
+    display: flex; /* Sử dụng flexbox để căn chỉnh ảnh đại diện và văn bản */
+    align-items: center; /* Căn giữa các mục theo chiều dọc */
+    margin-bottom: 15px; /* Khoảng cách giữa các bình luận */
+}
+
+.modal-body img {
+    border: 2px solid #e9ecef; /* Viền nhẹ quanh ảnh đại diện */
+}
+
+/* Kiểu dáng cho ô nhập */
+.text-comment {
+    display: flex; /* Sử dụng flexbox cho bố cục ô nhập */
+    align-items: center; /* Căn giữa các mục theo chiều dọc */
+    margin-top: 20px; /* Khoảng cách phía trên ô nhập */
+}
+
+input[type="text"] {
+    border: 1px solid #ced4da; /* Viền nhẹ cho ô nhập */
+    border-radius: 20px; /* Bo góc cho ô nhập */
+    padding: 10px; /* Khoảng đệm bên trong ô nhập */
+    margin-left: 5px; /* Khoảng cách giữa ảnh đại diện và ô nhập */
+    flex-grow: 1; /* Cho phép ô nhập chiếm không gian còn lại */
+    font-size: 16px; /* Kích thước phông chữ cho ô nhập */
+}
+
+/* Kiểu dáng khi ô nhập được chọn */
+input[type="text"]:focus {
+    border-color: #007bff; /* Thay đổi màu viền khi được chọn */
+    outline: none; /* Xóa viền mặc định */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Thêm bóng khi được chọn */
+}
+.input-container {
+    position: relative; /* Để sử dụng vị trí tương đối cho các phần tử con */
+    display: flex; /* Sử dụng flexbox để căn chỉnh các mục */
+    align-items: center; /* Căn giữa các mục theo chiều dọc */
+    margin-top: 20px; /* Khoảng cách phía trên */
+}
+
+.comment-input {
+    width: 90%; /* Chiều rộng của ô nhập */
+    height: 40px; /* Chiều cao của ô nhập */
+    padding-right: 30px; /* Khoảng đệm bên phải để tránh che mất dấu mũi tên */
+    border: 1px solid #ced4da; /* Viền nhẹ cho ô nhập */
+    border-radius: 20px; /* Bo góc cho ô nhập */
+    font-size: 14px; /* Kích thước phông chữ cho ô nhập */
+}
+
+.arrow {
+    position: absolute; /* Đặt vị trí tuyệt đối cho dấu mũi tên */
+    right: 10px; /* Khoảng cách bên phải */
+    color: #6c757d; /* Màu cho dấu mũi tên */
+    font-size: 18px; /* Kích thước cho dấu mũi tên */
+    cursor: pointer; /* Thay đổi con trỏ khi hover vào dấu mũi tên */
+}
+
