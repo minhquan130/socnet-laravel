@@ -18,15 +18,15 @@
         <div id="notification" class="alert alert-success">
             {{ session('status') }}
         </div>
-        <script>
+        {{-- <script>
         // Hiển thị hộp thông báo và chuyển hướng sau 3 giây
         setTimeout(function() {
             // Ẩn thông báo sau 3 giây
             document.getElementById('notification').style.display = 'none';
             // Chuyển hướng đến trang login
             window.location.href = '{{ url("login") }}'; // Hoặc dùng route
-        }, 1000); // Thời gian delay là 3000ms (3 giây)
-        </script>
+        }, 5000); // Thời gian delay là 3000ms (3 giây)
+        </script> --}}
         @endif
 
 
