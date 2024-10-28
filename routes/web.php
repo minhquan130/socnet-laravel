@@ -29,11 +29,16 @@ Route::middleware([CheckUser::class])->group(function () {
     Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
 
     Route::get('/chats', [ChatController::class, 'index'])->name('chats');
+
+    Route::get('/friends', [UserController::class, 'showFriends'])->name('friends');
+    Route::get('/friends/add/{id}', [UserController::class, 'addFriends'])->name('friends.add');
         
     // Route cho việc bình luận
     Route::post('/post/{id}/comment', [CommentController::class, 'store'])->name('post.store');
     
     Route::get('/post/{id}', [CommentController::class, 'show'])->name('post.show');
+
+
 });
 
 Route::get('/register', [RegisterController::class, 'index'])->name('register');

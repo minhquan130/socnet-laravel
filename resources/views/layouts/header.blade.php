@@ -18,6 +18,7 @@
     <script src="{{ asset('js/all.min.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('css/home.css') }}">
     <link rel="stylesheet" href="{{ asset('css/profile.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/friend.css')}}">
 </head>
 
 <body>
@@ -39,9 +40,9 @@
                 <a href="{{ route('home') }}" class="home active">
                     <span><i class="fa-solid fa-house"></i></span>
                 </a>
-                <div class="friends">
+                <a href="{{ route('friends') }}" class="friends">
                     <span><i class="fa-solid fa-user-group"></i></span>
-                </div>
+                </a>
                 <a href="{{ route('chats') }}" class="messages">
                     <span><i class="fa-solid fa-comments"></i></span>
                 </a>
