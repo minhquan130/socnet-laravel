@@ -4,7 +4,9 @@
     grid-template-columns: 20rem auto 20rem;
     gap: 1rem;
     margin-top: 80px;
+    overflow-y: scroll;
 }
+
 
 .profile .profile-left {
     padding-top: 10px;
@@ -21,7 +23,7 @@
     padding-left: 10px;
     border-radius: 1rem;
     width: 105%;
-    height: 300px;
+    height: 390px;
     background: linear-gradient(0deg, #ff7e7e, #fffd80);
     border: 3px solid #fff;
 }
@@ -38,13 +40,14 @@
 }
 
 
+
+
 .profile .container_sidebar {
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-
 
 .profile .profile-container {
     display: flex;
@@ -99,6 +102,8 @@
     border: 3px solid #727272;
 }
 
+
+
 .modal-body .edit span {
     display: block;
     font-weight: bold;
@@ -118,104 +123,4 @@
 
 .modal-body .edit input:focus {
     border-bottom: 1px solid #000;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.profile .sidebar {
-    /* background: rgba(255, 255, 255, .5); */
-    overflow: hidden;
-    position: fixed;
-    top: calc(1rem + 70px);
-    bottom: 1rem;
-    left: 1rem;
-    width: 20rem;
-    border-radius: 1rem;
-}
-
-.profile .container_sidebar .sidebar>.followers {
-    height: calc(100% - 286px - 1rem);
-    overflow: hidden;
-    margin-top: 300px;
-}
-
-.profile .container_sidebar .sidebar>.followers h3 {
-    font-size: 20px;
-    padding: 1rem;
-}
-
-.profile .container_sidebar .sidebar>.followers hr {
-    margin: 0 1rem;
-}
-
-.profile .container_sidebar .sidebar>.followers .list-followers {
-    overflow-y: scroll;
-    /* padding: 1rem; */
-    height: calc(100% - 57px);
-}
-
-.profile .container_sidebar .sidebar>.followers .list-followers::-webkit-scrollbar {
-    width: 5px;
-}
-
-.profile .container_sidebar .sidebar>.followers .list-followers::-webkit-scrollbar-track {
-    background: #696969;
-}
-
-.profile .container_sidebar .sidebar>.followers .list-followers::-webkit-scrollbar-thumb {
-    background: #ff7e7e;
-}
-
-.profile .container_sidebar .sidebar>.followers .list-followers .item-follower {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: .5rem;
-}
-
-.profile .container_sidebar .sidebar>.followers .list-followers .item-follower .info-follower {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-.profile .container_sidebar .sidebar>.followers .list-followers .item-follower .info-follower .avarta-follower img {
-    width: 54px;
-    height: 54px;
-    border-radius: 50%;
-    object-fit: cover;
-}
-
-.profile .container_sidebar .sidebar>.followers .list-followers .item-follower .info-follower .name-follower {
-    font-size: 20px;
-    font-weight: bold;
-}
-
-.profile .container_sidebar .sidebar>.followers .list-followers .item-follower .btn-follow {
-    background: #ff7e7e;
-    color: #fff;
-    padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
-    font-weight: bold;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-    transition: .3s;
-}
-
-.profile .container_sidebar .sidebar>.followers .list-followers .item-follower .btn-follow:hover {
-    background: #fffd80;
-    color: #000;
-    box-shadow: 0 0 5px #696969;
 }

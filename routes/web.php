@@ -28,7 +28,6 @@ Route::post('/post', [PostController::class, 'addPost'])->name('post.add');
 Route::get('/delete-post/{id}', [PostController::class, 'deletePost'])->name('post.delete');
 
 Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
 
 Route::get('/chats', [ChatController::class, 'index'])->name('chats');
-
-

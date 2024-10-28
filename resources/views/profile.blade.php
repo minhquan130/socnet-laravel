@@ -1,6 +1,11 @@
     @include('layouts.header')
     <div class="profile">
         <div class="profile-left">
+            @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+            @endif
             <div class="info-card">
                 <div class="info-head">
                     <h4>Thông tin người dùng</h4>
@@ -10,9 +15,9 @@
                 </div>
                 <div class="info">
                     <span>
-                        <b>Tên của bạn: </b>
+                        <b>Tên người dùng: </b>
                     </span>
-                    <span>Thiên Tú</span>
+                    <span>{{ $user->name }}</span>
                 </div>
                 <div class="info">
                     <span>
@@ -24,20 +29,39 @@
                     <span>
                         <b>Nơi ở: </b>
                     </span>
-                    <span>TPHCM</span>
+                    <span>{{ $user->address }}</span>
                 </div>
                 <div class="info">
                     <span>
                         <b>Làm việc ở: </b>
-                        <span>ESC</span>
+                        <span>{{ $user->company }}</span>
                     </span>
                 </div>
                 <div class="info">
                     <span>
                         <b>Tình trạng: </b>
-                        <span>Quan hệ mập mờ</span>
+                        <span>{{ $user->relationship_status }}</span>
                     </span>
                 </div>
+                <div class="info">
+                    <span>
+                        <b>Tiểu sử: </b>
+                        <span>{{ $user->bio }}</span>
+                    </span>
+                </div>
+                <div class="info">
+                    <span>
+                        <b>Giới tính: </b>
+                        <span>{{ $user->gender }}</span>
+                    </span>
+                </div>
+                <div class="info">
+                    <span>
+                        <b>Ngày sinh: </b>
+                        <span>{{ $user->date_of_birth }}</span>
+                    </span>
+                </div>
+
             </div>
             <!-- Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -48,30 +72,47 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form action="" method="POST">
+                        <form action="{{ route('profile.update') }}" method="POST">
+                            @csrf
                             <div class="edit">
                                 <div class="edit-name">
                                     <span>Tên người dùng</span>
-                                    <input type="text" name="user-name" id="name" placeholder="Nhập tên của bạn">
+                                    <input type="text" name="user-name" id="name" placeholder="Nhập tên của bạn" value="{{ old('user_name', $user->name) }}">
                                 </div>
                                 <div class="edit-address">
                                     <span>Địa chỉ</span>
-                                    <input type="text" name="address" id="address" placeholder="Nhập địa chỉ">
+                                    <input type="text" name="address" id="address" placeholder="Nhập địa chỉ" value="{{ old('address', $user->address) }}">
                                 </div>
                                 <div class="edit-company">
                                     <span>Làm việc ở</span>
-                                    <input type="text" name="" id="" placeholder="Nhập tên công ty">
+                                    <input type="text" name="" id="" placeholder="Nhập tên công ty" value="{{ old('company', $user->company) }}">
                                 </div>
                                 <div class="edit-relationship">
                                     <span>Tình trạng</span>
-                                    <input type="text" name="" id="" placeholder="Nhập tình trạng mối quan hệ">
+                                    <input type="text" name="" id="" placeholder="Nhập tình trạng mối quan hệ" value="{{ old('relationship_status', $user->relationship_status) }}">
+                                </div>
+                                <div class="edit-bio">
+                                    <span>Tiểu sử</span>
+                                    <input type="text" name="bio" id="bio" placeholder="Nhập tiểu sử" value="{{ old('bio', $user->bio) }}">
+                                </div>
+                                <div class="edit-gender">
+                                    <span>Giới tính</span>
+                                    <select name="gender" id="gender">
+                                        <option value="1" {{ old('gender', $user->gender) == '1' ? 'selected' : '' }}>Nam</option>
+                                        <option value="2" {{ old('gender', $user->gender) == '2' ? 'selected' : '' }}>Nữ</option>
+                                        <option value="3" {{ old('gender', $user->gender) == '3' ? 'selected' : '' }}>Giới tính khác</option>
+                                    </select>
+                                </div>
+                                <div class="edit-date">
+                                    <span>Ngày sinh</span>
+                                    <input type="date" name="date" id="date" value="{{ old('date', $user->date_of_birth) }}">
                                 </div>
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-primary" id="saveChanges">Save changes</button>
                     </div>
                 </div>
                 </div>
@@ -114,74 +155,7 @@
                     <span>boring</span>
                  </div>
             </div>
-        </div>
-        
-        <div class="container_sidebar">
-            <div class="sidebar">
-                <div class="followers">
-                    <h3>Những người theo dõi bạn</h3>
-                    <hr>
-                    <div class="list-followers">
-                        <div class="item-follower">
-                            <div class="info-follower">
-                                <div class="avarta-follower">
-                                    <img src="{{ asset('images/avatar.png') }}" alt="">
-                                </div>
-                                <div class="name-follower">Minh Quân</div>
-                            </div>
-                            <button class="btn-follow">Theo dõi</button>
-                        </div>
-                        <div class="item-follower">
-                            <div class="info-follower">
-                                <div class="avarta-follower">
-                                    <img src="{{ asset('images/avatar.png') }}" alt="">
-                                </div>
-                                <div class="name-follower">Thiên Tú</div>
-                            </div>
-                            <button class="btn-follow">Theo dõi</button>
-                        </div>
-                        <div class="item-follower">
-                            <div class="info-follower">
-                                <div class="avarta-follower">
-                                    <img src="{{ asset('images/avatar.png') }}" alt="">
-                                </div>
-                                <div class="name-follower">Thanh Sang</div>
-                            </div>
-                            <button class="btn-follow">Theo dõi</button>
-                        </div>
-                        <div class="item-follower">
-                            <div class="info-follower">
-                                <div class="avarta-follower">
-                                    <img src="{{ asset('images/avatar.png') }}" alt="">
-                                </div>
-                                <div class="name-follower">Thanh Sang</div>
-                            </div>
-                            <button class="btn-follow">Theo dõi</button>
-                        </div>
-                        <div class="item-follower">
-                            <div class="info-follower">
-                                <div class="avarta-follower">
-                                    <img src="{{ asset('images/avatar.png') }}" alt=""> 
-                                </div>
-                                <div class="name-follower">Thanh Sang</div>
-                            </div>
-                            <button class="btn-follow">Theo dõi</button>
-                        </div>
-                        <div class="item-follower">
-                            <div class="info-follower">
-                                <div class="avarta-follower">
-                                    <img src="{{ asset('images/avatar.png') }}" alt="">
-                                </div>
-                                <div class="name-follower">Thanh Sang</div>
-                            </div>
-                            <button class="btn-follow">Theo dõi</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>   
-       
-        
+        </div>  
     </div>
     <script src="{{ asset('js/home.js') }}"></script>
 </body>
