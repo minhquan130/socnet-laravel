@@ -6,6 +6,7 @@ use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\ForgetPasswordController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CommentController;
 
 use App\Http\Controllers\UserController;
 
@@ -30,3 +31,9 @@ Route::post('/post', [PostController::class, 'addPost'])->name('post.add');
 Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
 
 Route::get('/delete-post/{id}', [PostController::class, 'deletePost'])->name('post.delete');
+
+// Route cho việc bình luận
+Route::post('/post/{id}/comment', [CommentController::class, 'store'])->name('post.store');
+
+Route::get('/post/{id}', [CommentController::class, 'show'])->name('post.show');
+

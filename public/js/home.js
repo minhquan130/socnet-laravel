@@ -73,4 +73,34 @@ function showOptionItemPost(optionsItemPost) {
     }
 }
 
+$(document).ready(function() {
+    // Lắng nghe sự kiện gửi của form trong modal
+    $('#commentModal').on('submit', '#commentForm', function(e) {
+        e.preventDefault();
 
+        // Lấy bình luận và ID bài viết
+        let comment = $('#input-comment').val();
+        let postId = $(this).data('post-id'); // Đảm bảo ID bài viết được thiết lập trên form
+
+        $.ajax({
+            url: "{{ route('comments.store', ':id') }}".replace(':id', postId), // Thay ':id' bằng postId
+            type: "POST",
+            data: {
+                _token: "{{ csrf_token() }}",
+                comment: comment
+            },
+            success: function(response) {
+                if(response.status === 'success') {
+                    // Thêm comment mới vào danh sách trên trang
+                    $('#commentsList').prepend('<p>' + response.comment.content + '</p>'); // Thêm dấu '#' trước 'commentsList'
+
+                    // Xóa nội dung trong input sau khi gửi comment
+                    $('#input-comment').val('');
+                }
+            },
+            error: function(response) {
+                alert('Đã xảy ra lỗi. Vui lòng thử lại.');
+            }
+        });
+    });
+});
