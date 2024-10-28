@@ -3,8 +3,16 @@
         <div class="profile-left">
             <div class="info-card">
                 <div class="info-head">
-                    <h4>Thông tin của bạn</h4>
-                    <i class="fa-solid fa-pen-to-square"></i>
+                    <h4>Thông tin người dùng</h4>
+                    <a data-bs-toggle="modal" data-bs-target="#exampleModal" style="z-index: 10">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </a>
+                </div>
+                <div class="info">
+                    <span>
+                        <b>Tên của bạn: </b>
+                    </span>
+                    <span>Thiên Tú</span>
                 </div>
                 <div class="info">
                     <span>
@@ -29,6 +37,43 @@
                         <b>Tình trạng: </b>
                         <span>Quan hệ mập mờ</span>
                     </span>
+                </div>
+            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Chỉnh sửa thông tin</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="" method="POST">
+                            <div class="edit">
+                                <div class="edit-name">
+                                    <span>Tên người dùng</span>
+                                    <input type="text" name="user-name" id="name" placeholder="Nhập tên của bạn">
+                                </div>
+                                <div class="edit-address">
+                                    <span>Địa chỉ</span>
+                                    <input type="text" name="address" id="address" placeholder="Nhập địa chỉ">
+                                </div>
+                                <div class="edit-company">
+                                    <span>Làm việc ở</span>
+                                    <input type="text" name="" id="" placeholder="Nhập tên công ty">
+                                </div>
+                                <div class="edit-relationship">
+                                    <span>Tình trạng</span>
+                                    <input type="text" name="" id="" placeholder="Nhập tình trạng mối quan hệ">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
                 </div>
             </div>
         </div>
