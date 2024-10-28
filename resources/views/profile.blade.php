@@ -77,9 +77,9 @@
                             <div class="edit">
                                 <div class="edit-name">
                                     <span>Tên người dùng</span>
-                                    <input type="text" name="user-name" id="name" placeholder="Nhập tên của bạn" value="{{ old('user_name', $user->name) }}">
+                                    <input type="text" name="user-name" id="name" placeholder="Nhập tên của bạn" value="{{ old('user_name', $user->username) }}">
                                 </div>
-                                <div class="edit-address">
+                                {{-- <div class="edit-address">
                                     <span>Địa chỉ</span>
                                     <input type="text" name="address" id="address" placeholder="Nhập địa chỉ" value="{{ old('address', $user->address) }}">
                                 </div>
@@ -90,7 +90,7 @@
                                 <div class="edit-relationship">
                                     <span>Tình trạng</span>
                                     <input type="text" name="" id="" placeholder="Nhập tình trạng mối quan hệ" value="{{ old('relationship_status', $user->relationship_status) }}">
-                                </div>
+                                </div> --}}
                                 <div class="edit-bio">
                                     <span>Tiểu sử</span>
                                     <input type="text" name="bio" id="bio" placeholder="Nhập tiểu sử" value="{{ old('bio', $user->bio) }}">
@@ -98,9 +98,9 @@
                                 <div class="edit-gender">
                                     <span>Giới tính</span>
                                     <select name="gender" id="gender">
-                                        <option value="1" {{ old('gender', $user->gender) == '1' ? 'selected' : '' }}>Nam</option>
-                                        <option value="2" {{ old('gender', $user->gender) == '2' ? 'selected' : '' }}>Nữ</option>
-                                        <option value="3" {{ old('gender', $user->gender) == '3' ? 'selected' : '' }}>Giới tính khác</option>
+                                        <option value="1" {{ old('gender', $user->gender) == 'male' ? 'selected' : '' }}>Nam</option>
+                                        <option value="2" {{ old('gender', $user->gender) == 'female' ? 'selected' : '' }}>Nữ</option>
+                                        <option value="3" {{ old('gender', $user->gender) == 'other' ? 'selected' : '' }}>Giới tính khác</option>
                                     </select>
                                 </div>
                                 <div class="edit-date">
@@ -124,7 +124,7 @@
                     <img src="{{ asset('images/avatar.png') }}" alt="">
                 </div>
                 <div class="info-right">
-                    <span>Thiên Tú</span>
+                    <span>{{ $user->username }}</span>
                     <div class="user-post-follow">
                         <span class="post">0 Post</span>
                         <span class="follower">300 follower</span>
