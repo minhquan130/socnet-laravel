@@ -101,15 +101,19 @@ class UserController extends Controller
         $posts = Posts::orderBy('created_at', 'desc')->get();
         $create_comment = Comments::orderBy('created_at', 'desc')->get();
 
-        if (Session::has('user_id') && Session::has('user_email') && Session::has('user_password')) {
-            $user = Users::where('user_id', Session::get('user_id'))->first(); // Lấy bản ghi đầu tiên khớp
-            // Kiểm tra nếu user tồn tại và khớp thông tin đăng nhập
-            if ($user && $user->email == Session::get('user_email') && $user->password_hash == Session::get('user_password')) {
-                return view('home', compact('posts', 'user','create_comment')); // Truyền dữ liệu đến view
-            }
-        }
+        $user = Users::where('user_id', Session::get('user_id'))->first(); // Lấy bản ghi đầu tiên khớp
+        return view('home', compact('posts', 'user', 'create_comment')); // Truyền dữ liệu đến view
+        
+        // Kiểm tra nếu user tồn tại và khớp thông tin đăng nhập
+        // if (Session::has('user_id') && Session::has('user_email') && Session::has('user_password')) {
+        //     $user = Users::where('user_id', Session::get('user_id'))->first(); // Lấy bản ghi đầu tiên khớp
+        //     // Kiểm tra nếu user tồn tại và khớp thông tin đăng nhập
+        //     if ($user && $user->email == Session::get('user_email') && $user->password_hash == Session::get('user_password')) {
+        //         return view('home', compact('posts', 'user','create_comment')); // Truyền dữ liệu đến view
+        //     }
+        // }
 
         // Nếu thông tin session không hợp lệ, trả về trang login
-        return view('login');
+        // return view('login');
     }
 }
