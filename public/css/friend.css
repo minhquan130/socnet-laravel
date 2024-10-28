@@ -33,7 +33,7 @@
 }
 
 .page-freinds div.pf-002 {
-    padding: 1rem;
+    padding: 2rem;
 }
 
 .page-freinds div.pf-002 h3 {
@@ -44,7 +44,7 @@
 .page-freinds div.pf-002 .list-friends {
     display: grid;
     grid-template-columns: auto auto auto auto;
-    gap: 1rem;
+    gap: 2rem;
 }
 
 .page-freinds div.pf-002 .list-friends .card-friend {
