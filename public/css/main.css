@@ -1,6 +1,6 @@
 main {
     display: grid;
-    grid-template-columns: 24rem auto 24rem;
+    grid-template-columns: calc(24rem + 5px) auto 24rem;
     height: calc(100vh - 70px);
     gap: 1rem;
     overflow-y: scroll;
@@ -28,10 +28,14 @@ main .container_sidebar {
     justify-content: center;
 }
 
-main .navbar {
-    background: rgba(255, 255, 255, .5);
-    width: calc(100% - 3rem);
-    height: calc(100% - 2rem);
+main .navbar-content {
+    /* background: rgba(255, 255, 255, .5); */
+    overflow: hidden;
+    position: fixed;
+    top: calc(1rem + 70px);
+    bottom: 1rem;
+    right: 1rem;
+    width: 20rem;
     border-radius: 1rem;
 }
 
@@ -103,16 +107,16 @@ main .container_sidebar .sidebar>.followers {
 
 main .container_sidebar .sidebar>.followers h3 {
     font-size: 20px;
-    padding: 1rem;
+    padding: .5rem 0 .5rem 1rem;
+    margin: 0;
 }
 
 main .container_sidebar .sidebar>.followers hr {
-    margin: 0 1rem;
+    margin: 0 0 .5rem 0;
 }
 
 main .container_sidebar .sidebar>.followers .list-followers {
     overflow-y: scroll;
-    /* padding: 1rem; */
     height: calc(100% - 57px);
 }
 
@@ -576,5 +580,81 @@ input#input-comment:focus {
     color: #6c757d; /* Màu cho dấu mũi tên */
     font-size: 18px; /* Kích thước cho dấu mũi tên */
     cursor: pointer; /* Thay đổi con trỏ khi hover vào dấu mũi tên */
+}
+
+
+/* Navbar */
+main .container_navbar .navbar-content h3.title-navbar{
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0;
+    padding: .5rem;
+}
+
+main .container_navbar .navbar-content hr{
+    margin: 0;
+}
+
+main .container_navbar .navbar-content .list-friends {
+    overflow-y: scroll;
+    height: calc(100% - 40px);
+}
+
+main .container_navbar .navbar-content .list-friends::-webkit-scrollbar {
+    width: 5px;
+}
+
+main .container_navbar .navbar-content .list-friends::-webkit-scrollbar-track {
+    background: #696969;
+}
+
+main .container_navbar .navbar-content .list-friends::-webkit-scrollbar-thumb {
+    background: #fffd80;
+}
+
+main .container_navbar .navbar-content .list-friends .item-friend {
+    border-radius: 8px;
+    padding: 0.5rem;
+    display: flex;
+    gap: 1rem;
+    transition: .3s;
+    cursor: pointer;
+}
+
+main .container_navbar .navbar-content .list-friends .item-friend:hover {
+    background: #ffd4bf;
+}
+
+main .container_navbar .navbar-content .list-friends .item-friend .pic-avatar-friend{
+    position: relative;
+}
+
+main .container_navbar .navbar-content .list-friends .item-friend .pic-avatar-friend::before{
+    content: '';
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    background: #00ff2f;
+    z-index: 10;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    right: 0px;
+    bottom: 0px;
+}
+
+main .container_navbar .navbar-content .list-friends .item-friend .pic-avatar-friend img{
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+}
+
+
+main .container_navbar .navbar-content .list-friends .item-friend span{
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    font-weight: bold;
 }
 
