@@ -490,7 +490,7 @@ main .container_posts .posts .list-posts .post-item .options-post .option .optio
 }
 
 .modal-header {
-    background-color: #f8f9fa; /* Nền sáng cho header */
+    background-color: #f8fafa; /* Nền sáng cho header */
     border-bottom: 1px solid #dee2e6; /* Viền nhẹ cho header */
 }
 
