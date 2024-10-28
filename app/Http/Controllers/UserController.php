@@ -91,43 +91,41 @@ class UserController extends Controller
         Session::put(['user_id' => $user->user_id]);
         Session::put(['user_email' => $user->email]);
         Session::put(['user_password' => $user->password_hash]);
-        // dd(Session::all());
+
         // Chuyển hướng đến trang chính
         return redirect()->route('home')->with('success', 'Đăng nhập thành công!');
     }
 
     function showHome()
     {
-        // Lấy danh sách posts, sắp xếp giảm dần theo ngày tạo
         $posts = Posts::orderBy('created_at', 'desc')->get();
         $create_comment = Comments::orderBy('created_at', 'desc')->get();
 
-        $user = Users::where('user_id', Session::get('user_id'))->first(); // Lấy bản ghi đầu tiên khớp
-        return view('home', compact('posts', 'user', 'create_comment')); // Truyền dữ liệu đến view
-
-        // Kiểm tra nếu user tồn tại và khớp thông tin đăng nhập
-        // if (Session::has('user_id') && Session::has('user_email') && Session::has('user_password')) {
-        //     $user = Users::where('user_id', Session::get('user_id'))->first(); // Lấy bản ghi đầu tiên khớp
-        //     // Kiểm tra nếu user tồn tại và khớp thông tin đăng nhập
-        //     if ($user && $user->email == Session::get('user_email') && $user->password_hash == Session::get('user_password')) {
-        //         return view('home', compact('posts', 'user','create_comment')); // Truyền dữ liệu đến view
-        //     }
-        // }
-
-        // Nếu thông tin session không hợp lệ, trả về trang login
-        // return view('login');
+        $user = Users::where('user_id', Session::get('user_id'))->first();
+        return view('home', compact('posts', 'user', 'create_comment'));
     }
 
+    function showFriendsRequest()
+    {
+        $currentUserId = Session::get('user_id');
+
+        // Lấy danh sách user_id của những người đã gửi yêu cầu kết bạn
+        $userIds = Friends::where('friend_id', $currentUserId)->pluck('user_id');
+
+        // Nếu có yêu cầu kết bạn, lấy danh sách người dùng tương ứng
+        $users = $userIds->isNotEmpty() ? Users::whereIn('user_id', $userIds)->get() : 'request';
+
+        return view('friends', compact('users'));
+    }
     function showFriends()
     {
         // Lấy user_id của người dùng đang đăng nhập
         $currentUserId = Session::get('user_id');
 
         // Lấy danh sách friend_id từ bảng friends
-        // $friendIds = Friends::pluck('friend_id'); // Sử dụng pluck để lấy trực tiếp các friend_id
         $userIds = Friends::all()->where('friend_id', $currentUserId)->pluck('user_id'); // Sử dụng pluck để lấy trực tiếp các friend_id
         $friendIds = Friends::all()->where('user_id', $currentUserId)->pluck('friend_id'); // Sử dụng pluck để lấy trực tiếp các friend_id
-        // dd($userIds);
+
         // Lấy danh sách người dùng, loại trừ người dùng đang đăng nhập và các friend_id
         $users = Users::where('user_id', '!=', $currentUserId) // Loại trừ người dùng đang đăng nhập
             ->whereNotIn('user_id', $friendIds) // Loại trừ friend_id

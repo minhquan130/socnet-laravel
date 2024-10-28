@@ -15,6 +15,27 @@
     border-radius: 1rem;
 }
 
+.page-freinds div.pf-001 .list-options-friend-navbar{
+    flex-direction: column;
+    padding: 1rem;
+}
+
+.page-freinds div.pf-001 .list-options-friend-navbar a.option-friend-navbar{
+    display: flex;
+    gap: 1rem;
+    font-size: 20px;
+    padding: .5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #000;
+    transition: .3s;
+    font-weight: bold;
+}
+
+.page-freinds div.pf-001 .list-options-friend-navbar a.option-friend-navbar:hover{
+    background: #c2c2c2;
+}
+
 .page-freinds div.pf-002 {
     border-radius: 1rem 0 0 1rem;
     overflow-y: scroll;

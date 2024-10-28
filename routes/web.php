@@ -31,6 +31,7 @@ Route::middleware([CheckUser::class])->group(function () {
     Route::get('/chats', [ChatController::class, 'index'])->name('chats');
 
     Route::get('/friends', [UserController::class, 'showFriends'])->name('friends');
+    Route::get('/friends/request', [UserController::class, 'showFriendsRequest'])->name('friends.request');
     Route::get('/friends/add/{id}', [UserController::class, 'addFriends'])->name('friends.add');
         
     // Route cho việc bình luận
