@@ -1,9 +1,9 @@
 <div class="container_sidebar">
     <div class="sidebar">
         <div class="card-profile">
-            <div class="profile-picture">
+            <a href="{{ route('profile') }}" class="profile-picture" style="display: block">
                 <img src="{{ asset('images/avatar.png') }}" alt="">
-            </div>
+            </a>
             <div class="name">
                 <span>{{ $user->username }}</span>
             </div>
