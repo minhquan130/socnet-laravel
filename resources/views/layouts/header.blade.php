@@ -36,9 +36,9 @@
             </div>
             <!-- Mavigation -->
             <div class="navigation">
-                <div class="home active">
+                <a href="{{ route('home') }}" class="home active">
                     <span><i class="fa-solid fa-house"></i></span>
-                </div>
+                </a>
                 <div class="friends">
                     <span><i class="fa-solid fa-user-group"></i></span>
                 </div>
