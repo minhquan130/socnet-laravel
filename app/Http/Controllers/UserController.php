@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Friends;
 use App\Models\Posts;
 use App\Models\Users;
 use App\Models\Comments;
@@ -122,8 +123,26 @@ class UserController extends Controller
         // Lấy user_id của người dùng đang đăng nhập
         $currentUserId = Session::get('user_id');
 
-        // Lấy danh sách người dùng, loại trừ người dùng đang đăng nhập
-        $users = Users::where('user_id', '!=', $currentUserId)->get();
-        return view('friends', compact('users'));
+        // Lấy danh sách friend_id từ bảng friends
+        // $friendIds = Friends::pluck('friend_id'); // Sử dụng pluck để lấy trực tiếp các friend_id
+        $userIds = Friends::all()->where('friend_id', $currentUserId)->pluck('user_id'); // Sử dụng pluck để lấy trực tiếp các friend_id
+        $friendIds = Friends::all()->where('user_id', $currentUserId)->pluck('friend_id'); // Sử dụng pluck để lấy trực tiếp các friend_id
+        // dd($userIds);
+        // Lấy danh sách người dùng, loại trừ người dùng đang đăng nhập và các friend_id
+        $users = Users::where('user_id', '!=', $currentUserId) // Loại trừ người dùng đang đăng nhập
+            ->whereNotIn('user_id', $friendIds) // Loại trừ friend_id
+            ->whereNotIn('user_id', $userIds) // Loại trừ user_id
+            ->get();
+        return view('friends', compact('users')); // Trả về view với danh sách người dùng
+    }
+
+
+    function addFriends($id)
+    {
+        $friend = new Friends();
+        $friend->user_id = Session::get('user_id');
+        $friend->friend_id = $id;
+        $friend->save();
+        return redirect()->route('friends');
     }
 }
