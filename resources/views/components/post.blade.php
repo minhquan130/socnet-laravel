@@ -119,14 +119,7 @@
                 <div class="modal-body" id="commentsList">
                     
 
-                  <!-- Các bình luận hiện có -->
-                  @foreach ($post->comments as $comment)
-                    <p>
-                        <img src="{{ asset('images/avatar.png') }}" alt="Avatar" class="img-fluid rounded-circle me-2" style="width: 40px; height: 40px;">
-                        <span>{{ $comment->content }}</span>
-                    </p>
-                @endforeach
-                    <!-- <h2 class="fs-5">Musa</h2>
+                    <h2 class="fs-5">Musa</h2>
                     <p>
                         <img src="{{ asset('images/musa.jpg') }}" alt="Avatar" class="img-fluid rounded-circle me-2"
                             style="width: 40px; height: 40px;">
@@ -140,7 +133,7 @@
                             style="width: 40px; height: 40px;">
                         <span>Cái môi bả sáu dễ sợ</span>
                         <br>
-                    </p> -->
+                    </p>
                 </div>
                 <form action="{{route('post.store', ['id' => $post->post_id])}}" method="post"  data-post-id="{{ $post->id }}" class="text-comment">
                     <img src="{{ asset('images/avatar.png') }}" alt="Avatar" class="img-fluid rounded-circle me-2"

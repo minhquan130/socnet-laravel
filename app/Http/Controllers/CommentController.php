@@ -29,7 +29,7 @@ class CommentController extends Controller
         ]);
 
         // Lưu bình luận
-        Comment::create([
+        Comments::create([
             'post_id' => $id,
             'content' => $request->comment,
             // Có thể thêm thông tin người dùng hoặc các trường khác nếu cần

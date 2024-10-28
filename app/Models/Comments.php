@@ -16,4 +16,8 @@ class Comments extends Model
         'content',
         'created_at'
     ];
+    public function post()
+    {
+        return $this->belongsTo(Posts::class, 'post_id', 'post_id');
+    }
 }
