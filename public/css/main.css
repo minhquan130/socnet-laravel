@@ -29,7 +29,7 @@ main .container_sidebar {
 }
 
 main .navbar-content {
-    background: rgba(255, 255, 255, .5);
+    /* background: rgba(255, 255, 255, .5); */
     overflow: hidden;
     position: fixed;
     top: calc(1rem + 70px);
@@ -596,6 +596,65 @@ main .container_navbar .navbar-content hr{
 }
 
 main .container_navbar .navbar-content .list-friends {
-    margin: 0;
+    overflow-y: scroll;
+    height: calc(100% - 40px);
+}
+
+main .container_navbar .navbar-content .list-friends::-webkit-scrollbar {
+    width: 5px;
+}
+
+main .container_navbar .navbar-content .list-friends::-webkit-scrollbar-track {
+    background: #696969;
+}
+
+main .container_navbar .navbar-content .list-friends::-webkit-scrollbar-thumb {
+    background: #fffd80;
+}
+
+main .container_navbar .navbar-content .list-friends .item-friend {
+    border-radius: 8px;
+    padding: 0.5rem;
+    display: flex;
+    gap: 1rem;
+    transition: .3s;
+    cursor: pointer;
+}
+
+main .container_navbar .navbar-content .list-friends .item-friend:hover {
+    background: #ffd4bf;
+}
+
+main .container_navbar .navbar-content .list-friends .item-friend .pic-avatar-friend{
+    position: relative;
+}
+
+main .container_navbar .navbar-content .list-friends .item-friend .pic-avatar-friend::before{
+    content: '';
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    background: #00ff2f;
+    z-index: 10;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    right: 0px;
+    bottom: 0px;
+}
+
+main .container_navbar .navbar-content .list-friends .item-friend .pic-avatar-friend img{
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+}
+
+
+main .container_navbar .navbar-content .list-friends .item-friend span{
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    font-weight: bold;
 }
 

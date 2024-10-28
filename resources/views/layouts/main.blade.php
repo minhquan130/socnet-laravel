@@ -7,7 +7,64 @@
             <hr>
             <div class="list-friends">
                 <div class="item-friend">
-                    
+                    <div class="pic-avatar-friend">
+                        <img src="{{ asset('images/ny của quan.jpg') }}" alt="">
+                    </div>
+                    <span>Minh Quân</span>
+                </div>
+                <div class="item-friend">
+                    <div class="pic-avatar-friend">
+                        <img src="{{ asset('images/ny của quan.jpg') }}" alt="">
+                    </div>
+                    <span>Minh Quân</span>
+                </div>
+                <div class="item-friend">
+                    <div class="pic-avatar-friend">
+                        <img src="{{ asset('images/ny của quan.jpg') }}" alt="">
+                    </div>
+                    <span>Minh Quân</span>
+                </div>
+                <div class="item-friend">
+                    <div class="pic-avatar-friend">
+                        <img src="{{ asset('images/ny của quan.jpg') }}" alt="">
+                    </div>
+                    <span>Minh Quân</span>
+                </div>
+                <div class="item-friend">
+                    <div class="pic-avatar-friend">
+                        <img src="{{ asset('images/ny của quan.jpg') }}" alt="">
+                    </div>
+                    <span>Minh Quân</span>
+                </div>
+                <div class="item-friend">
+                    <div class="pic-avatar-friend">
+                        <img src="{{ asset('images/ny của quan.jpg') }}" alt="">
+                    </div>
+                    <span>Minh Quân</span>
+                </div>
+                <div class="item-friend">
+                    <div class="pic-avatar-friend">
+                        <img src="{{ asset('images/ny của quan.jpg') }}" alt="">
+                    </div>
+                    <span>Minh Quân</span>
+                </div>
+                <div class="item-friend">
+                    <div class="pic-avatar-friend">
+                        <img src="{{ asset('images/ny của quan.jpg') }}" alt="">
+                    </div>
+                    <span>Minh Quân</span>
+                </div>
+                <div class="item-friend">
+                    <div class="pic-avatar-friend">
+                        <img src="{{ asset('images/ny của quan.jpg') }}" alt="">
+                    </div>
+                    <span>Minh Quân</span>
+                </div>
+                <div class="item-friend">
+                    <div class="pic-avatar-friend">
+                        <img src="{{ asset('images/ny của quan.jpg') }}" alt="">
+                    </div>
+                    <span>Minh Quân</span>
                 </div>
             </div>
         </div>
