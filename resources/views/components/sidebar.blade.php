@@ -5,10 +5,19 @@
                 <img src="{{ asset('images/avatar.png') }}" alt="">
             </div>
             <div class="name">
-                <span>Victory Tikay</span>
+                <span>{{ $user->username }}</span>
             </div>
             <div class="bio">
-                <span>Hello World</span>
+                @if ($user->bio)
+                    <span>{{ $user->bio }}</span>
+                @else
+                    <span style="display: inline-flex; gap: 1rem;">
+                        Bạn chưa có tiểu sử
+                        <a href="#">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </a>
+                    </span>
+                @endif
             </div>
             <hr style="margin: 1rem 0">
             <div class="data">
