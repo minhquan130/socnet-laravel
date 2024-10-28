@@ -1,10 +1,19 @@
     @include('layouts.header')
     <div class="page-freinds">
-        <div class="pf-001"></div>
+        <div class="pf-001">
+            <div class="list-options-friend-navbar">
+                <a href="{{ route('friends') }}" class="option-friend-navbar"><i class="fa-solid fa-users"></i></i>Kết
+                    bạn</a>
+                <a href="{{ route('friends.request') }}" class="option-friend-navbar"><i
+                        class="fa-solid fa-user-plus"></i>Lời mời kết bạn</a>
+            </div>
+        </div>
 
         <div class="pf-002">
-            <h3>Kết bạn</h3>
-            @if ($users && $users->count() != 0)
+            <h3>Những người bạn có thể biết</h3>
+            @if ($users == 'request')
+                <div class="none-friend">Không có lời mời kết bạn</div>
+            @elseif ($users->count() != 0)
                 <div class="list-friends">
                     @foreach ($users as $user)
                         <div class="card-friend">
@@ -19,7 +28,7 @@
                     @endforeach
                 </div>
             @else
-                <div class="none-friend">Không còn ai</div>
+                <div class="none-friend">Không còn bạn bè</div>
             @endif
         </div>
     </div>
