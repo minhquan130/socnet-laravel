@@ -29,6 +29,8 @@ Route::middleware([CheckUser::class])->group(function () {
     Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
 
     Route::get('/chats', [ChatController::class, 'index'])->name('chats');
+
+    Route::get('/friends', [UserController::class, 'showFriends'])->name('friends');
         
     // Route cho việc bình luận
     Route::post('/post/{id}/comment', [CommentController::class, 'store'])->name('post.store');

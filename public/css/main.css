@@ -22,7 +22,7 @@ main::-webkit-scrollbar-thumb {
 main .container_navbar,
 main .container_posts,
 main .container_sidebar {
-    height: 100%;
+    height: calc(100% - 1rem);
     display: flex;
     align-items: center;
     justify-content: center;

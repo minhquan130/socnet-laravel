@@ -103,7 +103,7 @@ class UserController extends Controller
 
         $user = Users::where('user_id', Session::get('user_id'))->first(); // Lấy bản ghi đầu tiên khớp
         return view('home', compact('posts', 'user', 'create_comment')); // Truyền dữ liệu đến view
-        
+
         // Kiểm tra nếu user tồn tại và khớp thông tin đăng nhập
         // if (Session::has('user_id') && Session::has('user_email') && Session::has('user_password')) {
         //     $user = Users::where('user_id', Session::get('user_id'))->first(); // Lấy bản ghi đầu tiên khớp
@@ -115,5 +115,15 @@ class UserController extends Controller
 
         // Nếu thông tin session không hợp lệ, trả về trang login
         // return view('login');
+    }
+
+    function showFriends()
+    {
+        // Lấy user_id của người dùng đang đăng nhập
+        $currentUserId = Session::get('user_id');
+
+        // Lấy danh sách người dùng, loại trừ người dùng đang đăng nhập
+        $users = Users::where('user_id', '!=', $currentUserId)->get();
+        return view('friends', compact('users'));
     }
 }
