@@ -26,7 +26,9 @@
         <div class="header_container">
             <!-- Logo -->
             <div class="logo">
-                <img src="{{ asset('images/logo.png') }}" alt="" height="54">
+                <a href="{{ route('home') }}">
+                    <img src="{{ asset('images/logo.png') }}" alt="" height="54">
+                </a>
             </div>
             <div class="search">
                 <i class="fa-solid fa-magnifying-glass"></i>
@@ -40,9 +42,9 @@
                 <div class="friends">
                     <span><i class="fa-solid fa-user-group"></i></span>
                 </div>
-                <div class="messages">
+                <a href="{{ route('chats') }}" class="messages">
                     <span><i class="fa-solid fa-comments"></i></span>
-                </div>
+                </a>
                 <div class="messages">
                     <span><i class="fa-solid fa-camera-retro"></i></span>
                 </div>
