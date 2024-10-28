@@ -580,6 +580,14 @@ input#input-comment:focus {
     color: #6c757d; /* Màu cho dấu mũi tên */
     font-size: 18px; /* Kích thước cho dấu mũi tên */
     cursor: pointer; /* Thay đổi con trỏ khi hover vào dấu mũi tên */
+    background: none; /* Xóa nền */
+    border: none; /* Xóa viền */
+    outline: none; /* Xóa khung khi nhấn vào */
+    padding: 0; /* Loại bỏ padding mặc định */
+
+}
+.arrow:hover{
+    color:#0866ff; /* Đổi màu khi hover vào */
 }
 
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Posts;
 use App\Models\Users;
+use App\Models\Comments;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
@@ -98,12 +99,13 @@ class UserController extends Controller
     {
         // Lấy danh sách posts, sắp xếp giảm dần theo ngày tạo
         $posts = Posts::orderBy('created_at', 'desc')->get();
+        $create_comment = Comments::orderBy('created_at', 'desc')->get();
 
         if (Session::has('user_id') && Session::has('user_email') && Session::has('user_password')) {
             $user = Users::where('user_id', Session::get('user_id'))->first(); // Lấy bản ghi đầu tiên khớp
             // Kiểm tra nếu user tồn tại và khớp thông tin đăng nhập
             if ($user && $user->email == Session::get('user_email') && $user->password_hash == Session::get('user_password')) {
-                return view('home', compact('posts', 'user')); // Truyền dữ liệu đến view
+                return view('home', compact('posts', 'user','create_comment')); // Truyền dữ liệu đến view
             }
         }
 

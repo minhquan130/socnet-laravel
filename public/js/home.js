@@ -73,4 +73,34 @@ function showOptionItemPost(optionsItemPost) {
     }
 }
 
+document.getElementById('commentForm{{ $post->id }}').addEventListener('submit', function(event) {
+    event.preventDefault(); // Ngăn chặn gửi form mặc định
 
+    const form = this;
+    const commentInput = form.querySelector('input[name="comment"]');
+    const commentText = commentInput.value;
+
+    // Gửi dữ liệu bình luận bằng AJAX
+    fetch(form.action, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        },
+        body: JSON.stringify({ comment: commentText })
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Tạo phần tử bình luận mới
+        const commentElement = document.createElement('p');
+        commentElement.innerHTML = `
+            <img src="{{ asset('images/avatar.png') }}" alt="Avatar" class="img-fluid rounded-circle me-2" style="width: 40px; height: 40px;">
+            <span>${commentText}</span>
+        `;
+        document.getElementById('commentsList').appendChild(commentElement);
+
+        // Xóa nội dung trường nhập
+        commentInput.value = '';
+    })
+    .catch(error => console.error('Error:', error));
+});

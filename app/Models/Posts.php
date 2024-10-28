@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Comments;
 
 class Posts extends Model
 {
@@ -16,4 +17,11 @@ class Posts extends Model
         'created_at',
         'updated_at'
     ];
+    //  làm thêm 
+     // Định nghĩa quan hệ với Comments
+     public function comments()
+     {
+         return $this->hasMany(Comments::class, 'post_id', 'post_id'); 
+         // 'post_id' là khóa ngoại trong bảng comments và khóa chính trong bảng posts
+     }
 }
