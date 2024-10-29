@@ -19,21 +19,21 @@
                     </span>
                 @endif
             </div>
-            <hr style="margin: 1rem 0">
+            <hr  class="hr-card-profile" style="margin: 1rem 0">
             <div class="data">
                 <div class="data-followings">
                     <span>890</span> Followings
                 </div>
-                <hr>
+                <hr class="hr-card-profile">
                 <div class="data-followers">
                     <span>99</span> Followers
                 </div>
-                <hr>
+                <hr class="hr-card-profile">
                 <div class="data-posts">
                     <span>11</span> Posts
                 </div>
             </div>
-            <hr style="margin: 1rem 0 0 0">
+            <hr  class="hr-card-profile" style="margin: 1rem 0 0 0">
         </div>
         <div class="followers">
             <h3>Những người theo dõi bạn</h3>

@@ -14,3 +14,9 @@ body {
     background: linear-gradient(-135deg, #ff7e7e, #fffd80);
     overflow: hidden;
 }
+
+hr.hr-card-profile{
+    opacity: .8;
+    margin: 0;
+    border: 1px solid rgba(255, 255, 255, .8);
+}
