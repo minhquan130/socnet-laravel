@@ -2,7 +2,7 @@
     <div class="sidebar">
         <div class="card-profile">
             <a href="{{ route('profile') }}" class="profile-picture" style="display: block">
-                <img src="{{ asset('images/avatar.png') }}" alt="">
+                <img src="{{ asset('images/ny của quan.jpg') }}" alt="">
             </a>
             <div class="name">
                 <span>{{ $user->username }}</span>

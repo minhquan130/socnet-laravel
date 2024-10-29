@@ -30,11 +30,12 @@
     color: #000;
     transition: .3s;
     font-weight: bold;
+    align-items: center ;
 }
 
 .page-freinds div.pf-001 .list-options-friend-navbar a.option-friend-navbar.option-friend-navbar-active,
 .page-freinds div.pf-001 .list-options-friend-navbar a.option-friend-navbar:hover {
-    background: #c2c2c2;
+    background: linear-gradient(-135deg, #fffd80,#ff7e7e);
 }
 
 .page-freinds div.pf-002 {
@@ -77,7 +78,7 @@
 .page-freinds div.pf-002 .list-friends .card-friend {
     display: flex;
     flex-direction: column;
-    background: #c2c2c2;
+    background: #fff;
     border: 1px solid #696969;
     border-radius: 8px;
     overflow: hidden;
@@ -87,6 +88,7 @@
     height: 250px;
     width: 100%;
     object-fit: cover;
+    border-bottom: 1px solid #696969;
 }
 
 .page-freinds div.pf-002 .list-friends .card-friend .card-main {
