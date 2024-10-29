@@ -51,4 +51,14 @@ Route::post('/login', [UserController::class, 'login'])->name('login.store');
 
 Route::get('/forgetpassword', [ForgetPasswordController::class, 'index'])->name('forgetpassword');
 
+// Route::post('/post', [PostController::class, 'addPost'])->name('post.add');
+
+// Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+
+// Route::get('/delete-post/{id}', [PostController::class, 'deletePost'])->name('post.delete');
+
+// // Route cho việc bình luận
+// Route::post('/posts/{id}/comments', [CommentController::class, 'store'])->name('post.store');
+
+// Route::get('/post/{id}', [CommentController::class, 'show'])->name('post.show');
 
