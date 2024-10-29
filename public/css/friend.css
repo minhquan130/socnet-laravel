@@ -16,8 +16,10 @@
 }
 
 .page-freinds div.pf-001 .list-options-friend-navbar {
+    display: flex;
     flex-direction: column;
     padding: 1rem;
+    gap: .5rem;
 }
 
 .page-freinds div.pf-001 .list-options-friend-navbar a.option-friend-navbar {
@@ -30,12 +32,13 @@
     color: #000;
     transition: .3s;
     font-weight: bold;
-    align-items: center ;
+    align-items: center;
+    font-size: 18px;
 }
 
 .page-freinds div.pf-001 .list-options-friend-navbar a.option-friend-navbar.option-friend-navbar-active,
 .page-freinds div.pf-001 .list-options-friend-navbar a.option-friend-navbar:hover {
-    background: linear-gradient(-135deg, #fffd80,#ff7e7e);
+    background: linear-gradient(-135deg, #fffd80, #ff7e7e);
 }
 
 .page-freinds div.pf-002 {
@@ -78,7 +81,7 @@
 .page-freinds div.pf-002 .list-friends .card-friend {
     display: flex;
     flex-direction: column;
-    background: #fff;
+    background: #ffede3;
     border: 1px solid #696969;
     border-radius: 8px;
     overflow: hidden;
@@ -104,7 +107,7 @@
     font-weight: bold;
 }
 
-.page-freinds div.pf-002 .list-friends .card-friend .card-main .btn-option-friends{
+.page-freinds div.pf-002 .list-friends .card-friend .card-main .btn-option-friends {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
@@ -132,16 +135,23 @@
     border-radius: 8px;
 }
 
-.page-freinds div.pf-002 .list-friends .card-friend .card-main .btn-option-friends button.btn-add-friend a{
-    background: #0d6efd;
-}
-.page-freinds div.pf-002 .list-friends .card-friend .card-main .btn-option-friends button.btn-add-friend a:hover{
-    background: #0a58ca;
-}
-.page-freinds div.pf-002 .list-friends .card-friend .card-main .btn-option-friends button.btn-unaccepted-friend a{
-    background: #696969;
+.page-freinds div.pf-002 .list-friends .card-friend .card-main .btn-option-friends button.btn-add-friend a {
+    /* background: linear-gradient(-135deg, #fffd80, #ff7e7e); */
+    background: #ff7e7e;
+    color: #fff;
+    transition: .3s;
 }
 
-.page-freinds div.pf-002 .list-friends .card-friend .card-main .btn-option-friends button.btn-unaccepted-friend a:hover{
-    background: #7b7b7b;
+.page-freinds div.pf-002 .list-friends .card-friend .card-main .btn-option-friends button.btn-add-friend a:hover {
+    background: #fffd80;
+    color: #000;
+    box-shadow: 0 0 10px #c2c2c2;
+}
+
+.page-freinds div.pf-002 .list-friends .card-friend .card-main .btn-option-friends button.btn-unaccepted-friend a {
+    background: #9f9f9f;
+}
+
+.page-freinds div.pf-002 .list-friends .card-friend .card-main .btn-option-friends button.btn-unaccepted-friend a:hover {
+    background: #c2c2c2;
 }
