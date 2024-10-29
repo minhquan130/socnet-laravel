@@ -33,7 +33,7 @@ Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
 Route::get('/delete-post/{id}', [PostController::class, 'deletePost'])->name('post.delete');
 
 // Route cho việc bình luận
-Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('comments.store');
+Route::post('/posts/{id}/comments', [CommentController::class, 'store'])->name('post.store');
 
 Route::get('/post/{id}', [CommentController::class, 'show'])->name('post.show');
 
