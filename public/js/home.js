@@ -72,7 +72,7 @@ function showOptionItemPost(optionsItemPost) {
         optionsItemPost.style.display = 'none';
     }
 }
-
+// 
 document.getElementById('commentForm{{ $post->id }}').addEventListener('submit', function(event) {
     event.preventDefault(); // Ngăn chặn gửi form mặc định
 
@@ -91,15 +91,12 @@ document.getElementById('commentForm{{ $post->id }}').addEventListener('submit',
     })
     .then(response => response.json())
     .then(data => {
-        // Tạo phần tử bình luận mới
         const commentElement = document.createElement('p');
         commentElement.innerHTML = `
             <img src="{{ asset('images/avatar.png') }}" alt="Avatar" class="img-fluid rounded-circle me-2" style="width: 40px; height: 40px;">
             <span>${commentText}</span>
         `;
-        document.getElementById('commentsList').appendChild(commentElement);
-
-        // Xóa nội dung trường nhập
+        document.getElementById('commentsList{{ $post->id }}').appendChild(commentElement);
         commentInput.value = '';
     })
     .catch(error => console.error('Error:', error));

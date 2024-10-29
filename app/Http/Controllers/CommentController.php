@@ -11,30 +11,32 @@ use Illuminate\Support\Facades\Session;
 
 class CommentController extends Controller
 {
-    // Hiển thị danh sách các bài viết
-    public function index()
+
+    public function show($id)
     {
-        // Lấy tất cả bài viết
-        $posts = Post::all(); // Hoặc theo điều kiện bạn muốn
-
-        return view('index', compact('posts')); // Truyền biến $posts vào view
+        $post = Post::findOrFail($id);
+        return view('post', compact('post'));
     }
-
-
     public function store(Request $request, $id)
     {
-        // Xác thực dữ liệu
-        $request->validate([
-            'comment' => 'required|string|max:255',
-        ]);
+        // 1. Xác thực dữ liệu đầu vào
+    $request->validate([
+        'content' => 'required|max:255', // Nội dung bình luận là bắt buộc và không quá 255 ký tự
+    ]);
 
-        // Lưu bình luận
-        Comments::create([
-            'post_id' => $id,
-            'content' => $request->comment,
-            // Có thể thêm thông tin người dùng hoặc các trường khác nếu cần
-        ]);
+    // 2. Tìm bài viết bằng ID
+    $post = Post::findOrFail($postId);
 
-        return response()->json(['message' => 'Bình luận đã được thêm'], 201);
+    // 3. Tạo bình luận mới
+    $comment = new Comment([
+        'user_id' => auth()->id(), // Nếu người dùng đã đăng nhập, lưu ID của người dùng
+        'content' => $request->input('content'), // Lấy nội dung bình luận từ yêu cầu
+    ]);
+
+    // 4. Gắn bình luận với bài viết
+    $post->comments()->save($comment);
+
+    // 5. Chuyển hướng trở lại với thông báo thành công
+    return redirect()->back()->with('success', 'Bình luận đã được thêm thành công!');
     }
 }
