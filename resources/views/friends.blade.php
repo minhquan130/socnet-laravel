@@ -24,7 +24,7 @@
                 <div class="list-friends">
                     @foreach ($users as $user)
                         <div class="card-friend">
-                            <img src="{{ asset('images/ny của quan.jpg') }}" alt="">
+                            <img src="{{ $user->profile_pic_url == null ? asset('images/none-avatar.jpg') :  $user->profile_pic_url }}" alt="">
                             <div class="card-main">
                                 <span class="name-friend">{{ $user->username }}</span>
                                 <div class="btn-option-friends">

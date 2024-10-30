@@ -130,8 +130,8 @@ class UserController extends Controller
         $posts = Posts::orderBy('created_at', 'desc')->get();
         $create_comment = Comments::orderBy('created_at', 'desc')->get();
 
-        $user = Users::where('user_id', Session::get('user_id'))->first();
-        return view('home', compact('posts', 'user', 'create_comment'));
+        $userCurrent = Users::where('user_id', Session::get('user_id'))->first();
+        return view('home', compact('posts', 'userCurrent', 'create_comment'));
     }
 
     function showFriendsRequest()
@@ -143,8 +143,9 @@ class UserController extends Controller
 
         // Nếu có yêu cầu kết bạn, lấy danh sách người dùng tương ứng
         $users = $userIds->isNotEmpty() ? Users::whereIn('user_id', $userIds)->get() : 'request';
+        $userCurrent = Users::where('user_id', $currentUserId)->first();
 
-        return view('friends', compact('users'));
+        return view('friends', compact('users', 'userCurrent'));
     }
     function showFriends()
     {
@@ -160,7 +161,9 @@ class UserController extends Controller
             ->whereNotIn('user_id', $friendIds) // Loại trừ friend_id
             ->whereNotIn('user_id', $userIds) // Loại trừ user_id
             ->get();
-        return view('friends', compact('users')); // Trả về view với danh sách người dùng
+
+        $userCurrent = Users::where('user_id', $currentUserId)->first();
+        return view('friends', compact('users', 'userCurrent')); // Trả về view với danh sách người dùng
     }
 
 
