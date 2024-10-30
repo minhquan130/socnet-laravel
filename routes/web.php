@@ -38,8 +38,6 @@ Route::middleware([CheckUser::class])->group(function () {
     Route::post('/post/{id}/comment', [CommentController::class, 'store'])->name('post.store');
     
     Route::get('/post/{id}', [CommentController::class, 'show'])->name('post.show');
-
-
 });
 
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
