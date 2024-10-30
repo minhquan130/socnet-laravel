@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('password_hash', 255); // VARCHAR(255) NOT NULL
             $table->string('profile_pic_url', 255)->nullable(); // VARCHAR(255)
             $table->string('gender', 10)->default('male'); // TEXT
+            $table->dateTime('date_of_birth'); // TEXT
             $table->text('bio')->nullable(); // TEXT
             $table->enum('privacy_setting', ['public', 'friends', 'private'])->default('public'); // ENUM với giá trị mặc định
             $table->timestamps(); // created_at và updated_at
