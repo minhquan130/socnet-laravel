@@ -47,7 +47,7 @@ Route::get('/login', [UserController::class, 'showLogin'])->name('login');
 Route::post('/login', [UserController::class, 'login'])->name('login.store');
 
 
-Route::get('/forgetpassword', [ForgetPasswordController::class, 'index'])->name('forgetpassword');
+Route::get('/forgetpassword', [UserController::class, 'ShowForgetPassword'])->name('forgetpassword');
 
 // Route::post('/post', [PostController::class, 'addPost'])->name('post.add');
 

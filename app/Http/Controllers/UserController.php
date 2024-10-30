@@ -46,6 +46,10 @@ class UserController extends Controller
 
         $user->save(); // Save the user to the database
 
+        // Hủy session của người dùng
+        Session::invalidate();
+        Session::regenerateToken();
+
         // Redirect to login with success message
         return redirect()->route('login')->with('status', 'Tạo mới tài khoản thành công');
     }
@@ -62,7 +66,7 @@ class UserController extends Controller
     }
 
     // Update
-    function editUser(Request $request)
+    function forgetPassword(Request $request)
     {
         $user = Users::find(1);
         $user->username = $request->input('name');
@@ -71,6 +75,11 @@ class UserController extends Controller
         // $user->created_at = now();
         $user->updated_at = now();
         $user->save();
+    }
+
+    function showForgetPassword()
+    {
+        return view('forgetpassword');
     }
 
     // Delete
