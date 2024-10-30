@@ -57,6 +57,7 @@
                 </div>
                 <a href="{{route('logout')}}">
                     <div class="setting">
+                        <img src="{{ $user->profile_pic_url }}" alt="">
                         <i class="fa-solid fa-circle-chevron-down icon-dropdonw"></i>
                     </div>
                 </a>

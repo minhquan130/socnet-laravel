@@ -14,16 +14,45 @@ class UserController extends Controller
 {
     //CRUD
     // Creater
-    function register(Request $request)
+    public function register(Request $request)
     {
+        // Validate the request data
+        $request->validate([
+            'email' => 'required|email|unique:users,email',
+            'name' => 'required|string',
+            'password' => 'required|min:6|regex:/^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]*$/',
+            'gender' => 'required|in:male,female,other',
+            'birth_date' => 'required|date',
+            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+        ]);
+
+        // Create a new user instance
         $user = new Users();
         $user->username = $request->input('name');
         $user->email = $request->input('email');
-        $user->password_hash = $request->input('password');
+        $user->password_hash = Hash::make($request->input('password'));
+        $user->gender = $request->input('gender');
+        $user->date_of_birth = $request->input('birth_date');
         $user->created_at = now();
         $user->updated_at = now();
-        $user->save();
-        return redirect()->back()->with('status', 'Tạo mới tài khoản thành công');
+
+        // Handle avatar as Base64
+        if ($request->hasFile('avatar') && $request->file('avatar')->isValid()) {
+            $image = $request->file('avatar');
+            $extension = $image->getClientOriginalExtension();
+            $imageData = base64_encode(file_get_contents($image->getRealPath()));
+            $user->profile_pic_url = 'data:image/' . $extension . ';base64,' . $imageData;
+        }
+
+        $user->save(); // Save the user to the database
+
+        // Redirect to login with success message
+        return redirect()->route('login')->with('status', 'Tạo mới tài khoản thành công');
+    }
+
+    function showRegister()
+    {
+        return view('register');
     }
 
     // Read

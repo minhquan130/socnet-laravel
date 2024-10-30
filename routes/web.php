@@ -40,8 +40,8 @@ Route::middleware([CheckUser::class])->group(function () {
     Route::get('/post/{id}', [CommentController::class, 'show'])->name('post.show');
 });
 
-Route::get('/register', [RegisterController::class, 'index'])->name('register');
-Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
+Route::get('/register', [UserController::class, 'showRegister'])->name('register');
+Route::post('/register', [UserController::class, 'register'])->name('register.store');
 
 Route::get('/login', [UserController::class, 'showLogin'])->name('login');
 Route::post('/login', [UserController::class, 'login'])->name('login.store');
