@@ -17,7 +17,7 @@
                     <span>
                         <b>Tên người dùng: </b>
                     </span>
-                    <span>{{ $userCurrent->name }}</span>
+                    <span>{{ $userCurrent->username }}</span>
                 </div>
                 <div class="info">
                     <span>

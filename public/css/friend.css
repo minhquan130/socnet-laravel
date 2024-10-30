@@ -74,8 +74,8 @@
 
 .page-freinds div.pf-002 .list-friends {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
 }
 
 .page-freinds div.pf-002 .list-friends .card-friend {
@@ -88,7 +88,7 @@
 }
 
 .page-freinds div.pf-002 .list-friends .card-friend img {
-    height: 250px;
+    height: 225px;
     width: 100%;
     object-fit: cover;
     border-bottom: 1px solid #696969;
