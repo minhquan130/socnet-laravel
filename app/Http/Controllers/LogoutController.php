@@ -13,9 +13,6 @@ class LogoutController extends Controller
     }
     public function store(Request $request)
     {
-        // Đăng xuất người dùng
-        Auth::logout();
-
         // Hủy session của người dùng
         Session::invalidate();
         Session::regenerateToken();
