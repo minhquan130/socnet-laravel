@@ -10,8 +10,8 @@ class ProfileController extends Controller
 {
     //
     function index()  {
-        $user = Users::where('user_id', Session::get('user_id'))->first();
-        return view('profile', compact('user'));
+        $userCurrent = Users::where('user_id', Session::get('user_id'))->first();
+        return view('profile', compact('userCurrent'));
     }
         public function update(Request $request){
         $user = auth()->user();

@@ -2,14 +2,14 @@
     <div class="sidebar">
         <div class="card-profile">
             <a href="{{ route('profile') }}" class="profile-picture" style="display: block">
-                <img src="{{ $user->profile_pic_url }}" alt="">
+                <img src="{{ $userCurrent->profile_pic_url == null ? asset('images/none-avatar.jpg') :  $userCurrent->profile_pic_url }}" alt="">
             </a>
             <div class="name">
-                <span>{{ $user->username }}</span>
+                <span>{{ $userCurrent->username }}</span>
             </div>
             <div class="bio">
-                @if ($user->bio)
-                    <span>{{ $user->bio }}</span>
+                @if ($userCurrent->bio)
+                    <span>{{ $userCurrent->bio }}</span>
                 @else
                     <span style="display: inline-flex; gap: 1rem;">
                         Bạn chưa có tiểu sử

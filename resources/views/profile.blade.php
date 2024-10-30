@@ -17,7 +17,7 @@
                     <span>
                         <b>Tên người dùng: </b>
                     </span>
-                    <span>{{ $user->name }}</span>
+                    <span>{{ $userCurrent->name }}</span>
                 </div>
                 <div class="info">
                     <span>
@@ -29,36 +29,36 @@
                     <span>
                         <b>Nơi ở: </b>
                     </span>
-                    <span>{{ $user->address }}</span>
+                    <span>{{ $userCurrent->address }}</span>
                 </div>
                 <div class="info">
                     <span>
                         <b>Làm việc ở: </b>
-                        <span>{{ $user->company }}</span>
+                        <span>{{ $userCurrent->company }}</span>
                     </span>
                 </div>
                 <div class="info">
                     <span>
                         <b>Tình trạng: </b>
-                        <span>{{ $user->relationship_status }}</span>
+                        <span>{{ $userCurrent->relationship_status }}</span>
                     </span>
                 </div>
                 <div class="info">
                     <span>
                         <b>Tiểu sử: </b>
-                        <span>{{ $user->bio }}</span>
+                        <span>{{ $userCurrent->bio }}</span>
                     </span>
                 </div>
                 <div class="info">
                     <span>
                         <b>Giới tính: </b>
-                        <span>{{ $user->gender }}</span>
+                        <span>{{ $userCurrent->gender }}</span>
                     </span>
                 </div>
                 <div class="info">
                     <span>
                         <b>Ngày sinh: </b>
-                        <span>{{ $user->date_of_birth }}</span>
+                        <span>{{ $userCurrent->date_of_birth }}</span>
                     </span>
                 </div>
 
@@ -77,35 +77,35 @@
                             <div class="edit">
                                 <div class="edit-name">
                                     <span>Tên người dùng</span>
-                                    <input type="text" name="user-name" id="name" placeholder="Nhập tên của bạn" value="{{ old('user_name', $user->username) }}">
+                                    <input type="text" name="user-name" id="name" placeholder="Nhập tên của bạn" value="{{ old('user_name', $userCurrent->username) }}">
                                 </div>
                                 {{-- <div class="edit-address">
                                     <span>Địa chỉ</span>
-                                    <input type="text" name="address" id="address" placeholder="Nhập địa chỉ" value="{{ old('address', $user->address) }}">
+                                    <input type="text" name="address" id="address" placeholder="Nhập địa chỉ" value="{{ old('address', $userCurrent->address) }}">
                                 </div>
                                 <div class="edit-company">
                                     <span>Làm việc ở</span>
-                                    <input type="text" name="" id="" placeholder="Nhập tên công ty" value="{{ old('company', $user->company) }}">
+                                    <input type="text" name="" id="" placeholder="Nhập tên công ty" value="{{ old('company', $userCurrent->company) }}">
                                 </div>
                                 <div class="edit-relationship">
                                     <span>Tình trạng</span>
-                                    <input type="text" name="" id="" placeholder="Nhập tình trạng mối quan hệ" value="{{ old('relationship_status', $user->relationship_status) }}">
+                                    <input type="text" name="" id="" placeholder="Nhập tình trạng mối quan hệ" value="{{ old('relationship_status', $userCurrent->relationship_status) }}">
                                 </div> --}}
                                 <div class="edit-bio">
                                     <span>Tiểu sử</span>
-                                    <input type="text" name="bio" id="bio" placeholder="Nhập tiểu sử" value="{{ old('bio', $user->bio) }}">
+                                    <input type="text" name="bio" id="bio" placeholder="Nhập tiểu sử" value="{{ old('bio', $userCurrent->bio) }}">
                                 </div>
                                 <div class="edit-gender">
                                     <span>Giới tính</span>
                                     <select name="gender" id="gender">
-                                        <option value="1" {{ old('gender', $user->gender) == 'male' ? 'selected' : '' }}>Nam</option>
-                                        <option value="2" {{ old('gender', $user->gender) == 'female' ? 'selected' : '' }}>Nữ</option>
-                                        <option value="3" {{ old('gender', $user->gender) == 'other' ? 'selected' : '' }}>Giới tính khác</option>
+                                        <option value="1" {{ old('gender', $userCurrent->gender) == 'male' ? 'selected' : '' }}>Nam</option>
+                                        <option value="2" {{ old('gender', $userCurrent->gender) == 'female' ? 'selected' : '' }}>Nữ</option>
+                                        <option value="3" {{ old('gender', $userCurrent->gender) == 'other' ? 'selected' : '' }}>Giới tính khác</option>
                                     </select>
                                 </div>
                                 <div class="edit-date">
                                     <span>Ngày sinh</span>
-                                    <input type="date" name="date" id="date" value="{{ old('date', $user->date_of_birth) }}">
+                                    <input type="date" name="date" id="date" value="{{ old('date', $userCurrent->date_of_birth) }}">
                                 </div>
                             </div>
                         </form>
@@ -121,10 +121,10 @@
         <div class="profile-container">
             <div class="profile-right">
                 <div class="avatar">
-                    <img src="{{ asset('images/avatar.png') }}" alt="">
+                    <img src="{{ $userCurrent->profile_pic_url == null ? asset('images/none-avatar.jpg') :  $userCurrent->profile_pic_url }}" alt="">
                 </div>
                 <div class="info-right">
-                    <span>{{ $user->username }}</span>
+                    <span>{{ $userCurrent->username }}</span>
                     <div class="user-post-follow">
                         <span class="post">0 Post</span>
                         <span class="follower">300 follower</span>
