@@ -12,7 +12,7 @@
 <body>
     <div class="register-container">
         <h2>Đăng Ký</h2>
-        <form action="{{ route('register.store') }}" method="post" class="form-register">
+        <form action="{{ route('register.store') }}" method="post" class="form-register" enctype="multipart/form-data">
             @csrf
             <label for="email">
                 <i class="fa-solid fa-envelope"></i>
@@ -28,6 +28,23 @@
                 <i class="fa-solid fa-user"></i>
                 <input type="text" name="name" id="name" placeholder="Tên" required>
             </label>
+
+            <!-- Trường giới tính với checkbox -->
+            <label class="gender-label">
+                <i class="fa-solid fa-venus-mars"></i>
+                <span class="">Giới tính:</span>
+                <div class="gender-options">
+                    <label><input type="radio" name="gender" value="male" required checked> Nam</label>
+                    <label><input type="radio" name="gender" value="female"> Nữ</label>
+                    <label><input type="radio" name="gender" value="other"> Khác</label>
+                </div>
+            </label>
+
+            <!-- Trường ngày sinh -->
+            <label>
+                <i class="fa-solid fa-calendar"></i>
+                <input type="date" name="birth_date" id="birth_date" placeholder="Ngày sinh" required>
+            </label>
         
             <label for="password">
                 <i class="fa-solid fa-lock"></i>
@@ -42,6 +59,12 @@
             <label for="confirm_password">
                 <i class="fa-solid fa-rotate-right"></i>
                 <input type="password" name="confirm_password" id="confirm_password" placeholder="Xác nhận mật khẩu" required>
+            </label>
+
+             <!-- Trường ảnh đại diện -->
+             <label for="avatar">
+                <i class="fa-solid fa-image"></i>
+                <input type="file" name="avatar" id="avatar" accept="image/*">
             </label>
           
             <label class="btn-submit">

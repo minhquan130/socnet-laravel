@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Foundation\Auth\User;
+use App\Models\Users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash; // Import Hash facade for hashing passwords
 
@@ -23,7 +23,7 @@ class RegisterController extends Controller
         ]);
 
         // Create a new user instance
-        $user = new User();
+        $user = new Users();
         $user->username = $request->input('name');
         $user->email = $request->input('email');
         $user->password_hash = Hash::make($request->input('password')); // Hash the password

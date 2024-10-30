@@ -60,18 +60,25 @@ header .header_container .header_left .notification {
 }
 
 header .header_container .header_left .setting {
-    width: 40px;
-    height: 40px;
-    background: #ffffff;
+    width: 54px;
+    height: 54px;
+    position: relative;
+}
+
+header .header_container .header_left .setting img{
+    position: absolute;
+    width: 54px;
+    height: 54px;
     border-radius: 50%;
     border: 3px solid #474646;
-    position: relative;
+    object-fit: cover;
 }
 
 header .header_container .header_left .setting .icon-dropdonw {
     position: absolute;
-    bottom: -5px;
-    right: -5px;
+    bottom: 0px;
+    right: 0px;
     background: #ffffff;
+    border: 3px solid #474646;
     border-radius: 50%;
 }

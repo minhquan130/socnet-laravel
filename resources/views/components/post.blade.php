@@ -4,7 +4,7 @@
             @csrf
             <div class="top-post-bar">
                 <div class="img-avatar">
-                    <img src="{{ asset('images/avatar.png') }}" alt="">
+                    <img src="{{ $user->profile_pic_url }}" alt="" style="oject-fit: cover;">
                 </div>
                 <div class="form-text-post">
                     <input type="text" name="input-content" id="input-content" placeholder="Bạn đang nghĩ gì thế?">
