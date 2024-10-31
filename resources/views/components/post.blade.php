@@ -41,10 +41,10 @@
                 <div class="top-post">
                     <div class="top-post-tp1">
                         <div class="avarta-post">
-                            <img src="{{ asset('images/avatar.png') }}" alt="">
+                            <img src="{{ $post->profile_pic_url == null ? asset('images/none-avatar.jpg') :  $post->profile_pic_url }}" alt="">
                         </div>
                         <div class="content-top-post">
-                            <span class="name">Tikay</span>
+                            <span class="name">{{ $post->username }}</span>
                             <span class="posted-time">{{ $post->created_at->diffForHumans() }}</span>
                         </div>
                     </div>
