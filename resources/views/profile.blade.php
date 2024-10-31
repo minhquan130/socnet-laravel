@@ -75,6 +75,10 @@
                         <form action="{{ route('profile.update') }}" method="POST">
                             @csrf
                             <div class="edit">
+                                <div class="edit-avatar">
+                                    <img src="{{ $userCurrent->profile_pic_url == null ? asset('images/none-avatar.jpg') :  $userCurrent->profile_pic_url }}" alt="">
+                                    <button type="button">Chọn file ảnh</button>
+                                </div>
                                 <div class="edit-name">
                                     <span>Tên người dùng</span>
                                     <input type="text" name="user-name" id="name" placeholder="Nhập tên của bạn" value="{{ old('user_name', $userCurrent->username) }}">
