@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Likes;
 use App\Models\Posts;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -54,5 +55,15 @@ class PostController extends Controller
 
         $post->delete();
         return redirect()->route('home')->with('success', 'Bài viết đã được xóa.');
+    }
+
+    public function like(Request $request, $id)
+    {
+        $like = new Likes();
+
+        $result = $like->checkLike($id);
+        $count_like = $like->getCountLikeById($id);
+
+        return [$result, $count_like];
     }
 }

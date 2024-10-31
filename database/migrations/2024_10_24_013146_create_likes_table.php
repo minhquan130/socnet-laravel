@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id('like_id'); // PRIMARY KEY AUTO_INCREMENT
             $table->unsignedBigInteger('user_id'); // INT không dấu cho user_id
             $table->unsignedBigInteger('post_id'); // INT không dấu cho post_id
-            $table->timestamp('created_at')->useCurrent(); // TIMESTAMP mặc định là CURRENT_TIMESTAMP
+            $table->timestamps(); // created_at và updated_at
 
             // Thiết lập khóa ngoại
             
