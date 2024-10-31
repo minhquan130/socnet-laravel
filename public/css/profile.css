@@ -60,6 +60,7 @@
 .profile .profile-right {
     display: flex;
     gap: 1rem;
+    margin-right: 70px;
 }
 
 .profile .profile-right .avatar img {
@@ -73,9 +74,9 @@
 .profile .profile-right .info-right {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
     font-size: 20px;
-    margin-top: 10px;
+    margin-left: 10px;
+    margin-top: 30px;
 }
 
 .profile .profile-right .info-right .user-post-follow {
