@@ -478,7 +478,7 @@ main .container_posts .posts .list-posts .post-item hr{
 
 main .container_posts .posts .list-posts .post-item .options-post {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 main .container_posts .posts .list-posts .post-item .options-post .option {
@@ -489,6 +489,8 @@ main .container_posts .posts .list-posts .post-item .options-post .option {
     border-radius: .5rem;
     cursor: pointer;
     transition: .3s;
+    text-decoration: none;
+    color: #000;
 }
 
 main .container_posts .posts .list-posts .post-item .options-post .option:hover {
