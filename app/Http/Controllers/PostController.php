@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Posts;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class PostController extends Controller
 {
@@ -16,9 +17,11 @@ class PostController extends Controller
                 'input-picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // File ảnh (tùy chọn), chỉ chấp nhận các định dạng ảnh với dung lượng tối đa 2MB
             ]);
 
+            $currentUserId = Session::get('user_id');
+
             // Tạo đối tượng bài viết mới
             $post = new Posts();
-            $post->user_id = 1; // Hoặc lấy ID người dùng hiện tại
+            $post->user_id = $currentUserId; // Hoặc lấy ID người dùng hiện tại
             $post->content = $request->input('input-content', '');
 
             // Kiểm tra xem người dùng có upload file ảnh hay không
