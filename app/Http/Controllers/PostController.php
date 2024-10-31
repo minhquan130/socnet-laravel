@@ -59,8 +59,15 @@ class PostController extends Controller
 
     public function like(Request $request, $id)
     {
-        (new Likes())->checkLike($id);
+        $like = new Likes();
 
-        return redirect()->back();
+        $result= $like->checkLike($id);
+        
+        $color = '#000';
+        if($result){
+            $color = '#ff7e7e';
+        }
+
+        return redirect()->route('home', compact('color'));
     }
 }

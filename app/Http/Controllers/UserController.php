@@ -138,6 +138,7 @@ class UserController extends Controller
     {
         // $posts = Posts::orderBy('created_at', 'desc')->get();
         $create_comment = Comments::orderBy('created_at', 'desc')->get();
+        // $color = '#000';
 
         $posts = Posts::orderBy('posts.created_at', 'desc')
             ->Join('users', 'users.user_id', '=', 'posts.user_id')

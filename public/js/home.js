@@ -58,71 +58,62 @@ function showOptionItemPost(optionsItemPost) {
     // Toggle hiển thị
     if (optionsItemPost.style.display === 'none' || optionsItemPost.style.display === '') {
         optionsItemPost.style.display = 'flex';
-        // Thêm sự kiện `click` để ẩn khi nhấp ra ngoài
-        // const hideOnClickOutside = (event) => {
-        //     if (!optionsItemPost.contains(event.target)) {
-        //         optionsItemPost.style.display = 'none';
-        //         document.removeEventListener('click', hideOnClickOutside);
-        //         console.log(true);
-                
-        //     }
-        // };
-        // document.addEventListener('click', hideOnClickOutside);
     } else {
         optionsItemPost.style.display = 'none';
     }
 }
 // 
-document.getElementById('commentForm{{ $post->id }}').addEventListener('submit', function(event) {
-    event.preventDefault(); // Ngăn chặn gửi form mặc định
+// document.getElementById('commentForm{{ $post->id }}').addEventListener('submit', function (event) {
+//     event.preventDefault(); // Ngăn chặn gửi form mặc định
 
-    const form = this;
-    const commentInput = form.querySelector('input[name="comment"]');
-    const commentText = commentInput.value;
+//     const form = this;
+//     const commentInput = form.querySelector('input[name="comment"]');
+//     const commentText = commentInput.value;
 
-    // Gửi dữ liệu bình luận bằng AJAX
-    fetch(form.action, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': '{{ csrf_token() }}'
-        },
-        body: JSON.stringify({ comment: commentText })
-    })
-    .then(response => response.json())
-    .then(data => {
-        const commentElement = document.createElement('p');
-        commentElement.innerHTML = `
-            <img src="{{ asset('images/avatar.png') }}" alt="Avatar" class="img-fluid rounded-circle me-2" style="width: 40px; height: 40px;">
-            <span>${commentText}</span>
-        `;
-        document.getElementById('commentsList{{ $post->id }}').appendChild(commentElement);
-        commentInput.value = '';
-    })
-    .catch(error => console.error('Error:', error));
-});
-
-
-// document.addEventListener('DOMContentLoaded', function () {
-//     const likeButtons = document.querySelectorAll('.like-btn');
-
-//     likeButtons.forEach(button => {
-//         button.addEventListener('click', function () {
-//             const postId = this.getAttribute('data-id');
-//             fetch('/like', {
-//                 method: 'POST',
-//                 headers: {
-//                     'X-CSRF-TOKEN': '{{ csrf_token() }}',
-//                     'Content-Type': 'application/json'
-//                 },
-//                 body: JSON.stringify({ post_id: postId })
-//             })
-//             .then(response => response.json())
-//             .then(data => {
-//                 // Cập nhật số lượng like
-//                 document.getElementById(`like-count-${postId}`).innerText = data.likes_count;
-//             })
-//             .catch(error => console.error('Error:', error));
-//         });
-//     });
+//     // Gửi dữ liệu bình luận bằng AJAX
+//     fetch(form.action, {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json',
+//             'X-CSRF-TOKEN': '{{ csrf_token() }}'
+//         },
+//         body: JSON.stringify({ comment: commentText })
+//     })
+//         .then(response => response.json())
+//         .then(data => {
+//             const commentElement = document.createElement('p');
+//             commentElement.innerHTML = `
+//             <img src="{{ asset('images/avatar.png') }}" alt="Avatar" class="img-fluid rounded-circle me-2" style="width: 40px; height: 40px;">
+//             <span>${commentText}</span>
+//         `;
+//             document.getElementById('commentsList{{ $post->id }}').appendChild(commentElement);
+//             commentInput.value = '';
+//         })
+//         .catch(error => console.error('Error:', error));
 // });
+
+
+const likeButtons = document.querySelectorAll('.like-btn');
+console.log(likeButtons);
+
+likeButtons.forEach(button => {
+    button.addEventListener('click', function () {
+        const postId = this.getAttribute('data-id');
+        console.log(postId);
+
+        fetch('/like', {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ id: postId })
+        })
+            .then(response => response.json())
+            .then(data => {
+                // Cập nhật số lượng like
+                document.getElementById(`like-count-${postId}`).innerText = data.likes_count;
+            })
+            .catch(error => console.error('Error:', error));
+    });
+});

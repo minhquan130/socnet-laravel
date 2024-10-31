@@ -91,15 +91,12 @@
                     </div>
                     <hr>
                     <div class="options-post">
-                        @php
-     
-                        @endphp
-                        <a href="{{ route('post.like', ['id' => $post->post_id]) }}" class="option option-like">
+                        <button class="option option-like like-btn" data-id="{{ $post->post_id }}">
                             <span class="option-icon icon-like">
                                 <i class="fa-solid fa-heart"></i>
                             </span>
                             <span>Thích</span>
-                        </a>
+                        </button>
                         <div class="option option-comment" data-bs-toggle="modal"
                             data-bs-target="#commentModal{{ $post->id }}">
                             <span class="option-icon icon-comment">
