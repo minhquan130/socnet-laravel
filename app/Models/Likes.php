@@ -34,6 +34,12 @@ class Likes extends Model
         }
     }
 
+    public function isLiked($post_id)
+    {
+        $currentUserId = Session::get('user_id');
+        return $like = self::where('user_id', $currentUserId)->where('post_id', $post_id)->first();
+    }
+
     public function getCountLikeById($post_id)
     {
         return self::where('post_id', $post_id)->count();

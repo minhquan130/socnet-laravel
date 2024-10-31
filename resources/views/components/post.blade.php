@@ -91,7 +91,7 @@
                     </div>
                     <hr>
                     <div class="options-post">
-                        <button class="option option-like like-btn btn-like-post-{{ $post->post_id }}" data-id="{{ $post->post_id }}" style="background: none; border: none">
+                        <button class="option option-like like-btn btn-like-post-{{ $post->post_id }}" data-id="{{ $post->post_id }}" style="background: none; border: none; color: {{ $likesModel->isLiked($post->post_id) ? '#ff7e7e' : '#000' }}">
                             <span class="option-icon icon-like">
                                 <i class="fa-solid fa-heart"></i>
                             </span>
