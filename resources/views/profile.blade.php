@@ -128,7 +128,7 @@
                     <img src="{{ $userCurrent->profile_pic_url == null ? asset('images/none-avatar.jpg') :  $userCurrent->profile_pic_url }}" alt="">
                 </div>
                 <div class="info-right">
-                    <span>{{ $userCurrent->username }}</span>
+                    <h2>{{ $userCurrent->username }}</h2>
                     <div class="user-post-follow">
                         <span class="post">0 Post</span>
                         <span class="follower">300 follower</span>
