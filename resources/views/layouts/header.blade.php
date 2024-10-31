@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="{{ asset('css/home.css') }}">
     <link rel="stylesheet" href="{{ asset('css/profile.css')}}">
     <link rel="stylesheet" href="{{ asset('css/friend.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/chat.css')}}">
 </head>
 
 <body>
