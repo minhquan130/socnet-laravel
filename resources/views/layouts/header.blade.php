@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="{{ asset('css/home.css') }}">
     <link rel="stylesheet" href="{{ asset('css/profile.css') }}">
     <link rel="stylesheet" href="{{ asset('css/friend.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/chat.css')}}">
 
     <!-- jQuery (nếu cần cho phần khác của trang) -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
