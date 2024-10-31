@@ -7,20 +7,35 @@ use Illuminate\Support\Facades\Session;
 
 class Likes extends Model
 {
+    protected $table = 'likes'; // Tên bảng
+    protected $primaryKey = 'like_id'; // Khóa chính của bảng
     protected $fillable = [
-        'like_id',
         'user_id',
         'post_id',
         'created_at',
         'updated_at'
     ];
 
-    public function deleteLikeById($post_id) {
+    public function checkLike($post_id)
+    {
         $currentUserId = Session::get('user_id');
-        return self::where('user_id', $currentUserId)->where('post_id', $post_id)->delete();
+        $like = self::where('user_id', $currentUserId)->where('post_id', $post_id)->first();
+
+        if (!$like) {
+            $newLike = new self();
+            $newLike->user_id = $currentUserId;
+            $newLike->post_id = $post_id;
+            $newLike->save();
+            return true;
+        } else {
+            // dd($like);
+            $like->delete();
+            return false;
+        }
     }
 
-    public function getCountLikeById($post_id) {
+    public function getCountLikeById($post_id)
+    {
         return self::where('post_id', $post_id)->count();
     }
 }

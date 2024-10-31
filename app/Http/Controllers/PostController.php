@@ -59,22 +59,7 @@ class PostController extends Controller
 
     public function like(Request $request, $id)
     {
-        $currentUsserId = Session::get('user_id');
-        // $post = Posts::where('post_id', $id)->first();
-        $likes = Likes::where('post_id', $id)->where('user_id', $currentUsserId)->first();
-
-
-        // $post->likes_count += 1; // Hoặc xử lý tăng giảm tùy vào logic like/unlike
-        // $post->save();
-        $newLike = new Likes();
-        if (!$likes) {
-            // dd($likes);
-            $newLike->user_id = $currentUsserId;
-            $newLike->post_id = $id;
-            $newLike->save();
-        }else{
-            $newLike->deleteLikeById($id);
-        }
+        (new Likes())->checkLike($id);
 
         return redirect()->back();
     }

@@ -91,6 +91,9 @@
                     </div>
                     <hr>
                     <div class="options-post">
+                        @php
+     
+                        @endphp
                         <a href="{{ route('post.like', ['id' => $post->post_id]) }}" class="option option-like">
                             <span class="option-icon icon-like">
                                 <i class="fa-solid fa-heart"></i>
