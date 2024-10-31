@@ -136,8 +136,16 @@ class UserController extends Controller
 
     function showHome()
     {
-        $posts = Posts::orderBy('created_at', 'desc')->get();
+        // $posts = Posts::orderBy('created_at', 'desc')->get();
         $create_comment = Comments::orderBy('created_at', 'desc')->get();
+
+        $posts = Posts::orderBy('posts.created_at', 'desc')
+            ->Join('users', 'users.user_id', '=', 'posts.user_id')
+            ->select('posts.*', 'users.username', 'users.email', 'users.profile_pic_url')
+            ->get();
+
+
+        // dd($posts);
 
         $userCurrent = Users::where('user_id', Session::get('user_id'))->first();
         return view('home', compact('posts', 'userCurrent', 'create_comment'));
