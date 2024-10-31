@@ -29,30 +29,30 @@
                     <span>
                         <b>Nơi ở: </b>
                     </span>
-                    <span>{{ $userCurrent->address }}</span>
+                    <span></span>
                 </div>
                 <div class="info">
                     <span>
                         <b>Làm việc ở: </b>
-                        <span>{{ $userCurrent->company }}</span>
+                        <span></span>
                     </span>
                 </div>
                 <div class="info">
                     <span>
                         <b>Tình trạng: </b>
-                        <span>{{ $userCurrent->relationship_status }}</span>
+                        <span></span>
                     </span>
                 </div>
                 <div class="info">
                     <span>
                         <b>Tiểu sử: </b>
-                        <span>{{ $userCurrent->bio }}</span>
+                        <span></span>
                     </span>
                 </div>
                 <div class="info">
                     <span>
                         <b>Giới tính: </b>
-                        <span>{{ $userCurrent->gender }}</span>
+                        <span></span>
                     </span>
                 </div>
                 <div class="info">
@@ -72,44 +72,45 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form action="{{ route('profile.update') }}" method="POST">
+                        <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="edit">
-                                <div class="edit-avatar">
+                                <label class="edit-avatar">
                                     <img src="{{ $userCurrent->profile_pic_url == null ? asset('images/none-avatar.jpg') :  $userCurrent->profile_pic_url }}" alt="">
-                                    <button type="button">Chọn file ảnh</button>
-                                </div>
+                                    <input type="file" name="avatar" id="avatar" accept="image/*" style="display: none">
+                                </label>
                                 <div class="edit-name">
                                     <span>Tên người dùng</span>
                                     <input type="text" name="user-name" id="name" placeholder="Nhập tên của bạn" value="{{ old('user_name', $userCurrent->username) }}">
                                 </div>
-                                {{-- <div class="edit-address">
+                                <div class="edit-address">
                                     <span>Địa chỉ</span>
-                                    <input type="text" name="address" id="address" placeholder="Nhập địa chỉ" value="{{ old('address', $userCurrent->address) }}">
+                                    <input type="text" name="address" id="address" placeholder="Nhập địa chỉ">
                                 </div>
                                 <div class="edit-company">
                                     <span>Làm việc ở</span>
-                                    <input type="text" name="" id="" placeholder="Nhập tên công ty" value="{{ old('company', $userCurrent->company) }}">
+                                    <input type="text" name="" id="" placeholder="Nhập tên công ty">
                                 </div>
                                 <div class="edit-relationship">
                                     <span>Tình trạng</span>
-                                    <input type="text" name="" id="" placeholder="Nhập tình trạng mối quan hệ" value="{{ old('relationship_status', $userCurrent->relationship_status) }}">
-                                </div> --}}
+                                    <input type="text" name="" id="" placeholder="Nhập tình trạng mối quan hệ">
+                                </div>
                                 <div class="edit-bio">
                                     <span>Tiểu sử</span>
-                                    <input type="text" name="bio" id="bio" placeholder="Nhập tiểu sử" value="{{ old('bio', $userCurrent->bio) }}">
+                                    <input type="text" name="bio" id="bio" placeholder="Nhập tiểu sử">
                                 </div>
                                 <div class="edit-gender">
                                     <span>Giới tính</span>
                                     <select name="gender" id="gender">
-                                        <option value="1" {{ old('gender', $userCurrent->gender) == 'male' ? 'selected' : '' }}>Nam</option>
-                                        <option value="2" {{ old('gender', $userCurrent->gender) == 'female' ? 'selected' : '' }}>Nữ</option>
-                                        <option value="3" {{ old('gender', $userCurrent->gender) == 'other' ? 'selected' : '' }}>Giới tính khác</option>
+                                        <option value="1">Nam</option>
+                                        <option value="2">Nữ</option>
+                                        <option value="3">Giới tính khác</option>
                                     </select>
                                 </div>
                                 <div class="edit-date">
                                     <span>Ngày sinh</span>
-                                    <input type="date" name="date" id="date" value="{{ old('date', $userCurrent->date_of_birth) }}">
+                                    <input type="date" name="date_of_birth" id="date_of_birth">
+                                    
                                 </div>
                             </div>
                         </form>
@@ -161,6 +162,17 @@
             </div>
         </div>  
     </div>
+    <script>
+        // Thay đổi ảnh trong modal khi chọn ảnh mới
+        document.getElementById('avatar').onchange = function(event) {
+            let reader = new FileReader();
+            reader.onload = function() {
+                document.querySelector('.edit-avatar img').src = reader.result;
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        };
+
+    </script>
     <script src="{{ asset('js/home.js') }}"></script>
 </body>
 </html>

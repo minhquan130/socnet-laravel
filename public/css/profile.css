@@ -138,12 +138,9 @@
     text-align: center;
 }
 
-.modal-body .edit .edit-avatar button {
+.modal-body .edit .edit-avatar input {
     display: flex;
-    position: relative;
-    left: 39%;
-    top: 15px;
-    padding: 2px 10px;
+    border: none;
 }
 
 .modal-body .edit .edit-avatar img {
@@ -151,4 +148,5 @@
     height: 170px;
     object-fit: cover;
     border-radius: 50%;
+    cursor: pointer;
 }
