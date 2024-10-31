@@ -101,3 +101,28 @@ document.getElementById('commentForm{{ $post->id }}').addEventListener('submit',
     })
     .catch(error => console.error('Error:', error));
 });
+
+
+// document.addEventListener('DOMContentLoaded', function () {
+//     const likeButtons = document.querySelectorAll('.like-btn');
+
+//     likeButtons.forEach(button => {
+//         button.addEventListener('click', function () {
+//             const postId = this.getAttribute('data-id');
+//             fetch('/like', {
+//                 method: 'POST',
+//                 headers: {
+//                     'X-CSRF-TOKEN': '{{ csrf_token() }}',
+//                     'Content-Type': 'application/json'
+//                 },
+//                 body: JSON.stringify({ post_id: postId })
+//             })
+//             .then(response => response.json())
+//             .then(data => {
+//                 // Cập nhật số lượng like
+//                 document.getElementById(`like-count-${postId}`).innerText = data.likes_count;
+//             })
+//             .catch(error => console.error('Error:', error));
+//         });
+//     });
+// });

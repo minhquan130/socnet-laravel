@@ -16,10 +16,13 @@
     border-radius: 20px;
    
 }
+<<<<<<< HEAD
 .chats-wrapper .chats .chat-left .chat-left-top h2{
   font-weight: bold;
     
 }
+=======
+>>>>>>> dev
 .chats-wrapper .chats .chat-left .list-chat{
      overflow-y: scroll;
 }
@@ -110,7 +113,11 @@
     border: 2px solid #fff;
 }
 
+<<<<<<< HEAD
 .chats-wrapper .chats .chat-left-center  span {
+=======
+.chats-wrapper .chats .chat-left-center .pic-avtar-messages span {
+>>>>>>> dev
     display: flex;
     align-items: center;
     font-size: 18px;
@@ -125,12 +132,18 @@
     background: rgba(255, 255, 255, .5);
     border-radius: 20px;
     margin-left: 10px;
+<<<<<<< HEAD
     position: relative;
 }
 .chats-wrapper .chats .chat-center .chat-center-chatbox {
     padding: 20px 10px  20px;
     display: flex;
     align-items: center;
+=======
+}
+.chats-wrapper .chats .chat-center .chat-center-chatbox {
+    padding: 20px;
+>>>>>>> dev
 }
 .chats-wrapper .chats .chat-center .chat-center-chatbox .pic-avtar-messages-chat{
     position: relative;
@@ -157,6 +170,7 @@
     display: block;
     border: 2px solid #fff;
 }
+<<<<<<< HEAD
 .chats-wrapper .chats .chat-center .chat-center-chatbox .name{
     align-items: center;
     font-size: 18px;
@@ -169,3 +183,5 @@
     gap: 2rem;
   
 }
+=======
+>>>>>>> dev

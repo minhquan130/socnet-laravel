@@ -67,8 +67,8 @@ header .header_container .header_left .setting {
 
 header .header_container .header_left .setting img{
     position: absolute;
-    width: 54px;
-    height: 54px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     border: 3px solid #474646;
     object-fit: cover;

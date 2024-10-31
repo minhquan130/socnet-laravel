@@ -5,7 +5,11 @@
     <div class="chats">
         <div class="chat-left">
             <div class="chat-left-top">
+<<<<<<< HEAD
                 <h2>Đoạn chat</h2>
+=======
+                <h2>Trò chuyện</h2>
+>>>>>>> dev
                 <span><i class="fa-solid fa-ellipsis"></i></span>
                 <span><i class="fa-solid fa-pen-to-square"></i></span>
 
@@ -43,7 +47,11 @@
                     </div>
                     <span>Văn Đạt</span>
                 </div>
+<<<<<<< HEAD
 
+=======
+               
+>>>>>>> dev
             </div>
         </div>
         <div class="chat-center">
@@ -51,6 +59,7 @@
                 <div class="pic-avtar-messages-chat">
                     <img src="../images/musa.jpg" alt="" class='chatbox'>
                 </div>
+<<<<<<< HEAD
                 <span class='name'>Minh Quân</span>
                 <div class="icon">
                     <span><i class="fa-solid fa-phone"></i></span>
@@ -61,6 +70,13 @@
             <hr>
             <div class="chatbox-messages">
                 
+=======
+                <span>Minh Quân</span>
+
+                <span></span>
+                <span></span>
+                <span></span>
+>>>>>>> dev
             </div>
 
         </div>
