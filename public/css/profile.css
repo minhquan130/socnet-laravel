@@ -67,6 +67,7 @@
     height: 170px;
     object-fit: cover;
     border-radius: 50%;
+    border: 3px solid #727272;
 }
 
 .profile .profile-right .info-right {
