@@ -61,13 +61,9 @@ class PostController extends Controller
     {
         $like = new Likes();
 
-        $result= $like->checkLike($id);
-        
-        $color = '#000';
-        if($result){
-            $color = '#ff7e7e';
-        }
+        $result = $like->checkLike($id);
+        $count_like = $like->getCountLikeById($id);
 
-        return redirect()->route('home', compact('color'));
+        return [$result, $count_like];
     }
 }

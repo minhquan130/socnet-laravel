@@ -81,7 +81,7 @@
                                 $likesModel = new \App\Models\Likes();
                                 $countLike = $likesModel->getCountLikeById($post->post_id);
                             @endphp
-                            <span>
+                            <span id="qty-likes-post-{{ $post->post_id }}">
                                 {{ $countLike }}
                             </span>
                         </div>
@@ -91,7 +91,7 @@
                     </div>
                     <hr>
                     <div class="options-post">
-                        <button class="option option-like like-btn" data-id="{{ $post->post_id }}">
+                        <button class="option option-like like-btn btn-like-post-{{ $post->post_id }}" data-id="{{ $post->post_id }}" style="background: none; border: none">
                             <span class="option-icon icon-like">
                                 <i class="fa-solid fa-heart"></i>
                             </span>

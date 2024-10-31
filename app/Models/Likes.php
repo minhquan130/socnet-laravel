@@ -26,11 +26,11 @@ class Likes extends Model
             $newLike->user_id = $currentUserId;
             $newLike->post_id = $post_id;
             $newLike->save();
-            return true;
+            return 1;
         } else {
             // dd($like);
             $like->delete();
-            return false;
+            return 0;
         }
     }
 
