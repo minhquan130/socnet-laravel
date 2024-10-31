@@ -197,8 +197,8 @@ main .posts .post-bar {
 }
 
 main .posts .post-bar .img-avatar {
-    width: 54px;
-    height: 54px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     overflow: hidden;
     /* background: #000; */
@@ -350,15 +350,16 @@ main .container_posts .posts .list-posts .post-item .top-post .top-post-tp1 {
 }
 
 main .container_posts .posts .list-posts .post-item .top-post .top-post-tp1 .avarta-post {
-    width: 54px;
-    height: 54px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     overflow: hidden;
 }
 
 main .container_posts .posts .list-posts .post-item .top-post .top-post-tp1 .avarta-post img {
-    width: 54px;
-    height: 54px;
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
 }
 
 main .container_posts .posts .list-posts .post-item .top-post .top-post-tp1 .content-top-post {
