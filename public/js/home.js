@@ -132,7 +132,6 @@ likeButtons.forEach(button => {
     });
 });
 
-
 document.addEventListener('DOMContentLoaded', function () {
     const commentForms = document.querySelectorAll('.text-comment');
 
