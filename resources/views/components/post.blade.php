@@ -72,6 +72,7 @@
                             </div>
                         @endif
                     </div>
+                    <hr>
                     <div class="metrics-post">
                         <div class="count-likes">
                             <span class="icon-count-likes">
