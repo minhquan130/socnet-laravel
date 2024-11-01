@@ -35,9 +35,9 @@ Route::middleware([CheckUser::class])->group(function () {
     Route::get('/friends/add/{id}', [UserController::class, 'addFriends'])->name('friends.add');
         
     // Route cho việc bình luận
-    Route::post('/post/{id}/comment', [CommentController::class, 'store'])->name('post.store');
+    Route::post('/post/add', [CommentController::class, 'addComment'])->name('post.add');
+    // Route::get('/post/{id}', [CommentController::class, 'show'])->name('post.show');
     
-    Route::get('/post/{id}', [CommentController::class, 'show'])->name('post.show');
 
     Route::get('/like/post-{id}', [PostController::class, 'like'])->name('post.like');
     Route::post('/like/post-{id}', [PostController::class, 'like'])->name('post.like');
