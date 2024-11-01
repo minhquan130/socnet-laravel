@@ -6,12 +6,6 @@
                 {{ session('success') }}
             </div>
         @endif
-        <div class="info-card">
-            <div class="info-head">
-                <h5><i class="fa-solid fa-user"></i> Thông tin người dùng</h5>
-                <a data-bs-toggle="modal" data-bs-target="#exampleModal" style="z-index: 10">
-                    <i class="fa-solid fa-pen-to-square"></i>
-            @endif
             <div class="info-card">
                 <div class="info-head">
                     <h4>Thông tin người dùng</h4>
@@ -21,72 +15,35 @@
                 </div>
                 <div class="info">
                     <span>
-                        <b>Tên người dùng: </b>
+                        <b><i class="fa-solid fa-location-dot"></i> Địa chỉ: </b>
                     </span>
-                    <span>{{ $userCurrent->username }}</span>
+                    <span>{{ $userCurrent->address ?? 'Chưa cập nhật' }}</span>
                 </div>
                 <div class="info">
                     <span>
-                        <b>Nơi ở: </b>
-                    </span>
-                    <span></span>
-                </div>
-                <div class="info">
-                    <span>
-                        <b>Làm việc ở: </b>
-                        <span></span>
+                        <b><i class="fa-solid fa-building"></i> Làm việc ở: </b>
+                        <span>{{ $userCurrent->company ?? 'Chưa cập nhật' }}</span>
                     </span>
                 </div>
                 <div class="info">
                     <span>
-                        <b>Tình trạng: </b>
-                        <span></span>
+                        <b><i class="fa-solid fa-heart"></i> Tình trạng: </b>
+                        <span>{{ $userCurrent->relationship ?? 'Chưa cập nhật' }}</span>
                     </span>
                 </div>
                 <div class="info">
                     <span>
-                        <b>Giới tính: </b>
-                        <span>{{ $userCurrent->gender }}</span>
+                        <b><i class="fa-solid fa-venus-mars"></i> Giới tính: </b>
+                        <span>{{ $userCurrent->gender ?? 'Chưa cập nhật' }}</span>
                     </span>
                 </div>
                 <div class="info">
                     <span>
-                        <b>Ngày sinh: </b>
-                        <span>{{ $userCurrent->date_of_birth }}</span>
+                        <b><i class="fa-solid fa-cake-candles"></i> Ngày sinh: </b>
+                        <span>{{ $userCurrent->date_of_birth ?? 'Chưa cập nhật' }}</span>
                     </span>
                 </div>
             </div>
-            <div class="info">
-                <span>
-                    <b><i class="fa-solid fa-location-dot"></i> Địa chỉ: </b>
-                </span>
-                <span>{{ $userCurrent->address ?? 'Chưa cập nhật' }}</span>
-            </div>
-            <div class="info">
-                <span>
-                    <b><i class="fa-solid fa-building"></i> Làm việc ở: </b>
-                    <span>{{ $userCurrent->company ?? 'Chưa cập nhật' }}</span>
-                </span>
-            </div>
-            <div class="info">
-                <span>
-                    <b><i class="fa-solid fa-heart"></i> Tình trạng: </b>
-                    <span>{{ $userCurrent->relationship ?? 'Chưa cập nhật' }}</span>
-                </span>
-            </div>
-            <div class="info">
-                <span>
-                    <b><i class="fa-solid fa-venus-mars"></i> Giới tính: </b>
-                    <span>{{ $userCurrent->gender ?? 'Chưa cập nhật' }}</span>
-                </span>
-            </div>
-            <div class="info">
-                <span>
-                    <b><i class="fa-solid fa-cake-candles"></i> Ngày sinh: </b>
-                    <span>{{ $userCurrent->date_of_birth ?? 'Chưa cập nhật' }}</span>
-                </span>
-            </div>
-        </div>
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
