@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Session;
 
 class Comments extends Model
 {
@@ -14,15 +15,36 @@ class Comments extends Model
         'user_id',
         'parent_comment_id',
         'content',
-        'created_at'
+        'created_at',
+        'updated_at'
     ];
-    public function post()
+
+    public function addComment($post_id, $curentUserId, $content)
     {
-        return $this->belongsTo(Post::class);
+        $newComment = new self();
+
+        $newComment->post_id = $post_id;
+        $newComment->user_id = $curentUserId;
+        $newComment->content = $content;
+        $newComment->save();
+
+        return $newComment;
     }
 
-    public function user()
+    public function getCommentById($comment_id)
     {
-        return $this->belongsTo(User::class);
+        return $comment = self::Join('users', 'users.user_id', '=', 'comments.user_id')
+            ->where('comment_id', $comment_id)
+            ->select('comments.*', 'users.username', 'users.profile_pic_url')
+            ->first();
+    }
+
+    public function getAllCommentByPostId($post_id)
+    {
+        return $comment = self::orderBy('comments.created_at', 'desc')
+            ->Join('users', 'users.user_id', '=', 'comments.user_id')
+            ->where('post_id', $post_id)
+            ->select('comments.*', 'users.username', 'users.profile_pic_url')
+            ->get();
     }
 }
