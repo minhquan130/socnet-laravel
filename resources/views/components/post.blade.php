@@ -130,7 +130,7 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
-                            <div class="modal-body" id="commentsList">
+                            <div class="modal-body" id="commentsList-post-{{ $post->post_id }}">
                                 @php
                                     $newComment = new \App\Models\Comments();
                                     $comments = $newComment->getAllCommentByPostId($post->post_id);
@@ -140,7 +140,7 @@
                                 @endphp
                                 @foreach ($comments as $comment)
                                     <div class="item-comment">
-                                        <img src="{{ $comment->profile_pic_url }}" alt="Avatar"
+                                        <img src="{{ $comment->profile_pic_url == null ? asset('images/none-avatar.jpg') : $comment->profile_pic_url }}" alt="Avatar"
                                             class="img-fluid rounded-circle"
                                             style="width: 40px; height: 40px; object-fit: cover;">
                                         <div class="content-comment">
@@ -153,7 +153,7 @@
                             <div id="commentForm{{ $post->post_id }}" class="text-comment"
                                 data-post-id="{{ $post->post_id }}">
                                 @csrf
-                                <img src="{{ asset('images/avatar.png') }}" alt="Avatar"
+                                <img src="{{ $userCurrent->profile_pic_url == null ? asset('images/none-avatar.jpg') : $userCurrent->profile_pic_url }}" alt="Avatar"
                                     class="img-fluid rounded-circle me-2" style="width: 40px; height: 40px;">
                                 <input type="text" name="comment" id="input-comment"
                                     placeholder=" Bình luận dưới tên Văn Đạt" style="width: 100%; height:30px;">
