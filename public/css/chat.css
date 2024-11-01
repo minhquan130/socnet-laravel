@@ -124,7 +124,7 @@
 
 /* chat-center */
 .chats .chat-center{
-    width: 500px;
+    width: 700px;
     height: 600px;
     background: rgba(255, 255, 255, .5);
     border-radius: 20px;
@@ -176,5 +176,42 @@
    margin-left: auto;
     display: flex;
     gap: 2rem;
+    color: #0866ff;
   
 }
+
+/* content-chats
+ */
+ .chats-wrapper .chats .chat-center .the-end-chat-box{
+   display: flex;
+   gap: 3rem;
+   padding-top: 60%;
+ }
+ .chats-wrapper .chats .chat-center .the-end-chat-box .icon-send-chatbox span{
+    color: #0866ff;
+   padding-left:5px ;
+   font-size: 17px;
+ }
+ .chats-wrapper .chats .chat-center .the-end-chat-box label{
+    position: relative;
+    width: 500px;
+ }
+ .chats-wrapper .chats .chat-center .the-end-chat-box label input{
+    width: 100%;
+    height: 30px;
+    border: none;
+    border-radius: 20px;
+    outline: none;
+    padding: 10px;
+    padding-right: 50px; /* Để chừa chỗ cho nút */
+    box-sizing: border-box;
+ }
+ .chats-wrapper .chats .chat-center .the-end-chat-box label button{
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+ }
