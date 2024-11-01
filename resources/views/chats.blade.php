@@ -58,6 +58,26 @@
                 </div>
             </div>
             <hr>
+            <div class="content-chat-box">
+
+            </div>
+            
+            <div class="the-end-chat-box">
+               
+                <div class="icon-send-chatbox">
+                    <span><i class="fa-solid fa-circle-plus"></i></span>
+                    <span><i class="fa-solid fa-file-image"></i></span>
+                    <span><i class="fa-solid fa-face-smile"></i></span>
+                    <span><i class="fa-solid fa-gifts"></i></span>
+                </div>
+                <label for="input-content">
+                    <form action="" method="get">
+                    <input type="text" name="content-chat" id="">
+                    <button type="submit" class="send-chat">➤</button>
+                    </form>
+                </label>
+
+            </div>
         </div>
         <div class="chat-right"></div>
     </div>
