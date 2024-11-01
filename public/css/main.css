@@ -556,11 +556,15 @@ main .container_posts .posts .list-posts .post-item .options-post .option .optio
 }
 
 .modal-body .item-comment div.content-comment{
-    flex: 1;
+    max-width: calc(100% - 1rem - 40px);
 }
 
 .modal-body .item-comment div.content-comment p{
+    max-width: 100%;
+    overflow-wrap: break-word;
+    white-space: normal;
     margin: 0;
+    width: 100%;
 }
 
 .modal-body .item-comment div.content-comment p.username-comment{
