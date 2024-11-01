@@ -15,17 +15,6 @@ arrOtherPost.forEach(otherPost => {
     const optionsItemPost = otherPost.parentElement.querySelector('.options-item-post');
     otherPost.addEventListener('click', () => showOptionItemPost(optionsItemPost));
 })
-// optionLikes.forEach(optionLike => {
-//     optionLike.addEventListener('click', () => {
-//         if (!isLiked) {
-//             optionLike.style.color = '#ff7e7e';
-//             isLiked = true;
-//         } else {
-//             optionLike.style.color = '#000';
-//             isLiked = false;
-//         }
-//     });
-// });
 
 function chooseFile() {
     if (inputPicture.files && inputPicture.files[0]) {
