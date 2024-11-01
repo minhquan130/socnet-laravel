@@ -150,7 +150,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     return;
                 }
 
-                fetch('/post/add', {
+                fetch('/comment/add', {
                     method: 'POST',
                     headers: {
                         'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
