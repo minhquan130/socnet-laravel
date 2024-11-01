@@ -17,8 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id'); // ID của người dùng đã đăng bình luận
             $table->unsignedBigInteger('parent_comment_id')->nullable(); // ID của bình luận cha, có thể là NULL
             $table->text('content'); // Nội dung của bình luận
-            $table->timestamp('created_at')->useCurrent(); // Thời gian tạo bình luận
-
+            $table->timestamps(); // created_at và updated_at
         });
     }
 

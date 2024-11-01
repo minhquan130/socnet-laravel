@@ -91,14 +91,16 @@
                     </div>
                     <hr>
                     <div class="options-post">
-                        <button class="option option-like like-btn btn-like-post-{{ $post->post_id }}" data-id="{{ $post->post_id }}" style="background: none; border: none; color: {{ $likesModel->isLiked($post->post_id) ? '#ff7e7e' : '#000' }}">
+                        <button class="option option-like like-btn btn-like-post-{{ $post->post_id }}"
+                            data-id="{{ $post->post_id }}"
+                            style="background: none; border: none; color: {{ $likesModel->isLiked($post->post_id) ? '#ff7e7e' : '#000' }}">
                             <span class="option-icon icon-like">
                                 <i class="fa-solid fa-heart"></i>
                             </span>
                             <span>Thích</span>
                         </button>
                         <div class="option option-comment" data-bs-toggle="modal"
-                            data-bs-target="#commentModal{{ $post->id }}">
+                            data-bs-target="#commentModal{{ $post->post_id }}">
                             <span class="option-icon icon-comment">
                                 <i class="fa-solid fa-message"></i>
                             </span>
@@ -119,7 +121,7 @@
                     </div>
                 </div>
                 <!-- Modal -->
-                <div class="modal fade" id="commentModal{{ $post->id }}" tabindex="-1"
+                <div class="modal fade" id="commentModal{{ $post->post_id }}" tabindex="-1"
                     aria-labelledby="commentModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -128,33 +130,36 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
-                            <div class="modal-body" id="commentsList">
+                            <div class="modal-body" id="commentsList-post-{{ $post->post_id }}">
+                                @php
+                                    $newComment = new \App\Models\Comments();
+                                    $comments = $newComment->getAllCommentByPostId($post->post_id);
 
+                                    // dd($comments);
 
-                                <h2 class="fs-5">Musa</h2>
-                                <p>
-                                    <img src="{{ asset('images/musa.jpg') }}" alt="Avatar"
-                                        class="img-fluid rounded-circle me-2" style="width: 40px; height: 40px;">
-                                    <span>bà sáu xinh quá nhen</span>
-
-                                </p>
-                                <hr>
-                                <h2 class="fs-5">Shizuka</h2>
-                                <p>
-                                    <img src="{{ asset('images/Shizuka.png') }}" alt="Avatar"
-                                        class="img-fluid rounded-circle me-2" style="width: 40px; height: 40px;">
-                                    <span>Cái môi bả sáu dễ sợ</span>
-                                    <br>
-                                </p>
+                                @endphp
+                                @foreach ($comments as $comment)
+                                    <div class="item-comment">
+                                        <img src="{{ $comment->profile_pic_url == null ? asset('images/none-avatar.jpg') : $comment->profile_pic_url }}" alt="Avatar"
+                                            class="img-fluid rounded-circle"
+                                            style="width: 40px; height: 40px; object-fit: cover;">
+                                        <div class="content-comment">
+                                            <p class="username-comment">{{ $comment->username }}</p>
+                                            <p>{{ $comment->content }}</p>
+                                        </div>
+                                    </div>
+                                @endforeach
                             </div>
-                            <form action="{{ route('post.store', ['id' => $post->post_id]) }}" method="post"
-                                data-post-id="{{ $post->id }}" class="text-comment">
-                                <img src="{{ asset('images/avatar.png') }}" alt="Avatar"
+                            <div id="commentForm{{ $post->post_id }}" class="text-comment"
+                                data-post-id="{{ $post->post_id }}">
+                                @csrf
+                                <img src="{{ $userCurrent->profile_pic_url == null ? asset('images/none-avatar.jpg') : $userCurrent->profile_pic_url }}" alt="Avatar"
                                     class="img-fluid rounded-circle me-2" style="width: 40px; height: 40px;">
                                 <input type="text" name="comment" id="input-comment"
-                                    placeholder=" Bình luận dưới tên Văn Đat" style="width: 100%; height:30px;">
-                                <button type="submit" class="arrow">➤</button>
-                            </form>
+                                    placeholder=" Bình luận dưới tên Văn Đạt" style="width: 100%; height:30px;">
+                                <input type="hidden" name="post-id" value="{{ $post->post_id }}">
+                                <button type="button" class="submit-comment">➤</button>
+                            </div>
                         </div>
                     </div>
                 </div>

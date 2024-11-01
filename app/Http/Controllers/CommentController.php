@@ -5,38 +5,39 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Comments; // Đảm bảo bạn đã import model Comments
-use App\Models\Post; // Nếu bạn có model Post để lấy bài viết
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 
 class CommentController extends Controller
 {
+    // Định nghĩa thuộc tính $newComment để dùng trong các phương thức
+    protected $newComment;
 
-    public function show($id)
+    public function __construct()
     {
-        $post = Post::findOrFail($id);
-        return view('post', compact('post'));
+        // Khởi tạo model Comments
+        $this->newComment = new Comments();
     }
-    public function store(Request $request, $id)
+
+    function getAllCommentByPostId($post_id)
     {
-        // 1. Xác thực dữ liệu đầu vào
-    $request->validate([
-        'content' => 'required|max:255', // Nội dung bình luận là bắt buộc và không quá 255 ký tự
-    ]);
+        $comments = $this->newComment->getAllCommentByPostId($post_id);
+        dd($comments);
 
-    // 2. Tìm bài viết bằng ID
-    $post = Post::findOrFail($postId);
+        return $comments;
+    }
 
-    // 3. Tạo bình luận mới
-    $comment = new Comment([
-        'user_id' => auth()->id(), // Nếu người dùng đã đăng nhập, lưu ID của người dùng
-        'content' => $request->input('content'), // Lấy nội dung bình luận từ yêu cầu
-    ]);
+    public function addComment(Request $request)
+    {
+        $currentUserId = Session::get('user_id'); // Đảm bảo rằng bạn đã lưu user_id vào session
+        $post_id = $request->input('post-id'); // Kiểm tra tên input có đúng không
+        $content = $request->input('comment');
 
-    // 4. Gắn bình luận với bài viết
-    $post->comments()->save($comment);
+        // Gọi phương thức để thêm bình luận
+        $newComment = $this->newComment->addComment($post_id, $currentUserId, $content);
+        $dataComment = $this->newComment->getCommentById($newComment->comment_id);
 
-    // 5. Chuyển hướng trở lại với thông báo thành công
-    return redirect()->back()->with('success', 'Bình luận đã được thêm thành công!');
+        // Trả về phản hồi JSON
+        return response()->json(['message' => 'Comment added successfully', 'dataComment' => $dataComment]);
     }
 }
