@@ -123,7 +123,11 @@
 }
 
 .modal-body .edit .edit-avatar {
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;/
 }
 
 .modal-body .edit .edit-avatar img {
