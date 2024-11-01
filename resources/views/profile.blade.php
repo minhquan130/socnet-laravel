@@ -25,7 +25,7 @@
                     </span>
                     <span>Bạn bè</span>
                 </div>
-                <div class="info">
+                {{-- <div class="info">
                     <span>
                         <b>Nơi ở: </b>
                     </span>
@@ -42,17 +42,17 @@
                         <b>Tình trạng: </b>
                         <span></span>
                     </span>
-                </div>
-                <div class="info">
+                </div> --}}
+                {{-- <div class="info">
                     <span>
                         <b>Tiểu sử: </b>
-                        <span></span>
+                        <span>{{ $userCurrent->gender }}</span>
                     </span>
-                </div>
+                </div> --}}
                 <div class="info">
                     <span>
                         <b>Giới tính: </b>
-                        <span></span>
+                        <span>{{ $userCurrent->gender }}</span>
                     </span>
                 </div>
                 <div class="info">
@@ -110,7 +110,6 @@
                                 <div class="edit-date">
                                     <span>Ngày sinh</span>
                                     <input type="date" name="date_of_birth" id="date_of_birth">
-                                    
                                 </div>
                             </div>
                         </form>
