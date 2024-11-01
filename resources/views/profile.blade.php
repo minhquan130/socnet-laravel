@@ -11,7 +11,50 @@
                 <h5><i class="fa-solid fa-user"></i> Thông tin người dùng</h5>
                 <a data-bs-toggle="modal" data-bs-target="#exampleModal" style="z-index: 10">
                     <i class="fa-solid fa-pen-to-square"></i>
-                </a>
+            @endif
+            <div class="info-card">
+                <div class="info-head">
+                    <h4>Thông tin người dùng</h4>
+                    <a data-bs-toggle="modal" data-bs-target="#exampleModal" style="z-index: 10">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </a>
+                </div>
+                <div class="info">
+                    <span>
+                        <b>Tên người dùng: </b>
+                    </span>
+                    <span>{{ $userCurrent->username }}</span>
+                </div>
+                <div class="info">
+                    <span>
+                        <b>Nơi ở: </b>
+                    </span>
+                    <span></span>
+                </div>
+                <div class="info">
+                    <span>
+                        <b>Làm việc ở: </b>
+                        <span></span>
+                    </span>
+                </div>
+                <div class="info">
+                    <span>
+                        <b>Tình trạng: </b>
+                        <span></span>
+                    </span>
+                </div>
+                <div class="info">
+                    <span>
+                        <b>Giới tính: </b>
+                        <span>{{ $userCurrent->gender }}</span>
+                    </span>
+                </div>
+                <div class="info">
+                    <span>
+                        <b>Ngày sinh: </b>
+                        <span>{{ $userCurrent->date_of_birth }}</span>
+                    </span>
+                </div>
             </div>
             <div class="info">
                 <span>
@@ -87,6 +130,7 @@
                                 <div class="edit-date">
                                     <span>Ngày sinh</span>
                                     <input type="date" name="date_of_birth" id="date_of_birth" value="{{ old('date_of_birth', $userCurrent->date_of_birth) }}">
+
                                 </div>
                             </div>
                     </div>
