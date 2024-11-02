@@ -6,6 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Users extends Model
 {
+    // Tên bảng
+    protected $table = 'users';
+
+    // Khóa chính
+    protected $primaryKey = 'user_id';
+
     protected $fillable = [
         'username',
         'email',
