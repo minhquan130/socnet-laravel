@@ -15,7 +15,7 @@ class PostController extends Controller
             // Điều kiện kiểm tra dữ liệu đầu vào
             $request->validate([
                 'input-content' => 'nullable|string|max:65535',
-                'input-picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:10240',
+                'input-picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:10240',
             ]);
 
             $currentUserId = Session::get('user_id');
