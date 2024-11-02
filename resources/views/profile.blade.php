@@ -8,7 +8,7 @@
         @endif
             <div class="info-card">
                 <div class="info-head">
-                    <h4>Thông tin người dùng</h4>
+                    <h4><i class="fa-solid fa-user"></i> Thông tin người dùng</h4>
                     <a data-bs-toggle="modal" data-bs-target="#exampleModal" style="z-index: 10">
                         <i class="fa-solid fa-pen-to-square"></i>
                     </a>
