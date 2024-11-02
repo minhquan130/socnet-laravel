@@ -224,10 +224,21 @@
     border-radius: 20px;
     margin-left: 10px;
  }
+
+ .chats .chat-right .chat-right-setting{
+    display: flex;
+    flex-direction: column; /* Sắp xếp các phần tử theo cột */
+    align-items: center; /* Đưa nội dung xuống dưới một chút */
+    padding-top: 30px; /* Tạo khoảng trống phía trên */
+    height: 100%;
+
+    
+ }
  .chats .chat-right .chat-right-setting .pic-avtar-messages-setting{
     position: relative;
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
+   
  }
 
  .chats .chat-right .chat-right-setting .pic-avtar-messages-setting::before{
@@ -239,8 +250,9 @@
     z-index: 10;
     border-radius: 50%;
     border: 2px solid #fff;
-    right: 0px;
-    bottom: 0px;
+    bottom: 5px; /* Điều chỉnh vị trí cho phù hợp */
+    right: 5px; /* Điều chỉnh vị trí cho phù hợp */
+   
  }
  .chats .chat-right .chat-right-setting .pic-avtar-messages-setting img{
 
@@ -250,4 +262,27 @@
     object-fit: cover;
     display: block;
     border: 2px solid #fff;
+ } 
+ .chats .chat-right .chat-right-setting .name-right{
+    margin-top: 10px; /* Khoảng cách giữa avatar và tên */
+    font-size: 20px; /* Điều chỉnh kích thước chữ nếu cần */
+    color: #333; /* Màu chữ, điều chỉnh tùy ý */
+    text-align: center;
+    font-weight: bold;
  }
+ .chats .chat-right .icon-right{
+    display: flex;
+    gap: 2rem;
+ }
+ .chats .chat-right .icon-right div i{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid gray;
+    border-radius: 50%;
+    background-color: gray;
+    width: 50px;
+    height: 50px;
+ }
+
+
