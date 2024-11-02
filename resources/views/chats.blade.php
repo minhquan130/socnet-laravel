@@ -84,7 +84,19 @@
                 <div class="pic-avtar-messages-setting">
                     <img src="../images/musa.jpg" alt="" class='chatbox'>
                 </div>
-
+                <span class='name-right'>Minh Quân</span>
+                <div class="icon-right">
+                    <div><i class="fa-regular fa-circle-user"></i><span>Trang nhân</span></div>
+                    <div><i class="fa-solid fa-bell"></i><span>Thông báo</span></div>
+                    <div><i class="fa-solid fa-magnifying-glass"></i><span>Tìm kiếm</span></div>
+                </div>
+            </div>
+            <div class="setting">
+                <div> Thông tin về đoạn chat<span></span></div>
+                <div> Tùy chỉnh đoạn chat<span></span></div>
+                <div> File phương tiện và file<span></span></div>
+                <div> Quyền riêng tư và hỗ trợ<span></span></div>
+             
             </div>
         </div>
     </div>
