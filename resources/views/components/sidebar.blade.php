@@ -2,7 +2,8 @@
     <div class="sidebar">
         <div class="card-profile">
             <a href="{{ route('profile') }}" class="profile-picture" style="display: block">
-                <img src="{{ $userCurrent->profile_pic_url == null ? asset('images/none-avatar.jpg') :  $userCurrent->profile_pic_url }}" alt="">
+                <img src="{{ $userCurrent->profile_pic_url == null ? asset('images/none-avatar.jpg') : $userCurrent->profile_pic_url }}"
+                    alt="">
             </a>
             <div class="name">
                 <span>{{ $userCurrent->username }}</span>
@@ -19,7 +20,7 @@
                     </span>
                 @endif
             </div>
-            <hr  class="hr-card-profile" style="margin: 1rem 0">
+            <hr class="hr-card-profile" style="margin: 1rem 0">
             <div class="data">
                 <div class="data-followings">
                     <span>890</span> Followings
@@ -33,67 +34,26 @@
                     <span>11</span> Posts
                 </div>
             </div>
-            <hr  class="hr-card-profile" style="margin: 1rem 0 0 0">
+            <hr class="hr-card-profile" style="margin: 1rem 0 0 0">
         </div>
+        @if ($followers->isNotEmpty())
         <div class="followers">
             <h3>Những người theo dõi bạn</h3>
             <hr>
             <div class="list-followers">
+                @foreach ($followers as $follower)
                 <div class="item-follower">
-                    <div class="info-follower">
-                        <div class="avarta-follower">
-                            <img src="{{ asset('images/avatar.png') }}" alt="">
+                            <div class="info-follower">
+                                <div class="avarta-follower">
+                                    <img src="{{ $follower->users->profile_pic_url == null ? asset('images/none-avatar.jpg') : $follower->users->profile_pic_url }}" alt="">
+                                </div>
+                                <div class="name-follower">{{ $follower->users->username }}</div>
+                            </div>
+                            <button class="btn-follow">Theo dõi</button>
                         </div>
-                        <div class="name-follower">Minh Quân</div>
-                    </div>
-                    <button class="btn-follow">Theo dõi</button>
-                </div>
-                <div class="item-follower">
-                    <div class="info-follower">
-                        <div class="avarta-follower">
-                            <img src="{{ asset('images/avatar.png') }}" alt="">
-                        </div>
-                        <div class="name-follower">Thiên Tú</div>
-                    </div>
-                    <button class="btn-follow">Theo dõi</button>
-                </div>
-                <div class="item-follower">
-                    <div class="info-follower">
-                        <div class="avarta-follower">
-                            <img src="{{ asset('images/avatar.png') }}" alt="">
-                        </div>
-                        <div class="name-follower">Thanh Sang</div>
-                    </div>
-                    <button class="btn-follow">Theo dõi</button>
-                </div>
-                <div class="item-follower">
-                    <div class="info-follower">
-                        <div class="avarta-follower">
-                            <img src="{{ asset('images/avatar.png') }}" alt="">
-                        </div>
-                        <div class="name-follower">Thanh Sang</div>
-                    </div>
-                    <button class="btn-follow">Theo dõi</button>
-                </div>
-                <div class="item-follower">
-                    <div class="info-follower">
-                        <div class="avarta-follower">
-                            <img src="{{ asset('images/avatar.png') }}" alt="">
-                        </div>
-                        <div class="name-follower">Thanh Sang</div>
-                    </div>
-                    <button class="btn-follow">Theo dõi</button>
-                </div>
-                <div class="item-follower">
-                    <div class="info-follower">
-                        <div class="avarta-follower">
-                            <img src="{{ asset('images/avatar.png') }}" alt="">
-                        </div>
-                        <div class="name-follower">Thanh Sang</div>
-                    </div>
-                    <button class="btn-follow">Theo dõi</button>
+                    @endforeach
                 </div>
             </div>
-        </div>
+        @endif
     </div>
 </div>
