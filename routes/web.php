@@ -23,6 +23,9 @@ Route::middleware([CheckUser::class])->group(function () {
     // Post
     Route::post('/post', [PostController::class, 'addPost'])->name('post.add');
     Route::get('/delete-post/{id}', [PostController::class, 'deletePost'])->name('post.delete');
+
+    // post-edit-post
+    Route::post('/edit-post/{id}', [PostController::class, 'updatePost'])->name('post.edit');
     
     // Profile
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');

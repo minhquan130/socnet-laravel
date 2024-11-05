@@ -47,4 +47,8 @@ class Comments extends Model
             ->select('comments.*', 'users.username', 'users.profile_pic_url')
             ->get();
     }
+    public function getCountCommentByPostId($post_id)
+    {
+        return self::where('post_id', $post_id)->count();
+    }
 }
