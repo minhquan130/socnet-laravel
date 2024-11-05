@@ -9,14 +9,16 @@ class Friends extends Model
     public $incrementing = false;
     protected $primaryKey = null;
     protected $fillable = ['user_id', 'friend_id', 'status'];
-
-    const STATUS_PENDING = 'pending';
-    const STATUS_ACCEPTED = 'accepted';
-    const STATUS_BLOCKED = 'blocked';
+    protected $table = 'friends';
 
     public function users()
     {
         return $this->belongsTo(Users::class, 'user_id');
+    }
+
+    public function friends()
+    {
+        return $this->belongsTo(Users::class, 'friend_id');
     }
 
     function getFriendsByStatus($currentUserId, $status)

@@ -56,6 +56,25 @@ class UserController extends Controller
 
     function showRegister()
     {
+        for ($i = 0; $i < 10; $i++) {
+            # code...
+            $newUser = new Users();
+            Users::create([
+                'username' => 'Quân ' . $i,
+                'email' => 'quan' . $i . '@gmail.com',
+                'password_hash' => Hash::make('123456'),
+                'gender' => 'male',
+                'date_of_birth' => now(),
+            ]);
+        }
+
+        for ($i = 1; $i < 5; $i++) {
+            $newFriend = new Friends();
+            $newFriend->user_id = $i;
+            $newFriend->friend_id = 5;
+            $newFriend->save();
+        }
+
         return view('register');
     }
 
@@ -146,6 +165,7 @@ class UserController extends Controller
 
         $userCurrent = Users::where('user_id', $currentUserId)->first();
         $followers = (new Friends)->getFriendsByStatus($currentUserId, ['pending', 'following']);
+
         return view('home', compact('posts', 'userCurrent', 'create_comment', 'followers'));
     }
 
@@ -183,22 +203,44 @@ class UserController extends Controller
     }
 
 
-    function addFriends($id)
+    public function addFriends($id)
     {
         $currentUserId = Session::get('user_id');
-        $newFriend = Friends::where('user_id', $id)
-        ->where('friend_id', $currentUserId)
-        ->first();
-        if ($newFriend) {
-            $newFriend->update(['status' => Friends::STATUS_ACCEPTED]);
+
+        // Kiểm tra xem yêu cầu kết bạn đã tồn tại chưa
+        $existingFriendRequest = Friends::where('user_id', $id)
+            ->where('friend_id', $currentUserId)
+            ->first();
+
+
+        if ($existingFriendRequest) {
+            // Nếu tồn tại, cập nhật trạng thái thành 'accepted'
+            Friends::where('user_id', $id)
+                ->where('friend_id', $currentUserId)
+                ->update(['status' => 'accepted']);
+
+            $mutualFriend = Friends::where('user_id', $currentUserId)
+                ->where('friend_id', $id)
+                ->first();
+
+            if (!$mutualFriend) {
+                $mutualFriend = new Friends();
+                $mutualFriend->user_id = $currentUserId;
+                $mutualFriend->friend_id = $id;
+                $mutualFriend->status = 'accepted';
+                $mutualFriend->save();
+            }
+
             return redirect()->route('friends.request');
         } else {
-            $newFriend = new Friends();
-            $newFriend->user_id = $currentUserId;
-            $newFriend->friend_id = $id;
-            $newFriend->save();
+            // Nếu chưa tồn tại, tạo yêu cầu kết bạn mới với trạng thái 'pending'
+            $newFriendRequest = new Friends();
+            $newFriendRequest->user_id = $currentUserId;
+            $newFriendRequest->friend_id = $id;
+            $newFriendRequest->status = 'pending';
+            $newFriendRequest->save();
+
             return redirect()->route('friends');
         }
-
     }
 }
