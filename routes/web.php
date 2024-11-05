@@ -28,7 +28,8 @@ Route::middleware([CheckUser::class])->group(function () {
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
     Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
 
-    Route::get('/chats', [ChatController::class, 'index'])->name('chats');
+    Route::get('/chats/message/{id}', [ChatController::class, 'index'])->name('chats');
+    Route::post('/chats/message/{id}', [ChatController::class, 'store'])->name('chats');
 
     Route::get('/friends', [UserController::class, 'showFriends'])->name('friends');
     Route::get('/friends/request', [UserController::class, 'showFriendsRequest'])->name('friends.request');
