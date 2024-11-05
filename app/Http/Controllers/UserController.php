@@ -145,7 +145,7 @@ class UserController extends Controller
             ->get();
 
         $userCurrent = Users::where('user_id', $currentUserId)->first();
-        $followers = (new Friends)->getFriendsByStatus($currentUserId, ['pending', 'following']); 
+        $followers = (new Friends)->getFriendsByStatus($currentUserId, ['pending', 'following']);
         return view('home', compact('posts', 'userCurrent', 'create_comment', 'followers'));
     }
 
@@ -154,11 +154,12 @@ class UserController extends Controller
         $currentUserId = Session::get('user_id');
 
         // Lấy danh sách user_id của những người đã gửi yêu cầu kết bạn
-        $userIds = Friends::where('friend_id', $currentUserId)->pluck('user_id');
+        $userIds = Friends::where('friend_id', $currentUserId)->where('status', 'pending')->pluck('user_id');
 
         // Nếu có yêu cầu kết bạn, lấy danh sách người dùng tương ứng
         $users = $userIds->isNotEmpty() ? Users::whereIn('user_id', $userIds)->get() : 'request';
         $userCurrent = Users::where('user_id', $currentUserId)->first();
+        // $users = (new Friends)->getFriendsByStatus($currentUserId, ['pending']);
 
         return view('friends', compact('users', 'userCurrent'));
     }
@@ -184,10 +185,20 @@ class UserController extends Controller
 
     function addFriends($id)
     {
-        $friend = new Friends();
-        $friend->user_id = Session::get('user_id');
-        $friend->friend_id = $id;
-        $friend->save();
-        return redirect()->route('friends');
+        $currentUserId = Session::get('user_id');
+        $newFriend = Friends::where('user_id', $id)
+        ->where('friend_id', $currentUserId)
+        ->first();
+        if ($newFriend) {
+            $newFriend->update(['status' => Friends::STATUS_ACCEPTED]);
+            return redirect()->route('friends.request');
+        } else {
+            $newFriend = new Friends();
+            $newFriend->user_id = $currentUserId;
+            $newFriend->friend_id = $id;
+            $newFriend->save();
+            return redirect()->route('friends');
+        }
+
     }
 }

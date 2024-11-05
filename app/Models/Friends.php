@@ -6,13 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Friends extends Model
 {
-    protected $fillable = [
-        'user_id',
-        'friend_id',
-        'status',
-        'created_at',
-        'updated_at'
-    ];
+    public $incrementing = false;
+    protected $primaryKey = null;
+    protected $fillable = ['user_id', 'friend_id', 'status'];
+
+    const STATUS_PENDING = 'pending';
+    const STATUS_ACCEPTED = 'accepted';
+    const STATUS_BLOCKED = 'blocked';
 
     public function users()
     {
