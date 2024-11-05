@@ -23,7 +23,7 @@ class UserController extends Controller
             'password' => 'required|min:6|regex:/^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]*$/',
             'gender' => 'required|in:male,female,other',
             'birth_date' => 'required|date',
-            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:10240'
         ]);
 
         // Create a new user instance
