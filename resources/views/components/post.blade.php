@@ -66,10 +66,9 @@
 
 
                     <!-- Modal of chỉnh sửa bài biết  -->
-
                     <!-- Modal -->
-                    <div class="modal fade" id="updatePostModal{{ $post->post_id }}" tabindex="-1" aria-labelledby="updatePostModalLabel"
-                        aria-hidden="true">
+                    <div class="modal fade" id="updatePostModal{{ $post->post_id }}" tabindex="-1"
+                        aria-labelledby="updatePostModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -77,26 +76,44 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                                 </div>
-                                <div class="modal-body">
-                                 
-                                    <span class="name">{{ $post->username }}</span>
-                                    <div class="content-text">
-                                        {{ $post->content }}
-                                    </div>
-                                    @if ($post->media_url)
-                                    <div class="content-media">
-                                        <img src="{{ $post->media_url }}" alt="Hình ảnh bài viết" loading="lazy">
-                                    </div>
-                                    @endif
+                                <form action="{{ route('post.edit', ['id' => $post->post_id]) }}" method="POST"
+                                    enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="modal-body">
+                                        <span class="name">{{ $post->username }}</span>
 
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                                    <button type="button" class="btn btn-primary">Lưu</button>
-                                </div>
+                                        <!-- Nội dung bài viết -->
+                                        <textarea name="input-content"
+                                            class="form-control">{{ $post->content }}</textarea>
+
+                                        <!-- Hiển thị ảnh hiện tại nếu có -->
+                                        @if ($post->media_url)
+                                        <div class="current-image my-3">
+                                            <label>Ảnh hiện tại:</label>
+                                            <img src="{{ $post->media_url }}" alt="Ảnh hiện tại"
+                                                style="width: 100%; max-height: 200px; object-fit: cover;">
+                                        </div>
+                                        @endif
+
+                                        <!-- Input để tải ảnh mới -->
+                                        <div class="mt-3">
+                                            <label for="input-picture" class="form-label">Chọn ảnh mới (nếu muốn thay
+                                                đổi)</label>
+                                            <input type="file" name="input-picture" class="form-control"
+                                                accept="image/*">
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Hủy</button>
+                                        <button type="submit" class="btn btn-primary">Lưu</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
+
+                    <!-- modal -->
                 </div>
                 <div class="content-post">
                     <div class="content-text">

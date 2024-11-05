@@ -178,3 +178,27 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+// viết cái phàn về edit bình luận 
+$('.submit-edit').on('click', function(e) {
+    e.preventDefault();
+    const postId = $(this).data('id');
+    const content = $('#input-content-' + postId).val();
+
+    $.ajax({
+        url: '/post/update/' + postId,
+        type: 'POST',
+        data: {
+            _token: '{{ csrf_token() }}',
+            'input-content': content
+        },
+        success: function(response) {
+            $('#updatePostModal' + postId).modal('hide');
+            location.reload();
+        },
+        error: function(xhr) {
+            console.log(xhr.responseText);
+        }
+    });
+});
+
+
