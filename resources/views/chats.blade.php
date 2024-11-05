@@ -1,108 +1,83 @@
 @include('layouts.header')
 
-
 <div class="chats-wrapper">
     <div class="chats">
         <div class="chat-left">
-            <div class="chat-left-top">
-                <h2>Đoạn chat</h2>
-                <span><i class="fa-solid fa-ellipsis"></i></span>
-                <span><i class="fa-solid fa-pen-to-square"></i></span>
-            </div>
-            <input type="text" name="find-name" id="" placeholder="Tìm kiếm cuộc trò chuyện">
-            <div class="list-chat">
-                <div class="chat-left-center">
-                    <div class="pic-avtar-messages">
-                        <img src="../images/musa.jpg" alt="">
-                    </div>
-                    <span>Minh Quân</span>
-
-                </div>
-                <div class="chat-left-center">
-                    <div class="pic-avtar-messages">
-                        <img src="../images/musa.jpg" alt="">
-                    </div>
-                    <span>Thiên Tú</span>
-                </div>
-                <div class="chat-left-center">
-                    <div class="pic-avtar-messages">
-                        <img src="../images/musa.jpg" alt="">
-                    </div>
-                    <span>Nguyễn Thư</span>
-                </div>
-                <div class="chat-left-center">
-                    <div class="pic-avtar-messages">
-                        <img src="../images/musa.jpg" alt="">
-                    </div>
-                    <span>Thanh Sang</span>
-                </div>
-                <div class="chat-left-center">
-                    <div class="pic-avtar-messages">
-                        <img src="../images/musa.jpg" alt="">
-                    </div>
-                    <span>Văn Đạt</span>
-                </div>
-            </div>
-        </div>
-        <div class="chat-center">
-            <div class="chat-center-chatbox">
-                <div class="pic-avtar-messages-chat">
-                    <img src="../images/musa.jpg" alt="" class='chatbox'>
-                </div>
-
-                <span class='name'>Minh Quân</span>
-                <div class="icon">
-                    <span><i class="fa-solid fa-phone"></i></span>
-                    <span><i class="fa-solid fa-video"></i></span>
-                    <span><i class="fa-solid fa-circle-info"></i></span>
-                </div>
-            </div>
-            <hr>
-            <div class="content-chat-box">
-
-            </div>
-
-            <div class="the-end-chat-box">
-
-                <div class="icon-send-chatbox">
-                    <span><i class="fa-solid fa-circle-plus"></i></span>
-                    <span><i class="fa-solid fa-file-image"></i></span>
-                    <span><i class="fa-solid fa-face-smile"></i></span>
-                    <span><i class="fa-solid fa-gifts"></i></span>
-                </div>
-                <label for="input-content">
-                    <form action="" method="get">
-                        <input type="text" name="content-chat" id="">
-                        <button type="submit" class="send-chat">➤</button>
-                    </form>
+            <h3>Đoạn chat</h3>
+            <form action="#" id="form-search-chat">
+                <label class="search-chat-bar">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="Tìm kiếm đoạn chat">
                 </label>
+            </form>
+            <div class="list-chats">
+                <div class="list-chats-wrapper" style="margin-right: 1rem">
+                    <div class="chat-item">
+                        <img src="{{ asset('images/none-avatar.jpg') }}" alt="" class="avatar-chat">
+                        <div class="name-friend-chat">Minh Quân</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="chat-main">
+            <div class="header-chat-main">
+                <div class="info-friend">
+                    <div class="avatar"><img src="{{ asset('images/none-avatar.jpg') }}" alt=""></div>
+                    <div class="name">Minh Nhựt</div>
+                </div>
+            </div>
 
+            <div class="chat-messages">
+                <div class="message-friend">
+                    <p class="message">Hello</p>
+                </div>
+                <div class="message-user">
+                    <p class="message">ỏ</p>
+                </div>
+                <div class="message-user">
+                    <p class="message">Hehehehehehehe</p>
+                </div>
+                <div class="message-user">
+                    <p class="message">Hehehehehehehe</p>
+                </div>
+                <div class="message-user">
+                    <p class="message">Hehehehehehehe</p>
+                </div>
+                <div class="message-user">
+                    <p class="message">Hehehehehehehe</p>
+                </div>
+                <div class="message-user">
+                    <p class="message">Hehehehehehehe</p>
+                </div>
+                <div class="message-user">
+                    <p class="message">Hehehehehehehe</p>
+                </div>
+                <div class="message-user">
+                    <div class="message-user">
+                        <p class="message">Hehehehehehehe</p>
+                    </div>
+                    <p class="message">ỏ</p>
+                </div>
+                <div class="message-friend">
+                    <p class="message">Hello</p>
+                </div>
+                <div class="message-user">
+                    <p class="message">ỏ</p>
+                </div>
+            </div>
+
+            <div class="chat-bar">
+                <i class="fa-solid fa-image"></i>
+                <i class="fa-solid fa-face-smile"></i>
+                <input type="text" name="chat-message" id="chat-message">
+                <i class="fa-solid fa-paper-plane" id="send-message"></i>
             </div>
         </div>
-        <div class="chat-right">
-            <div class="chat-right-setting">
-                <div class="pic-avtar-messages-setting">
-                    <img src="../images/musa.jpg" alt="" class='chatbox'>
-                </div>
-                <span class='name-right'>Minh Quân</span>
-                <div class="icon-right">
-                    <div><i class="fa-regular fa-circle-user"></i><span>Trang nhân</span></div>
-                    <div><i class="fa-solid fa-bell"></i><span>Thông báo</span></div>
-                    <div><i class="fa-solid fa-magnifying-glass"></i><span>Tìm kiếm</span></div>
-                </div>
-            </div>
-            <div class="setting">
-                <div> Thông tin về đoạn chat<span></span></div>
-                <div> Tùy chỉnh đoạn chat<span></span></div>
-                <div> File phương tiện và file<span></span></div>
-                <div> Quyền riêng tư và hỗ trợ<span></span></div>
-             
-            </div>
-        </div>
+        <div class="chat-right"></div>
     </div>
 </div>
 
-
+    <script src="{{ asset('js/chat.js') }}"></script>
 </body>
 
 </html>
