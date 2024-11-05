@@ -424,6 +424,23 @@ main .container_posts .posts .list-posts .post-item .top-post .top-post-tp2 .opt
     background: none;
     width: 100%;
 }
+/*  */
+main .container_posts .posts .list-posts .post-item .top-post .top-post-tp2 .options-item-post li{
+    font-size: 18px;
+    display: flex;
+    gap: 1rem;
+    padding: 0.5rem 1rem;
+    transition: .3s;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    color: #000;
+    border: none;
+    cursor: pointer;
+    background: none;
+    width: 100%;
+}
+/*  */
 
 main .container_posts .posts .list-posts .post-item .top-post .top-post-tp2 .options-item-post li a:hover {
     background: #c2c2c2;
