@@ -1,6 +1,6 @@
 .page-freinds {
     display: grid;
-    grid-template-columns: 18rem auto;
+    grid-template-columns: 20rem auto;
     height: calc(100vh - 70px);
     margin-top: 70px;
     padding: 1rem;

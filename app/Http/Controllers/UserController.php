@@ -136,20 +136,17 @@ class UserController extends Controller
 
     function showHome()
     {
-        // $posts = Posts::orderBy('created_at', 'desc')->get();
+        $currentUserId = Session::get('user_id');
         $create_comment = Comments::orderBy('created_at', 'desc')->get();
-        // $color = '#000';
 
         $posts = Posts::orderBy('posts.created_at', 'desc')
             ->Join('users', 'users.user_id', '=', 'posts.user_id')
             ->select('posts.*', 'users.username', 'users.email', 'users.profile_pic_url')
             ->get();
 
-
-        // dd($posts);
-
-        $userCurrent = Users::where('user_id', Session::get('user_id'))->first();
-        return view('home', compact('posts', 'userCurrent', 'create_comment'));
+        $userCurrent = Users::where('user_id', $currentUserId)->first();
+        $followers = (new Friends)->getFriendsByStatus($currentUserId, ['pending', 'following']); 
+        return view('home', compact('posts', 'userCurrent', 'create_comment', 'followers'));
     }
 
     function showFriendsRequest()
