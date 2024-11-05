@@ -66,4 +66,13 @@ class PostController extends Controller
 
         return [$result, $count_like];
     }
+    public function showPost($post_id)
+    {
+        $post = Posts::findOrFail($post_id);
+
+        $comments = new \App\Models\Comments();
+        $countComments = $comments->getCountCommentByPostId($post_id);
+
+        return view('post.show', compact('post', 'countComments'));
+    }
 }

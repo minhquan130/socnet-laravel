@@ -123,7 +123,11 @@
                         </span>
                     </div>
                     <div class="count-comments">
-                        <span>67 bình luận</span>
+                        @php
+                            $commentsModel = new \App\Models\Comments();
+                            $countComments = $commentsModel->getCountCommentByPostId($post->post_id);
+                        @endphp
+                        <span id="qty-comments-post-{{ $post->post_id }}">{{ $countComments }} bình luận</span>
                     </div>
                 </div>
                 <hr>
