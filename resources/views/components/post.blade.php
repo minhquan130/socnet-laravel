@@ -85,7 +85,7 @@
                                     </div>
                                     @if ($post->media_url)
                                     <div class="content-media">
-                                        <img src="{{ $post->media_url }}" alt="Hình ảnh bài viết" loading="lazy">
+                                        <img src="{{ $post->media_url }}" alt="Hình ảnh bài viết"  >
                                     </div>
                                     @endif
 
