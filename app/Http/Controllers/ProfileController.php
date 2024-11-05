@@ -15,6 +15,15 @@ class ProfileController extends Controller
             $userCurrent->date_of_birth = date('d/m/Y', strtotime($userCurrent->date_of_birth));
         }
 
+        if ($userCurrent) {
+            $userCurrent->gender = match($userCurrent->gender) {
+                'male' => 'Nam',
+                'female' => 'Nữ',
+                'other' => 'Giới tính khác',
+                default => 'Chưa cập nhật',
+            };
+        }
+
         return view('profile', compact('userCurrent'));
     }
 
