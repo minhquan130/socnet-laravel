@@ -33,12 +33,16 @@ class ChatController extends Controller
 
     function store(Request $request, $id) {
         // dd($id);
+        // dd($request->input('chatMessage'));
         $currentUserId = Session::get('user_id');
         $newGroupMessage = new GroupMessage();
         $newGroupMessage->group_id = $id;
         $newGroupMessage->sender_id = $currentUserId;
         $newGroupMessage->content = $request->input('chatMessage');
         $newGroupMessage->save();
-        return redirect()->route('chats', ['id' => $id]);
+        // return redirect()->route('chats', ['id' => $id]);
+        return response()->json([
+            'message' => $newGroupMessage
+        ]);
     }
 }
