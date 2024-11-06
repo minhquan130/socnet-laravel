@@ -13,7 +13,7 @@ class GroupMessage extends Model
     protected $primaryKey = 'message_id';
 
     // Tùy chọn: Nếu muốn tự động quản lý timestamps
-    public $timestamps = false; // Không sử dụng timestamps tự động nếu không có `created_at` và `updated_at`
+    public $timestamps = true; // Không sử dụng timestamps tự động nếu không có `created_at` và `updated_at`
 
     // Khai báo các cột có thể gán
     protected $fillable = [
