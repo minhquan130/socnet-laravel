@@ -58,24 +58,24 @@ class UserController extends Controller
 
     function showRegister()
     {
-        for ($i = 0; $i < 10; $i++) {
-            # code...
-            $newUser = new Users();
-            Users::create([
-                'username' => 'Quân ' . $i,
-                'email' => 'quan' . $i . '@gmail.com',
-                'password_hash' => Hash::make('123456'),
-                'gender' => 'male',
-                'date_of_birth' => now(),
-            ]);
-        }
+        // for ($i = 0; $i < 10; $i++) {
+        //     # code...
+        //     $newUser = new Users();
+        //     Users::create([
+        //         'username' => 'Quân ' . $i,
+        //         'email' => 'quan' . $i . '@gmail.com',
+        //         'password_hash' => Hash::make('123456'),
+        //         'gender' => 'male',
+        //         'date_of_birth' => now(),
+        //     ]);
+        // }
 
-        for ($i = 1; $i < 5; $i++) {
-            $newFriend = new Friends();
-            $newFriend->user_id = $i;
-            $newFriend->friend_id = 5;
-            $newFriend->save();
-        }
+        // for ($i = 1; $i < 5; $i++) {
+        //     $newFriend = new Friends();
+        //     $newFriend->user_id = $i;
+        //     $newFriend->friend_id = 5;
+        //     $newFriend->save();
+        // }
 
         return view('register');
     }
