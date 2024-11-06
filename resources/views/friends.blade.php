@@ -32,9 +32,9 @@
                                         <button class="btn-add-friend">
                                             <a href="{{ route('friends.add', ['id' => $user->user_id]) }}">Xác nhận</a>
                                         </button>
-                                        <button class="btn-unaccepted-friend">
+                                        {{-- <button class="btn-unaccepted-friend">
                                             <a href="{{ route('friends.add', ['id' => $user->user_id]) }}">Xóa</a>
-                                        </button>
+                                        </button> --}}
                                     @else
                                         <button class="btn-add-friend">
                                             <a href="{{ route('friends.add', ['id' => $user->user_id]) }}">Thêm bạn

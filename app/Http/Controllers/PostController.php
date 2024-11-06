@@ -66,4 +66,46 @@ class PostController extends Controller
 
         return [$result, $count_like];
     }
+    public function showPost($post_id)
+    {
+        $post = Posts::findOrFail($post_id);
+
+        $comments = new \App\Models\Comments();
+        $countComments = $comments->getCountCommentByPostId($post_id);
+
+        return view('post.show', compact('post', 'countComments'));
+    }
+
+
+    public function updatePost(Request $request, $id)
+    {
+        $post = Posts::find($id);
+    
+        if (!$post) {
+            return redirect()->back()->with('error', 'Bài viết không tồn tại.');
+        }
+    
+        // Validate nội dung và ảnh
+        $request->validate([
+            'input-content' => 'nullable|string|max:65535',
+            'input-picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:10240',
+        ]);
+    
+        // Cập nhật nội dung
+        $post->content = $request->input('input-content');
+    
+        // Kiểm tra và cập nhật ảnh nếu có
+        if ($request->hasFile('input-picture') && $request->file('input-picture')->isValid()) {
+            $image = $request->file('input-picture');
+            $extension = $image->getClientOriginalExtension();
+            $imageData = base64_encode(file_get_contents($image->getRealPath()));
+    
+            // Lưu ảnh mới dưới dạng base64
+            $post->media_url = 'data:image/' . $extension . ';base64,' . $imageData;
+        }
+    
+        $post->save();
+    
+        return redirect()->route('home')->with('success', 'Bài viết đã được cập nhật thành công!');
+    }
 }

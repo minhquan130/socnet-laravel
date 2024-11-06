@@ -23,12 +23,16 @@ Route::middleware([CheckUser::class])->group(function () {
     // Post
     Route::post('/post', [PostController::class, 'addPost'])->name('post.add');
     Route::get('/delete-post/{id}', [PostController::class, 'deletePost'])->name('post.delete');
+
+    // post-edit-post
+    Route::post('/edit-post/{id}', [PostController::class, 'updatePost'])->name('post.edit');
     
     // Profile
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
     Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
 
-    Route::get('/chats', [ChatController::class, 'index'])->name('chats');
+    Route::get('/chats/message/{id}', [ChatController::class, 'index'])->name('chats');
+    Route::post('/chats/message/{id}', [ChatController::class, 'store'])->name('chats');
 
     Route::get('/friends', [UserController::class, 'showFriends'])->name('friends');
     Route::get('/friends/request', [UserController::class, 'showFriendsRequest'])->name('friends.request');

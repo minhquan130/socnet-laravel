@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('group_id'); // ID của nhóm chat
             $table->unsignedBigInteger('sender_id'); // ID của người gửi tin nhắn
             $table->text('content'); // Nội dung tin nhắn
-            $table->timestamp('created_at')->useCurrent(); // Thời gian tạo tin nhắn
+            $table->timestamps(); // Thời gian tạo tin nhắn
         });
     }
 

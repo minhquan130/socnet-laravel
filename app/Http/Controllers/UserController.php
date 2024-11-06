@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Friends;
+use App\Models\GroupChat;
 use App\Models\Posts;
 use App\Models\Users;
 use App\Models\Comments;
+use App\Models\GroupMember;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
@@ -23,7 +25,7 @@ class UserController extends Controller
             'password' => 'required|min:6|regex:/^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]*$/',
             'gender' => 'required|in:male,female,other',
             'birth_date' => 'required|date',
-            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:10240'
         ]);
 
         // Create a new user instance
@@ -56,6 +58,25 @@ class UserController extends Controller
 
     function showRegister()
     {
+        for ($i = 0; $i < 10; $i++) {
+            # code...
+            $newUser = new Users();
+            Users::create([
+                'username' => 'Quân ' . $i,
+                'email' => 'quan' . $i . '@gmail.com',
+                'password_hash' => Hash::make('123456'),
+                'gender' => 'male',
+                'date_of_birth' => now(),
+            ]);
+        }
+
+        for ($i = 1; $i < 5; $i++) {
+            $newFriend = new Friends();
+            $newFriend->user_id = $i;
+            $newFriend->friend_id = 5;
+            $newFriend->save();
+        }
+
         return view('register');
     }
 
@@ -145,7 +166,8 @@ class UserController extends Controller
             ->get();
 
         $userCurrent = Users::where('user_id', $currentUserId)->first();
-        $followers = (new Friends)->getFriendsByStatus($currentUserId, ['pending', 'following']); 
+        $followers = (new Friends)->getFriendsByStatus($currentUserId, ['pending', 'following']);
+
         return view('home', compact('posts', 'userCurrent', 'create_comment', 'followers'));
     }
 
@@ -154,11 +176,12 @@ class UserController extends Controller
         $currentUserId = Session::get('user_id');
 
         // Lấy danh sách user_id của những người đã gửi yêu cầu kết bạn
-        $userIds = Friends::where('friend_id', $currentUserId)->pluck('user_id');
+        $userIds = Friends::where('friend_id', $currentUserId)->where('status', 'pending')->pluck('user_id');
 
         // Nếu có yêu cầu kết bạn, lấy danh sách người dùng tương ứng
         $users = $userIds->isNotEmpty() ? Users::whereIn('user_id', $userIds)->get() : 'request';
         $userCurrent = Users::where('user_id', $currentUserId)->first();
+        // $users = (new Friends)->getFriendsByStatus($currentUserId, ['pending']);
 
         return view('friends', compact('users', 'userCurrent'));
     }
@@ -182,12 +205,53 @@ class UserController extends Controller
     }
 
 
-    function addFriends($id)
+    public function addFriends($id)
     {
-        $friend = new Friends();
-        $friend->user_id = Session::get('user_id');
-        $friend->friend_id = $id;
-        $friend->save();
-        return redirect()->route('friends');
+        $currentUserId = Session::get('user_id');
+
+        // Kiểm tra xem yêu cầu kết bạn đã tồn tại chưa
+        $existingFriendRequest = Friends::where('user_id', $id)
+            ->where('friend_id', $currentUserId)
+            ->first();
+
+
+        if ($existingFriendRequest) {
+            // Nếu tồn tại, cập nhật trạng thái thành 'accepted'
+            Friends::where('user_id', $id)
+                ->where('friend_id', $currentUserId)
+                ->update(['status' => 'accepted']);
+
+                $mutualFriend = new Friends();
+                $mutualFriend->user_id = $currentUserId;
+                $mutualFriend->friend_id = $id;
+                $mutualFriend->status = 'accepted';
+                $mutualFriend->save();
+
+                $newGroupChat = new GroupChat();
+                $newGroupChat->save();
+                $groupId = $newGroupChat->group_id;
+                
+                $newGroupMember1 = GroupMember::create([
+                    'group_id' => $groupId,
+                    'user_id' => $currentUserId,
+                ]);
+
+                $newGroupMember2 = GroupMember::create([
+                    'group_id' => $groupId,
+                    'user_id' => $id,
+                ]);
+                
+
+            return redirect()->route('friends.request');
+        } else {
+            // Nếu chưa tồn tại, tạo yêu cầu kết bạn mới với trạng thái 'pending'
+            $newFriendRequest = new Friends();
+            $newFriendRequest->user_id = $currentUserId;
+            $newFriendRequest->friend_id = $id;
+            $newFriendRequest->status = 'pending';
+            $newFriendRequest->save();
+
+            return redirect()->route('friends');
+        }
     }
 }
