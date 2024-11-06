@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Friends;
+use App\Models\GroupChat;
 use App\Models\Posts;
 use App\Models\Users;
 use App\Models\Comments;
+use App\Models\GroupMember;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
@@ -219,17 +221,26 @@ class UserController extends Controller
                 ->where('friend_id', $currentUserId)
                 ->update(['status' => 'accepted']);
 
-            $mutualFriend = Friends::where('user_id', $currentUserId)
-                ->where('friend_id', $id)
-                ->first();
-
-            if (!$mutualFriend) {
                 $mutualFriend = new Friends();
                 $mutualFriend->user_id = $currentUserId;
                 $mutualFriend->friend_id = $id;
                 $mutualFriend->status = 'accepted';
                 $mutualFriend->save();
-            }
+
+                $newGroupChat = new GroupChat();
+                $newGroupChat->save();
+                $groupId = $newGroupChat->group_id;
+                
+                $newGroupMember1 = GroupMember::create([
+                    'group_id' => $groupId,
+                    'user_id' => $currentUserId,
+                ]);
+
+                $newGroupMember2 = GroupMember::create([
+                    'group_id' => $groupId,
+                    'user_id' => $id,
+                ]);
+                
 
             return redirect()->route('friends.request');
         } else {
