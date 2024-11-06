@@ -34,14 +34,7 @@
             </div>
 
             <div class="chat-messages">
-                {{-- <div class="message-friend">
-                    <p class="message">Hello</p>
-                </div>
-                <div class="message-user">
-                    <p class="message">ỏ</p>
-                </div> --}}
                 @foreach ($messages as $message)
-                {{-- @dd($message->sender_id.'/'.$userCurrent->user_id) --}}
                     @if ($message->sender_id == $userCurrent->user_id)
                         <div class="message-user">
                             <p class="message">{{ $message->content }}</p>
@@ -57,11 +50,7 @@
             <div class="chat-bar">
                 <i class="fa-solid fa-image"></i>
                 <i class="fa-solid fa-face-smile"></i>
-                <form action="" method="post">
-                    @csrf
-                    <input type="text" name="chatMessage" id="chat-message">
-                    <input type="submit" value="Send">
-                </form>
+                <input type="text" name="chatMessage" id="chat-message">
                 <i class="fa-solid fa-paper-plane" id="send-message"></i>
             </div>
         </div>
