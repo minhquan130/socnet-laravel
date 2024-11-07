@@ -24,35 +24,40 @@
             </div>
         </div>
         <div class="chat-main">
-            <div class="header-chat-main">
-                <div class="info-friend">
-                    <div class="avatar"><img
-                            src="{{ $otherUser->profile_pic_url == null ? asset('images/none-avatar.jpg') : $otherUser->profile_pic_url }}"
-                            alt=""></div>
-                    <div class="name">{{ $otherUser->username }}</div>
+            @if ($otherUser)
+                <div class="header-chat-main">
+                    <div class="info-friend">
+                        <div class="avatar"><img
+                                src="{{ $otherUser->profile_pic_url == null ? asset('images/none-avatar.jpg') : $otherUser->profile_pic_url }}"
+                                alt=""></div>
+                        <div class="name">{{ $otherUser->username }}</div>
+                    </div>
                 </div>
-            </div>
+            @endif
 
-            <div class="chat-messages">
-                @foreach ($messages as $message)
-                    @if ($message->sender_id == $userCurrent->user_id)
-                        <div class="message-user">
-                            <p class="message">{{ $message->content }}</p>
-                        </div>
-                    @else
-                        <div class="message-friend">
-                            <p class="message">{{ $message->content }}</p>
-                        </div>
-                    @endif
-                @endforeach
-            </div>
 
-            <div class="chat-bar">
-                <i class="fa-solid fa-image"></i>
-                <i class="fa-solid fa-face-smile"></i>
-                <input type="text" name="chatMessage" id="chat-message">
-                <i class="fa-solid fa-paper-plane" id="send-message"></i>
-            </div>
+            @if ($messages)
+                <div class="chat-messages">
+                    @foreach ($messages as $message)
+                        @if ($message->sender_id == $userCurrent->user_id)
+                            <div class="message-user">
+                                <p class="message">{{ $message->content }}</p>
+                            </div>
+                        @else
+                            <div class="message-friend">
+                                <p class="message">{{ $message->content }}</p>
+                            </div>
+                        @endif
+                    @endforeach
+                </div>
+                <div class="chat-bar">
+                    <i class="fa-solid fa-image"></i>
+                    <i class="fa-solid fa-face-smile"></i>
+                    <input type="text" name="chatMessage" id="chat-message">
+                    <i class="fa-solid fa-paper-plane" id="send-message"></i>
+                </div>
+            @endif
+
         </div>
         <div class="chat-right"></div>
     </div>

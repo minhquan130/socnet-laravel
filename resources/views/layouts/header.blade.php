@@ -63,7 +63,7 @@
                     $groupMessageModel = new \App\Models\GroupMessage();
                     $groupIdNewActive = $groupMessageModel->getGroupIdNewActive();
                 @endphp
-                <a href="{{ route('chats', ['id' => $groupIdNewActive ? $groupIdNewActive->group_id : null]) }}" class="messages">
+                <a href="{{ route('chats', ['id' => $groupIdNewActive ? $groupIdNewActive->group_id : -1]) }}" class="messages">
                     <span><i class="fa-solid fa-comments"></i></span>
                 </a>
                 <div class="messages">

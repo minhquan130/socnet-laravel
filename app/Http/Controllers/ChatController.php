@@ -18,11 +18,13 @@ class ChatController extends Controller
     function index($id)
     {
         $currentUserId = Session::get('user_id');
+        $userCurrent = Users::where('user_id', $currentUserId)->first();
+        $friends = (new Friends())->getFriendsByStatus($currentUserId, 'accepted');
+        $otherUser = null;
+        $messages = null;
         if (GroupMember::where('group_id', $id)->where('user_id', $currentUserId)->first()) {
             # code...
-            $userCurrent = Users::where('user_id', $currentUserId)->first();
 
-            $friends = (new Friends())->getFriendsByStatus($currentUserId, 'accepted');
 
             $otherUserIds = GroupMember::where('group_id', $id)->where('user_id', '!=', $currentUserId)->pluck('user_id');
             $otherUser = Users::whereIn('user_id', $otherUserIds)->first();
@@ -31,9 +33,9 @@ class ChatController extends Controller
             $messages = GroupMessage::where('group_id', $id)->get();
             // dd($messages);
 
-            return view('chats', compact('userCurrent', 'friends', 'otherUser', 'messages'));
         }
-        return redirect()->route('home');
+        return view('chats', compact('userCurrent', 'friends', 'otherUser', 'messages'));
+        // return redirect()->route('home');
     }
 
     function store(Request $request, $id)
