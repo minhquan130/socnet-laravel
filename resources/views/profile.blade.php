@@ -86,7 +86,8 @@
                                 </div>
                                 <div class="edit-date">
                                     <span>Ngày sinh</span>
-                                    <input type="date" name="date_of_birth" id="date_of_birth" value="{{ old('date_of_birth', $userCurrent->date_of_birth) }}">
+                                    <input type="date" name="date_of_birth" id="date_of_birth" value="{{ old('date_of_birth', $userCurrent->date_of_birth ? date('Y-m-d', strtotime($userCurrent->date_of_birth)) : '') }}">
+
 
                                 </div>
                             </div>
@@ -136,6 +137,8 @@
                 <span>boring</span>
             </div>
         </div>
+        
+        
     </div>
 </div>
 <script>
