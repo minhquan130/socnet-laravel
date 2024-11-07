@@ -2,10 +2,10 @@
 <div class="profile">
     <div class="profile-left">
         @if(session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-        @endif
+        <div class="alert alert-success" id="successMessage">
+            {{ session('success') }}
+        </div>
+    @endif
             <div class="info-card">
                 <div class="info-head">
                     <h4><i class="fa-solid fa-user"></i> Thông tin người dùng</h4>
@@ -151,6 +151,13 @@
         };
         reader.readAsDataURL(event.target.files[0]);
     };
+
+    @if(session('success'))
+        setTimeout(function() {
+            // Ẩn thông báo sau 2 giây (2000ms)
+            document.getElementById('successMessage').style.display = 'none';
+        }, 1000);
+    @endif
 </script>
 </body>
 </html>
