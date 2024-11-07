@@ -729,3 +729,93 @@ main .container_navbar .navbar-content .list-friends .item-friend span{
     font-weight: bold;
 }
 
+/* css cho modal edit-post */
+/* CSS cho modal chỉnh sửa bài viết */
+.modal-content {
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+.modal-header {
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #e5e5e5;
+    padding: 1rem 1.5rem;
+}
+
+.modal-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.modal-body {
+    padding: 1.5rem;
+}
+
+.modal-body .name {
+    font-weight: bold;
+    color: #555;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.form-control {
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.current-image img {
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    margin-top: 5px;
+    max-height: 200px;
+    object-fit: cover;
+}
+
+.modal-body label {
+    font-weight: 600;
+    color: #666;
+}
+
+.modal-footer {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid #e5e5e5;
+    background-color: #f5f5f5;
+}
+
+.modal-footer .btn-secondary {
+    background-color: #ddd;
+    border-color: #ddd;
+    color: #333;
+}
+
+.modal-footer .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: #fff;
+}
+
+.modal-footer .btn-secondary:hover,
+.modal-footer .btn-primary:hover {
+    opacity: 0.85;
+}
+
+@media (max-width: 576px) {
+    .modal-content {
+        padding: 0.5rem;
+    }
+
+    .modal-header,
+    .modal-footer {
+        padding: 0.5rem;
+    }
+
+    .modal-title {
+        font-size: 1rem;
+    }
+}
