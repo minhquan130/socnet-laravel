@@ -55,7 +55,7 @@
                 <a href="{{ route('friends') }}" class="friends">
                     <span><i class="fa-solid fa-user-group"></i></span>
                 </a>
-                <a href="{{ route('chats') }}" class="messages">
+                <a href="{{ route('chats', ['id' => '1']) }}" class="messages">
                     <span><i class="fa-solid fa-comments"></i></span>
                 </a>
                 <div class="messages">

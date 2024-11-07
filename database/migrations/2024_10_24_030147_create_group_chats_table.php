@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('group_chats', function (Blueprint $table) {
-            $table->id('group_id'); // PRIMARY KEY AUTO_INCREMENT
-            $table->string('group_name', 50); // Tên nhóm, không được để trống
-            $table->timestamp('created_at')->useCurrent(); // Thời gian tạo nhóm
+            $table->id('group_id');
+            $table->string('group_name', 50)->nullable();
+            $table->timestamps();
         });
     }
 

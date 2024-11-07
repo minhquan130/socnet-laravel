@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('sender_id'); // ID của người gửi
             $table->unsignedBigInteger('receiver_id'); // ID của người nhận
             $table->text('content'); // Nội dung của tin nhắn
-            $table->timestamp('created_at')->useCurrent(); // Thời gian tạo tin nhắn, mặc định là CURRENT_TIMESTAMP
+            $table->timestamps(); // Thời gian tạo tin nhắn, mặc định là CURRENT_TIMESTAMP
 
         
         });
