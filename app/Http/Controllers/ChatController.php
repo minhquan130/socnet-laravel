@@ -15,23 +15,29 @@ use Illuminate\Support\Facades\Session;
 
 class ChatController extends Controller
 {
-    function index($id) {
+    function index($id)
+    {
         $currentUserId = Session::get('user_id');
-        $userCurrent = Users::where('user_id', $currentUserId)->first();
-        
-        $friends = (new Friends())->getFriendsByStatus($currentUserId,'accepted');
+        if (GroupMember::where('group_id', $id)->where('user_id', $currentUserId)->first()) {
+            # code...
+            $userCurrent = Users::where('user_id', $currentUserId)->first();
 
-        $otherUserIds = GroupMember::where('group_id', $id)->where('user_id', '!=', $currentUserId)->pluck('user_id');
-        $otherUser = Users::whereIn('user_id', $otherUserIds)->first();
+            $friends = (new Friends())->getFriendsByStatus($currentUserId, 'accepted');
 
-        // dd($otherUsers);
-        $messages = GroupMessage::where('group_id', $id)->get();
-        // dd($messages);
+            $otherUserIds = GroupMember::where('group_id', $id)->where('user_id', '!=', $currentUserId)->pluck('user_id');
+            $otherUser = Users::whereIn('user_id', $otherUserIds)->first();
 
-        return view('chats', compact('userCurrent', 'friends', 'otherUser', 'messages'));
+            // dd($otherUsers);
+            $messages = GroupMessage::where('group_id', $id)->get();
+            // dd($messages);
+
+            return view('chats', compact('userCurrent', 'friends', 'otherUser', 'messages'));
+        }
+        return redirect()->route('home');
     }
 
-    function store(Request $request, $id) {
+    function store(Request $request, $id)
+    {
         // dd($id);
         // dd($request->input('chatMessage'));
         $currentUserId = Session::get('user_id');
@@ -42,7 +48,8 @@ class ChatController extends Controller
         $newGroupMessage->save();
         // return redirect()->route('chats', ['id' => $id]);
         return response()->json([
-            'message' => $newGroupMessage
+            'message' => $newGroupMessage,
+            'currentUserId' => $currentUserId
         ]);
     }
 }

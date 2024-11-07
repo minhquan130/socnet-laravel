@@ -14,6 +14,12 @@ use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
+    function getUserId() {
+        return response()->json([
+            'userId' => Session::get('user_id')
+        ]);
+    }
+
     //CRUD
     // Creater
     public function register(Request $request)
