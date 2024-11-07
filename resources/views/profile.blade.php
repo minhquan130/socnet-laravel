@@ -79,9 +79,9 @@
                                 <div class="edit-gender">
                                     <span>Giới tính</span>
                                     <select name="gender" id="gender">
-                                        <option value="1" {{ $userCurrent->gender == 1 ? 'selected' : '' }}>Nam</option>
-                                        <option value="2" {{ $userCurrent->gender == 2 ? 'selected' : '' }}>Nữ</option>
-                                        <option value="3" {{ $userCurrent->gender == 3 ? 'selected' : '' }}>Giới tính khác</option>
+                                        <option value="male" {{ $userCurrent->gender == "male" ? 'selected' : '' }}>Nam</option>
+                                        <option value="female" {{ $userCurrent->gender == "female" ? 'selected' : '' }}>Nữ</option>
+                                        <option value="other" {{ $userCurrent->gender == "other" ? 'selected' : '' }}>Giới tính khác</option>
                                     </select>
                                 </div>
                                 <div class="edit-date">
