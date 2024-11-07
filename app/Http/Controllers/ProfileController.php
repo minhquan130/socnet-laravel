@@ -37,7 +37,10 @@ class ProfileController extends Controller
             'username' => 'required|string|max:255',  
             'gender' => 'required|string',
             'date_of_birth' => 'nullable|date',
-            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',  //kiêm tra hình ảnh 
+            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'address' => 'nullable|string|max:255',
+            'company' => 'nullable|string|max:255',
+            'relationship' => 'nullable|string|max:255',
         ]);
 
         // Lấy thông tin người dùng hiện tại từ cơ sở dữ liệu
@@ -53,6 +56,9 @@ class ProfileController extends Controller
         $user->username = $request->input('username');  
         $user->gender = $request->input('gender'); 
         $user->date_of_birth = $request->input('date_of_birth');  
+        $user->address = $request->input('address', $user->address);
+        $user->company = $request->input('company', $user->company);
+        $user->relationship = $request->input('relationship', $user->relationship);
         // Xử lý avatar nếu có
         if ($request->hasFile('avatar')) {
             $image = $request->file('avatar');
