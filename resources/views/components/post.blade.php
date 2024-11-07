@@ -64,7 +64,6 @@
                         </ul>
                     </div>
 
-
                     <!-- Modal of chỉnh sửa bài biết  -->
                     <!-- Modal -->
                     <div class="modal fade" id="updatePostModal{{ $post->post_id }}" tabindex="-1"
@@ -112,8 +111,8 @@
                             </div>
                         </div>
                     </div>
-
                     <!-- modal -->
+                     
                 </div>
                 <div class="content-post">
                     <div class="content-text">
