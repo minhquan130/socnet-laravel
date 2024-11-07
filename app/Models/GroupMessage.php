@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Session;
 
 class GroupMessage extends Model
 {
@@ -33,5 +34,10 @@ class GroupMessage extends Model
     public function sender()
     {
         return $this->belongsTo(Users::class, 'sender_id');
+    }
+
+    public function getGroupIdNewActive(){
+        $currentUserId = Session::get('user_id');
+        return self::where('sender_id', $currentUserId)->orderBy('created_at', 'desc')->first();
     }
 }

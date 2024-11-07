@@ -14,6 +14,7 @@ use App\Http\Middleware\CheckUser;
 
 Route::middleware([CheckUser::class])->group(function () {
     // Home
+    Route::get('/get-user-id', [UserController::class, 'getUserId']);
     Route::get('/', [UserController::class, 'showHome'])->name('home');
     
     // Loguot

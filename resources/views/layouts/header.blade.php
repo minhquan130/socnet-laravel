@@ -22,6 +22,10 @@
     <link rel="stylesheet" href="{{ asset('css/friend.css') }}">
     <link rel="stylesheet" href="{{ asset('css/chat.css') }}">
 
+    <script src="https://cdn.socket.io/4.8.0/socket.io.min.js"
+        integrity="sha384-OoIbkvzsFFQAG88r+IqMAjyOtYDPGO0cqK5HF5Uosdy/zUEGySeAzytENMDynREd" crossorigin="anonymous">
+    </script>
+
     <!-- jQuery (nếu cần cho phần khác của trang) -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
 
@@ -55,7 +59,11 @@
                 <a href="{{ route('friends') }}" class="friends">
                     <span><i class="fa-solid fa-user-group"></i></span>
                 </a>
-                <a href="{{ route('chats', ['id' => '1']) }}" class="messages">
+                @php
+                    $groupMessageModel = new \App\Models\GroupMessage();
+                    $groupIdNewActive = $groupMessageModel->getGroupIdNewActive();
+                @endphp
+                <a href="{{ route('chats', ['id' => $groupIdNewActive->group_id]) }}" class="messages">
                     <span><i class="fa-solid fa-comments"></i></span>
                 </a>
                 <div class="messages">
