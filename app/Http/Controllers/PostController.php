@@ -114,7 +114,11 @@ class PostController extends Controller
     {
         $userCurrent = Users::where('user_id', Session::get('user_id'))->first();
         // Lấy tất cả các bài đăng của người dùng cụ thể, sắp xếp từ mới đến cũ
-        $posts = Posts::where('user_id', $userId)->orderBy('created_at', 'desc')->get();
+        $posts = Posts::orderBy('posts.created_at', 'desc')
+            ->Join('users', 'users.user_id', '=', 'posts.user_id')
+            ->select('posts.*', 'users.username', 'users.email', 'users.profile_pic_url')
+            ->where('posts.user_id', $userId)
+            ->get();
 
         if ($userCurrent) {
             $userCurrent->gender = match($userCurrent->gender) {

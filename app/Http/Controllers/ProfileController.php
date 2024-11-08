@@ -55,7 +55,7 @@ class ProfileController extends Controller
         $user = Users::where('user_id', Session::get('user_id'))->first();
 
         if (!$user) {
-            return redirect()->route('profile.index')->with('error', 'Không tìm thấy người dùng.');
+            return redirect()->route('profile', ['userId' => $user->user_id])->with('error', 'Không tìm thấy người dùng.');
         }
 
         // dd($request->input('gender'));
@@ -79,7 +79,7 @@ class ProfileController extends Controller
         $user->save();
 
         // Trả về lại trang profile với thông báo thành công
-        return redirect()->route('profile', ['userId', $user->user_id])->with('success', 'Cập nhật thông tin thành công!');
+        return redirect()->route('profile', ['userId' => $user->user_id])->with('success', 'Cập nhật thông tin thành công!');
     }
 
     

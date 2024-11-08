@@ -1,11 +1,9 @@
 const showMediaPost = document.getElementById('show-media-post');
 const imgShowMediaPost = document.getElementById('img-show-media-post');
 const inputPicture = document.getElementById('input-picture');
-const btnClosePreview = showMediaPost.querySelector('.close');
+const btnClosePreview = showMediaPost.querySelector('.close') ?? '';
 const arrOtherPost = document.querySelectorAll('.other-post');
 const optionLikes = document.querySelectorAll('.option-like');
-
-let isLiked = false;
 
 inputPicture.addEventListener('change', chooseFile);
 btnClosePreview.addEventListener('click', closeFile);
@@ -51,38 +49,6 @@ function showOptionItemPost(optionsItemPost) {
         optionsItemPost.style.display = 'none';
     }
 }
-
-// const postIdOfComment = this.getAttribute('data-post-id');
-// document.getElementById('commentForm'+postIdOfComment).addEventListener('submit', function (event) {
-//     event.preventDefault(); // Ngăn chặn gửi form mặc định
-//     console.log('aaaa');
-
-//     const form = this;
-//     const commentInput = form.querySelector('input[name="comment"]');
-//     const commentText = commentInput.value;
-
-//     // Gửi dữ liệu bình luận bằng AJAX
-//     fetch(form.action, {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json',
-//             'X-CSRF-TOKEN': '{{ csrf_token() }}'
-//         },
-//         body: JSON.stringify({ comment: commentText })
-//     })
-//         .then(response => response.json())
-//         .then(data => {
-//             const commentElement = document.createElement('p');
-//             commentElement.innerHTML = `
-//             <img src="{{ asset('images/avatar.png') }}" alt="Avatar" class="img-fluid rounded-circle me-2" style="width: 40px; height: 40px;">
-//             <span>${commentText}</span>
-//         `;
-//             document.getElementById('commentsList{{ $post->id }}').appendChild(commentElement);
-//             commentInput.value = '';
-//         })
-//         .catch(error => console.error('Error:', error));
-// });
-
 
 const likeButtons = document.querySelectorAll('.like-btn');
 likeButtons.forEach(button => {
