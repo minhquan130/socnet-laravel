@@ -116,6 +116,19 @@ class PostController extends Controller
         // Lấy tất cả các bài đăng của người dùng cụ thể, sắp xếp từ mới đến cũ
         $posts = Posts::where('user_id', $userId)->orderBy('created_at', 'desc')->get();
 
+        if ($userCurrent) {
+            $userCurrent->gender = match($userCurrent->gender) {
+                'male' => 'Nam',
+                'female' => 'Nữ',
+                'other' => 'Giới tính khác',
+                default => 'Chưa cập nhật',
+            };
+        }
+
+        if ($userCurrent && $userCurrent->date_of_birth) {
+            $userCurrent->date_of_birth = date('d/m/Y', strtotime($userCurrent->date_of_birth));
+        }
+
         // Kiểm tra xem $posts có dữ liệu không
         if ($posts->isEmpty()) {
             // Nếu không có bài đăng nào
