@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Likes;
 use App\Models\Posts;
+use App\Models\Users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -108,4 +109,23 @@ class PostController extends Controller
     
         return redirect()->route('home')->with('success', 'Bài viết đã được cập nhật thành công!');
     }
+
+    public function postProfile($userId)
+    {
+        $userCurrent = Users::where('user_id', Session::get('user_id'))->first();
+        // Lấy tất cả các bài đăng của người dùng cụ thể, sắp xếp từ mới đến cũ
+        $posts = Posts::where('user_id', $userId)->orderBy('created_at', 'desc')->get();
+
+        // Kiểm tra xem $posts có dữ liệu không
+        if ($posts->isEmpty()) {
+            // Nếu không có bài đăng nào
+            return view('profile', compact('posts', 'userCurrent'));
+        }
+
+
+        // Truyền bài đăng vào view profile
+        return view('profile', compact('posts', 'userCurrent'));
+    }
+
+
 }

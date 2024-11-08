@@ -57,6 +57,7 @@ Route::post('/login', [UserController::class, 'login'])->name('login.store');
 
 Route::get('/forgetpassword', [UserController::class, 'ShowForgetPassword'])->name('forgetpassword');
 
+Route::get('/profile/{userId}', [PostController::class, 'postProfile'])->name('profile');
 
 
 

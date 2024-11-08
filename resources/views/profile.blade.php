@@ -138,11 +138,21 @@
                 <span>boring</span>
             </div>
         </div>
-        <div class="post">
-            
+        <div class="posts-container">
+            @if($posts->isEmpty())
+                <p>Không có bài đăng nào.</p>
+            @else
+                @foreach($posts as $post)
+                    <div class="post-profile">
+                        <p>{{ $post->content }}</p>
+                        @if($post->media_url)
+                            <img src="{{ $post->media_url }}" alt="Ảnh bài đăng" style="max-width: 100%; height: auto;">
+                        @endif
+                    </div>
+                @endforeach
+            @endif
         </div>
-        
-        
+ 
     </div>
 </div>
 <script>
