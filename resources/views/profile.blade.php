@@ -138,6 +138,9 @@
                 <span>boring</span>
             </div>
         </div>
+        <div class="post">
+            
+        </div>
         
         
     </div>
