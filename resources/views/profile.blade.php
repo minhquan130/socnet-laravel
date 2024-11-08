@@ -154,7 +154,6 @@
 
     @if(session('success'))
         setTimeout(function() {
-            // Ẩn thông báo sau 2 giây (2000ms)
             document.getElementById('successMessage').style.display = 'none';
         }, 1000);
     @endif
