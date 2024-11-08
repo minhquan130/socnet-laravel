@@ -1,7 +1,7 @@
 <div class="container_sidebar">
     <div class="sidebar">
         <div class="card-profile">
-            <a href="{{ route('profile') }}" class="profile-picture" style="display: block">
+            <a href="{{ route('profile', ['userId' =>  $userCurrent->user_id]) }}" class="profile-picture" style="display: block">
                 <img src="{{ $userCurrent->profile_pic_url == null ? asset('images/none-avatar.jpg') : $userCurrent->profile_pic_url }}"
                     alt="">
             </a>

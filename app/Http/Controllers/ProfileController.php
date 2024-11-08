@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Users;
-use App\Models\Post;
+use App\Models\Posts;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
 
@@ -25,8 +26,15 @@ class ProfileController extends Controller
                 default => 'Chưa cập nhật',
             };
         }
-        return view('profile', compact('userCurrent'));
-    }
+
+         // Lấy tất cả các bài đăng của người dùng hiện tại, sắp xếp từ mới đến cũ
+         $posts = Posts::where('user_id', $userCurrent->user_id)->orderBy('created_at', 'desc')->get();
+
+        dd($userCurrent);
+
+        // Truyền cả thông tin người dùng và bài đăng vào view profile
+        return view('profile', compact('userCurrent', 'posts'));
+        }
     
 
 
