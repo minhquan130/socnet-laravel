@@ -31,6 +31,7 @@ Route::middleware([CheckUser::class])->group(function () {
     // Profile
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
     Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+    
 
     Route::get('/chats/message/{id}', [ChatController::class, 'index'])->name('chats');
     Route::post('/chats/message/{id}', [ChatController::class, 'store'])->name('chats');
@@ -69,4 +70,3 @@ Route::get('/forgetpassword', [UserController::class, 'ShowForgetPassword'])->na
 // Route::post('/posts/{id}/comments', [CommentController::class, 'store'])->name('post.store');
 
 // Route::get('/post/{id}', [CommentController::class, 'show'])->name('post.show');
-

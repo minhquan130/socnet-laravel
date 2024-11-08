@@ -21,6 +21,9 @@ return new class extends Migration
             $table->dateTime('date_of_birth'); // TEXT
             $table->text('bio')->nullable(); // TEXT
             $table->enum('privacy_setting', ['public', 'friends', 'private'])->default('public'); // ENUM với giá trị mặc định
+            $table->string('address')->nullable(); // Cột 'address' có thể null
+            $table->string('company')->nullable(); // Cột 'company' có thể null
+            $table->string('relationship')->nullable(); // Cột 'relationship' có thể null
             $table->timestamps(); // created_at và updated_at
         });
     }

@@ -2,10 +2,10 @@
 <div class="profile">
     <div class="profile-left">
         @if(session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-        @endif
+        <div class="alert alert-success" id="successMessage">
+            {{ session('success') }}
+        </div>
+    @endif
             <div class="info-card">
                 <div class="info-head">
                     <h4><i class="fa-solid fa-user"></i> Thông tin người dùng</h4>
@@ -86,7 +86,9 @@
                                 </div>
                                 <div class="edit-date">
                                     <span>Ngày sinh</span>
-                                    <input type="date" name="date_of_birth" id="date_of_birth" value="{{ old('date_of_birth', $userCurrent->date_of_birth) }}">
+                                    {{-- @dd(date('Y-m-d', strtotime(str_replace('/', '-', $userCurrent->date_of_birth)))) --}}
+                                    <input type="date" name="date_of_birth" id="date_of_birth" value="{{ date('Y-m-d', strtotime(str_replace('/', '-', $userCurrent->date_of_birth))) }}">
+
 
                                 </div>
                             </div>
@@ -136,6 +138,11 @@
                 <span>boring</span>
             </div>
         </div>
+        <div class="post">
+            
+        </div>
+        
+        
     </div>
 </div>
 <script>
@@ -147,6 +154,12 @@
         };
         reader.readAsDataURL(event.target.files[0]);
     };
+
+    @if(session('success'))
+        setTimeout(function() {
+            document.getElementById('successMessage').style.display = 'none';
+        }, 1000);
+    @endif
 </script>
 </body>
 </html>
