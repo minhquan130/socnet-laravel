@@ -15,7 +15,7 @@ class PostController extends Controller
         if ($request->input('input-content') || $request->file('input-picture')) {
             // Điều kiện kiểm tra dữ liệu đầu vào
             $request->validate([
-                'input-content' => 'nullable|string|max:10000',
+                'input-content' => 'nullable|string|max:65535',
                 'input-picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:10240',
             ]);
 

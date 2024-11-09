@@ -121,21 +121,24 @@ document.addEventListener('DOMContentLoaded', function () {
                     })
                     .then(data => {
                         const commentsList = document.querySelector('#commentsList-post-' + data.dataComment.post_id);
+                        const qtyComments = document.querySelector('#qty-comments-post-' + data.dataComment.post_id);
                         const avatar = data.dataComment.profile_pic_url ? data.dataComment.profile_pic_url : defaultAvatar;
                         const username = data.dataComment.username;
                         const content = data.dataComment.content;
                         console.log(avatar);
-                        
+
                         commentsList.insertAdjacentHTML('beforeend', `
-                        <div class="item-comment">
-                            <img src="${avatar}" alt="Avatar" class="img-fluid rounded-circle" style="width: 40px; height: 40px;">
-                            <div class="content-comment">
-                                <p class="username-comment">${username}</p>
-                                <p>${content}</p> <!-- Dùng nội dung bình luận từ phản hồi -->
+                            <div class="item-comment">
+                                <img src="${avatar}" alt="Avatar" class="img-fluid rounded-circle" style="width: 40px; height: 40px;">
+                                <div class="content-comment">
+                                    <p class="username-comment">${username}</p>
+                                    <p>${content}</p> <!-- Dùng nội dung bình luận từ phản hồi -->
+                                </div>
                             </div>
-                        </div>
-                    `);
-                        commentInput.value = '';
+                        `);
+                        commentInput.value = '';    
+                        const newQtyCmt = Number(qtyComments.innerHTML.split(' ')[0]) + 1; 
+                        qtyComments.innerHTML = newQtyCmt + ' bình luận';
 
                     })
                     .catch(error => console.error('Error:', error));
@@ -145,7 +148,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 // viết cái phàn về edit bình luận 
-$('.submit-edit').on('click', function(e) {
+$('.submit-edit').on('click', function (e) {
     e.preventDefault();
     const postId = $(this).data('id');
     const content = $('#input-content-' + postId).val();
@@ -157,11 +160,11 @@ $('.submit-edit').on('click', function(e) {
             _token: '{{ csrf_token() }}',
             'input-content': content
         },
-        success: function(response) {
+        success: function (response) {
             $('#updatePostModal' + postId).modal('hide');
             location.reload();
         },
-        error: function(xhr) {
+        error: function (xhr) {
             console.log(xhr.responseText);
         }
     });
