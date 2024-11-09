@@ -53,7 +53,7 @@
                 <div class="chat-bar">
                     <i class="fa-solid fa-image"></i>
                     <i class="fa-solid fa-face-smile"></i>
-                    <input type="text" name="chatMessage" id="chat-message">
+                    <input type="text" name="chatMessage" id="chat-message" autocomplete="off">
                     <i class="fa-solid fa-paper-plane" id="send-message"></i>
                 </div>
             @endif
