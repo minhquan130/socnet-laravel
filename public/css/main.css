@@ -39,6 +39,11 @@ main .navbar-content {
     border-radius: 1rem;
 }
 
+main .container_posts{
+    max-width: 700px;
+    margin: 0 auto;
+}
+
 main .sidebar {
     /* background: rgba(255, 255, 255, .5); */
     overflow: hidden;
@@ -454,6 +459,8 @@ main .container_posts .posts .post-bar #show-media-post>.close:hover {
 
 .list-posts .post-item .content-post .content-text {
     font-size: 18px;
+    overflow-wrap: break-word;
+    white-space: normal;
 }
 
 .list-posts .post-item .content-post .content-media {

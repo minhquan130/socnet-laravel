@@ -53,17 +53,17 @@
             </div>
             <!-- Mavigation -->
             <div class="navigation">
-                <a href="{{ route('home') }}" class="home active">
+                <a href="{{ route('home') }}" class="home {{ asset('') == url()->current().'/' ? 'active' : '' }}">
                     <span><i class="fa-solid fa-house"></i></span>
                 </a>
-                <a href="{{ route('friends') }}" class="friends">
+                <a href="{{ route('friends') }}" class="friends {{ asset('').'friends/' == url()->current().'/' ? 'active' : '' }}">
                     <span><i class="fa-solid fa-user-group"></i></span>
                 </a>
                 @php
                     $groupMessageModel = new \App\Models\GroupMessage();
                     $groupIdNewActive = $groupMessageModel->getGroupIdNewActive();
                 @endphp
-                <a href="{{ route('chats', ['id' => $groupIdNewActive ? $groupIdNewActive->group_id : -1]) }}" class="messages">
+                <a href="{{ route('chats', ['id' => $groupIdNewActive ? $groupIdNewActive->group_id : -1]) }}" class="messages {{ asset('').'chats/message/' == dirname(url()->current()).'/' ? 'active' : '' }}">
                     <span><i class="fa-solid fa-comments"></i></span>
                 </a>
                 {{-- <div class="messages">
