@@ -174,7 +174,9 @@ class UserController extends Controller
         $userCurrent = Users::where('user_id', $currentUserId)->first();
         $followers = (new Friends)->getFriendsByStatus($currentUserId, ['pending', 'following']);
 
-        return view('home', compact('posts', 'userCurrent', 'create_comment', 'followers'));
+        $friends = (new Friends())->getFriendsByStatus($currentUserId, 'accepted');
+
+        return view('home', compact('posts', 'userCurrent', 'create_comment', 'followers', 'friends'));
     }
 
     function showFriendsRequest()

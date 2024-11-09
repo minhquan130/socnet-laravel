@@ -6,66 +6,17 @@
             <h3 class="title-navbar">Bạn bè</h3>
             <hr>
             <div class="list-friends">
-                <div class="item-friend">
-                    <div class="pic-avatar-friend">
-                        <img src="{{ asset('images/ny của quan.jpg') }}" alt="">
-                    </div>
-                    <span>Minh Quân</span>
-                </div>
-                <div class="item-friend">
-                    <div class="pic-avatar-friend">
-                        <img src="{{ asset('images/ny của quan.jpg') }}" alt="">
-                    </div>
-                    <span>Minh Quân</span>
-                </div>
-                <div class="item-friend">
-                    <div class="pic-avatar-friend">
-                        <img src="{{ asset('images/ny của quan.jpg') }}" alt="">
-                    </div>
-                    <span>Minh Quân</span>
-                </div>
-                <div class="item-friend">
-                    <div class="pic-avatar-friend">
-                        <img src="{{ asset('images/ny của quan.jpg') }}" alt="">
-                    </div>
-                    <span>Minh Quân</span>
-                </div>
-                <div class="item-friend">
-                    <div class="pic-avatar-friend">
-                        <img src="{{ asset('images/ny của quan.jpg') }}" alt="">
-                    </div>
-                    <span>Minh Quân</span>
-                </div>
-                <div class="item-friend">
-                    <div class="pic-avatar-friend">
-                        <img src="{{ asset('images/ny của quan.jpg') }}" alt="">
-                    </div>
-                    <span>Minh Quân</span>
-                </div>
-                <div class="item-friend">
-                    <div class="pic-avatar-friend">
-                        <img src="{{ asset('images/ny của quan.jpg') }}" alt="">
-                    </div>
-                    <span>Minh Quân</span>
-                </div>
-                <div class="item-friend">
-                    <div class="pic-avatar-friend">
-                        <img src="{{ asset('images/ny của quan.jpg') }}" alt="">
-                    </div>
-                    <span>Minh Quân</span>
-                </div>
-                <div class="item-friend">
-                    <div class="pic-avatar-friend">
-                        <img src="{{ asset('images/ny của quan.jpg') }}" alt="">
-                    </div>
-                    <span>Minh Quân</span>
-                </div>
-                <div class="item-friend">
-                    <div class="pic-avatar-friend">
-                        <img src="{{ asset('images/ny của quan.jpg') }}" alt="">
-                    </div>
-                    <span>Minh Quân</span>
-                </div>
+                @if ($friends->isNotEmpty())
+                    {{-- @dd($friends) --}}
+                    @foreach ($friends as $friend)
+                        <div class="item-friend">
+                            <div class="pic-avatar-friend">
+                                <img src="{{ $friend->users->profile_pic_url == null ? asset('images/none-avatar.jpg') : $friend->users->profile_pic_url }}" alt="">
+                            </div>
+                            <span>{{ $friend->users->username }}</span>
+                        </div>
+                    @endforeach
+                @endif
             </div>
         </div>
     </div>

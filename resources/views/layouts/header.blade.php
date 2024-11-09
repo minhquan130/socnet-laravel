@@ -66,9 +66,9 @@
                 <a href="{{ route('chats', ['id' => $groupIdNewActive ? $groupIdNewActive->group_id : -1]) }}" class="messages">
                     <span><i class="fa-solid fa-comments"></i></span>
                 </a>
-                <div class="messages">
+                {{-- <div class="messages">
                     <span><i class="fa-solid fa-camera-retro"></i></span>
-                </div>
+                </div> --}}
             </div>
             <!-- Header Left -->
             <div class="header_left">
