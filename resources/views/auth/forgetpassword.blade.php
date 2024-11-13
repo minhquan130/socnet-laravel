@@ -10,7 +10,8 @@
 <body>
     <div class="forgetPassword-contaiter">
         <h2>Quên mật Khẩu</h2>
-        <form action="#" method="post" class="form-forgetpassword">
+        <form action="{{ route('password.sendOtp') }}" method="post" class="form-forgetpassword">
+        @csrf
             <label for>
                 <i class="fa-solid fa-envelope"></i>
                 <input type="text" name="email" id="email"
@@ -19,7 +20,7 @@
            
             <label for>
                 <i class="fa-solid fa-user"></i>
-                <input type="text" name="Otp" id="name" placeholder="Nhập mã OTP"
+                <input type="hidden" name="Otp" id="name" placeholder="Nhập mã OTP"
                     required>
             </label>
         

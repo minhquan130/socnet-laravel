@@ -8,7 +8,7 @@ use App\Http\Controllers\ForgetPasswordController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CommentController;
-
+use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\CheckUser;
 
@@ -71,3 +71,9 @@ Route::get('/profile/{userId}', [PostController::class, 'postProfile'])->name('p
 // Route::post('/posts/{id}/comments', [CommentController::class, 'store'])->name('post.store');
 
 // Route::get('/post/{id}', [CommentController::class, 'show'])->name('post.show');
+
+
+Route::get('/forgetpassword', [PasswordResetController::class, 'showforgotpasswordForm'])->name('password.request');
+Route::post('/forgetpassword', [PasswordResetController::class, 'sendResetOtp'])->name('password.sendOtp');
+Route::post('/verify-otp', [PasswordResetController::class, 'verifyOtp'])->name('password.verifyOtp');
+Route::post('/resetpassword', [PasswordResetController::class, 'resetPassword'])->name('password.reset');
