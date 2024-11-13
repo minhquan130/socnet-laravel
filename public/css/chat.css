@@ -107,8 +107,7 @@
 }
 
 .chats-wrapper .chat-main .chat-messages .message-user{
-    text-align: left;
-    float: right;
+    text-align: right;
 }
 
 .chats-wrapper .chat-main .chat-messages .message{
