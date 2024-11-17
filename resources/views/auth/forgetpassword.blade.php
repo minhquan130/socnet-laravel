@@ -18,13 +18,13 @@
                     placeholder="Nhập Email hoặc SĐT đã đăng ký" required>
             </label>
            
-            <label for>
+            <!-- <label for>
                 <i class="fa-solid fa-user"></i>
                 <input type="hidden" name="Otp" id="name" placeholder="Nhập mã OTP"
                     required>
-            </label>
+            </label> -->
         
-            <label for>
+            <!-- <label for>
                 <i class="fa-solid fa-lock"></i>
                 <input type="password" name="Changepassword" id="password"
                     placeholder="Mật khẩu mới" required>
@@ -35,10 +35,9 @@
                 <input type="password" name="agin_password"
                     id="again_password" placeholder="Xác thực mật khẩu" required>
             </label>
-          
+           -->
             <label for="" class="btn-changepass">
-                 <input type="submit" value="Thay Đổi">
-            </label>
+                 <input type="submit" value="Gửi">
         </form>
     </div>
 </body>

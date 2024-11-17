@@ -23,10 +23,6 @@ class PasswordResetController extends Controller
     public function sendResetOtp(Request $request)
     {
     
-        $request->validate([
-            'email' => 'required|email|exists:users,email',
-        ]);
-
         $otp = random_int(100000, 999999); // Tạo OTP ngẫu nhiên
         $email = $request->email;
 
@@ -38,7 +34,16 @@ class PasswordResetController extends Controller
   
 
         // Gửi OTP qua email
-        Mail::to($email)->send(new OtpMail($otp));
+         
+        Mail::send('emails.otp',compact('otp'),function($email){
+            $email ->to('dinhvandat.06102003@gmail.com');
+        });
+     
+
+        // $otp_email = new OtpMail($otp);
+        // Mail::to('dinhvandat.06102003@gmail.com')->send($otp_email);
+
+       
 
         return back()->with('message', 'OTP đã được gửi đến email của bạn.');
     }
@@ -47,26 +52,20 @@ class PasswordResetController extends Controller
     {
         
 
-        $request->validate([
-            'email' => 'required|email|exists:password_resets,email',
-            'otp' => 'required|digits:6',
-        ]);
+        // Validate input
+    $request->validate([
+        'email' => 'required|email|exists:users,email',
+        'otp' => 'required|numeric',
+    ]);
 
-        $email = $request->input('email'); // Hoặc $request->email
-        $otp = $request->input('otp');     // Hoặc $request->otp
+       // Gọi phương thức validateOtp để kiểm tra OTP
+    $passwordReset = PasswordReset::validateOtp($request->email, $request->otp);
 
-        if (!$email || !$otp) {
-            return back()->withErrors(['error' => 'Email hoặc OTP không hợp lệ.']);
-        }
-        // Kiểm tra OTP trong bảng password_resets
-        $passwordReset = PasswordReset::where('email', $request->email)
-            ->where('otp', $request->otp)
-            ->first();
+       // Kiểm tra nếu không tìm thấy bản ghi hợp lệ
+    if ($passwordReset === null) {
+        return back()->withErrors(['otp' => 'OTP không hợp lệ hoặc đã hết hạn.']);
+    }
 
-        // Nếu không tìm thấy OTP hợp lệ hoặc OTP hết hạn
-        if (!$passwordReset || $passwordReset->created_at->diffInMinutes(Carbon::now()) > 15) {
-            return back()->withErrors(['otp' => 'OTP không hợp lệ hoặc đã hết hạn.']);
-        }
 
         // Nếu OTP hợp lệ và chưa hết hạn, chuyển hướng đến trang đặt lại mật khẩu
         return view('auth.resetpassword', ['email' => $request->email]);

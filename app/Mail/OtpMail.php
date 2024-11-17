@@ -38,7 +38,7 @@ class OtpMail extends Mailable
     public function build()
 {
     return $this->subject('OTP Xác Nhận Quên Mật Khẩu')
-                ->view('emails.Otp') // View đúng tên
+                ->view('emails.otp') // View đúng tên
                 ->with([
                     'otp' => $this->otp, // Truyền đúng giá trị OTP vào view
                 ]);

@@ -22,18 +22,18 @@ class PasswordReset extends Model
 
     // Tạo một phương thức để kiểm tra OTP và cập nhật thông tin
     public static function validateOtp($email, $otp)
-    {$passwordReset = PasswordReset::validateOtp($request->email, $request->otp);
-
-        if (!$passwordReset) {
-            return back()->withErrors(['otp' => 'OTP không hợp lệ hoặc đã hết hạn.']);
-        }
-        
-
-        // Lấy bản ghi có email và otp trùng khớp, và kiểm tra thời gian hết hạn
-        return self::where('email', $email)
+    { // Kiểm tra bản ghi trong bảng password_resets
+        $passwordReset = PasswordReset::where('email', $email)
             ->where('otp', $otp)
             ->where('created_at', '>=', now()->subMinutes(15)) // OTP có hiệu lực trong 15 phút
             ->first();
-    }
-
+    
+        // // Kiểm tra xem có bản ghi hợp lệ hay không
+        // if (!$passwordReset) {
+        //     return back()->withErrors(['otp' => 'OTP không hợp lệ hoặc đã hết hạn.']);
+        // }
+    
+        // Trả về bản ghi hợp lệ
+        return $passwordReset;
+}
 }
