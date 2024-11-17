@@ -71,11 +71,6 @@ class ProfileController extends Controller
         if ($request->filled('date_of_birth')) {
             $user->date_of_birth = $request->input('date_of_birth');
         }
-
-        // $user->address = $request->input('address', $user->address);
-        // $user->company = $request->input('company', $user->company);
-        // $user->relationship = $request->input('relationship', $user->relationship);
-
         // Xử lý avatar nếu có
         if ($request->hasFile('avatar')) {
             $image = $request->file('avatar');
