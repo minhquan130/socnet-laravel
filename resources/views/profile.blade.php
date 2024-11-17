@@ -52,6 +52,11 @@
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Chỉnh sửa thông tin</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
+                    @if(session('updatedUser'))
+                        @php
+                            $userCurrent = session('updatedUser');
+                        @endphp
+                    @endif
                     <div class="modal-body">
                         <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data" id="profileUpdateForm">
                             @csrf

@@ -87,9 +87,9 @@ class ProfileController extends Controller
         }
 
         // Lưu thông tin vào cơ sở dữ liệu
-        $user->save();
+        $user->save(); 
 
         // Trả về lại trang profile với thông báo thành công
-        return redirect()->route('profile', ['userId' => $user->user_id])->with('success', 'Cập nhật thông tin thành công!');
+        return redirect()->route('profile', ['userId' => $user->user_id])->with('success', 'Cập nhật thông tin thành công!')->with('updatedUser', $user);
     }
 }
