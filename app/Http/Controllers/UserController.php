@@ -11,10 +11,14 @@ use App\Models\GroupMember;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use App\Mail\OtpMail;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
-    function getUserId() {
+    function getUserId()
+    {
         return response()->json([
             'userId' => Session::get('user_id')
         ]);
@@ -25,7 +29,7 @@ class UserController extends Controller
     public function register(Request $request)
     {
         // Validate the request data
-        $request->validate([
+        $validatedData = $request->validate([
             'email' => 'required|email|unique:users,email',
             'name' => 'required|string',
             'password' => 'required|min:6|regex:/^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]*$/',
@@ -34,25 +38,12 @@ class UserController extends Controller
             'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:10240'
         ]);
 
-        // Create a new user instance
-        $user = new Users();
-        $user->username = $request->input('name');
-        $user->email = $request->input('email');
-        $user->password_hash = Hash::make($request->input('password'));
-        $user->gender = $request->input('gender');
-        $user->date_of_birth = $request->input('birth_date');
-        $user->created_at = now();
-        $user->updated_at = now();
+        $user = Users::createNewUser($validatedData);
 
-        // Handle avatar as Base64
-        if ($request->hasFile('avatar') && $request->file('avatar')->isValid()) {
-            $image = $request->file('avatar');
-            $extension = $image->getClientOriginalExtension();
-            $imageData = base64_encode(file_get_contents($image->getRealPath()));
-            $user->profile_pic_url = 'data:image/' . $extension . ';base64,' . $imageData;
+        // Xử lý avatar nếu có
+        if ($request->hasFile('avatar')) {
+            $user->handleAvatar($request->file('avatar'));
         }
-
-        $user->save(); // Save the user to the database
 
         // Hủy session của người dùng
         Session::invalidate();
@@ -126,7 +117,7 @@ class UserController extends Controller
     function login(Request $request)
     {
         // Xác thực đầu vào với thông điệp lỗi tùy chỉnh
-        $request->validate([
+        $validatedData = $request->validate([
             'email' => 'required|email',
             'password' => 'required|min:6',
         ], [
@@ -140,7 +131,8 @@ class UserController extends Controller
         $password = $request->input('password');
 
         // Tìm người dùng theo email
-        $user = Users::where('email', $email)->first();
+        // Gọi phương thức authenticate từ model
+        $user = Users::authenticate($email, $password);
 
         if (!$user) {
             // Nếu người dùng không tồn tại
@@ -229,26 +221,26 @@ class UserController extends Controller
                 ->where('friend_id', $currentUserId)
                 ->update(['status' => 'accepted']);
 
-                $mutualFriend = new Friends();
-                $mutualFriend->user_id = $currentUserId;
-                $mutualFriend->friend_id = $id;
-                $mutualFriend->status = 'accepted';
-                $mutualFriend->save();
+            $mutualFriend = new Friends();
+            $mutualFriend->user_id = $currentUserId;
+            $mutualFriend->friend_id = $id;
+            $mutualFriend->status = 'accepted';
+            $mutualFriend->save();
 
-                $newGroupChat = new GroupChat();
-                $newGroupChat->save();
-                $groupId = $newGroupChat->group_id;
-                
-                $newGroupMember1 = GroupMember::create([
-                    'group_id' => $groupId,
-                    'user_id' => $currentUserId,
-                ]);
+            $newGroupChat = new GroupChat();
+            $newGroupChat->save();
+            $groupId = $newGroupChat->group_id;
 
-                $newGroupMember2 = GroupMember::create([
-                    'group_id' => $groupId,
-                    'user_id' => $id,
-                ]);
-                
+            $newGroupMember1 = GroupMember::create([
+                'group_id' => $groupId,
+                'user_id' => $currentUserId,
+            ]);
+
+            $newGroupMember2 = GroupMember::create([
+                'group_id' => $groupId,
+                'user_id' => $id,
+            ]);
+
 
             return redirect()->route('friends.request');
         } else {
@@ -261,5 +253,48 @@ class UserController extends Controller
 
             return redirect()->route('friends');
         }
+    }
+
+    public function sendOtp(Request $request)
+    {
+        // dd(true);
+        // Validate email
+        $request->validate([
+            'email' => 'required|email',
+        ]);
+
+        // Tạo mã OTP ngẫu nhiên
+        $otpCode = Str::random(6); // Hoặc sử dụng mt_rand(100000, 999999) cho mã số 6 chữ số
+
+        // Lưu mã OTP vào session hoặc cơ sở dữ liệu để kiểm tra sau
+        $request->session()->put('otp_code', $otpCode);
+        $request->session()->put('otp_expires_at', now()->addMinutes(5)); // Đặt thời gian hết hạn OTP
+
+        // Gửi email
+        Mail::to($request->email)->send(new OtpMail($otpCode));
+
+        return response()->json(['message' => 'OTP code has been sent to your email.']);
+    }
+
+    public function verifyOtp(Request $request)
+    {
+        $request->validate([
+            'otp_code' => 'required',
+        ]);
+
+        $otpCode = $request->session()->get('otp_code');
+        $otpExpiresAt = $request->session()->get('otp_expires_at');
+
+        if ($otpCode && $otpExpiresAt && now()->lessThanOrEqualTo($otpExpiresAt)) {
+            if ($request->otp_code == $otpCode) {
+                // OTP hợp lệ
+                $request->session()->forget(['otp_code', 'otp_expires_at']);
+                return response()->json(['message' => 'OTP verified successfully.']);
+            } else {
+                return response()->json(['message' => 'Invalid OTP code.'], 400);
+            }
+        }
+
+        return response()->json(['message' => 'OTP code has expired.'], 400);
     }
 }

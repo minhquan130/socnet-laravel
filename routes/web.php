@@ -57,6 +57,7 @@ Route::get('/login', [UserController::class, 'showLogin'])->name('login');
 Route::post('/login', [UserController::class, 'login'])->name('login.store');
 
 Route::get('/forgetpassword', [UserController::class, 'ShowForgetPassword'])->name('forgetpassword');
+Route::post('/sendotp', [UserController::class, 'sendOtp'])->name('sendotp');
 
 
 

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Hash;
 
 class Users extends Model
 {
@@ -23,4 +24,38 @@ class Users extends Model
         'created_at',
         'updated_at'
     ];
+
+    public static function createNewUser($data)
+    {
+        return self::create([
+            'username' => $data['name'],
+            'email' => $data['email'],
+            'password_hash' => Hash::make($data['password']),
+            'gender' => $data['gender'],
+            'date_of_birth' => $data['birth_date'],
+        ]);
+    }
+
+    public function handleAvatar($file)
+    {
+        if ($file && $file->isValid()) {
+            $extension = $file->getClientOriginalExtension();
+            $imageData = base64_encode(file_get_contents($file->getRealPath()));
+
+            // Lưu avatar dưới dạng Base64
+            $this->profile_pic_url = sprintf('data:image/%s;base64,%s', $extension, $imageData);
+            $this->save(); // Cập nhật model
+        }
+    }
+
+    public static function authenticate($email, $password)
+    {
+        $user = self::where('email', $email)->first();
+
+        if ($user) {
+            return $user;
+        }
+
+        return null;
+    }
 }
