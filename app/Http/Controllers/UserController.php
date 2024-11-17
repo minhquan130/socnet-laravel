@@ -181,13 +181,15 @@ class UserController extends Controller
         $currentUserId = Session::get('user_id');
 
         // Lấy danh sách friend_id từ bảng friends
-        $userIds = Friends::all()->where('friend_id', $currentUserId)->pluck('user_id'); // Sử dụng pluck để lấy trực tiếp các friend_id
-        $friendIds = Friends::all()->where('user_id', $currentUserId)->pluck('friend_id'); // Sử dụng pluck để lấy trực tiếp các friend_id
+        $userIds = Friends::where('friend_id', $currentUserId)->pluck('user_id');
+        $friendIds = Friends::where('user_id', $currentUserId)->pluck('friend_id');
+
+        // Kết hợp cả userIds và friendIds để tìm tất cả các bạn bè của người dùng
+        $allFriendsIds = $userIds->merge($friendIds)->unique();
 
         // Lấy danh sách người dùng, loại trừ người dùng đang đăng nhập và các friend_id
         $users = Users::where('user_id', '!=', $currentUserId) // Loại trừ người dùng đang đăng nhập
-            ->whereNotIn('user_id', $friendIds) // Loại trừ friend_id
-            ->whereNotIn('user_id', $userIds) // Loại trừ user_id
+            ->whereNotIn('user_id', $allFriendsIds) // Loại trừ tất cả bạn bè
             ->get();
 
         $userCurrent = Users::where('user_id', $currentUserId)->first();
