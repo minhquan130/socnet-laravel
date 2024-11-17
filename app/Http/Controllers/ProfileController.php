@@ -62,6 +62,9 @@ class ProfileController extends Controller
 
         // Cập nhật các trường cần thiết
         $user->username = $request->input('username');
+        $user->address = $request->input('address', $user->address);
+        $user->company = $request->input('company', $user->company);
+        $user->relationship = $request->input('relationship', $user->relationship);
         $user->gender = $request->input('gender');
 
         // Cập nhật ngày sinh nếu có
