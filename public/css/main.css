@@ -39,7 +39,7 @@ main .navbar-content {
     border-radius: 1rem;
 }
 
-main .container_posts{
+main .container_posts {
     max-width: 700px;
     margin: 0 auto;
     width: 100%;
@@ -499,6 +499,16 @@ main .container_posts .posts .post-bar #show-media-post>.close:hover {
     font-size: 15px;
     align-items: center;
     justify-content: center;
+}
+
+.list-posts .post-item .metrics-post .count-comments a {
+    color: #000;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.list-posts .post-item .metrics-post .count-comments a:hover {
+    text-decoration: underline;
 }
 
 .list-posts .post-item hr {
