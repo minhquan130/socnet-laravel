@@ -117,7 +117,7 @@ class UserController extends Controller
     function login(Request $request)
     {
         // Xác thực đầu vào với thông điệp lỗi tùy chỉnh
-        $request->validate([
+        $validatedData = $request->validate([
             'email' => 'required|email',
             'password' => 'required|min:6',
         ], [
@@ -131,7 +131,8 @@ class UserController extends Controller
         $password = $request->input('password');
 
         // Tìm người dùng theo email
-        $user = Users::where('email', $email)->first();
+        // Gọi phương thức authenticate từ model
+        $user = Users::authenticate($email, $password);
 
         if (!$user) {
             // Nếu người dùng không tồn tại

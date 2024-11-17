@@ -48,14 +48,14 @@ class Users extends Model
         }
     }
 
-    public static function encodeAvatarToBase64($file)
+    public static function authenticate($email, $password)
     {
-        if ($file && $file->isValid()) {
-            $extension = $file->getClientOriginalExtension();
-            $imageData = base64_encode(file_get_contents($file->getRealPath()));
+        $user = self::where('email', $email)->first();
 
-            return sprintf('data:image/%s;base64,%s', $extension, $imageData);
+        if ($user) {
+            return $user;
         }
-        return null; // Trả về null nếu không hợp lệ
+
+        return null;
     }
 }
