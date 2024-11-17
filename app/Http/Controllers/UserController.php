@@ -156,32 +156,22 @@ class UserController extends Controller
     function showHome()
     {
         $currentUserId = Session::get('user_id');
-        $create_comment = Comments::orderBy('created_at', 'desc')->get();
 
-        $posts = Posts::orderBy('posts.created_at', 'desc')
-            ->Join('users', 'users.user_id', '=', 'posts.user_id')
-            ->select('posts.*', 'users.username', 'users.email', 'users.profile_pic_url')
-            ->get();
-
-        $userCurrent = Users::where('user_id', $currentUserId)->first();
-        $followers = (new Friends)->getFriendsByStatus($currentUserId, ['pending', 'following']);
-
-        $friends = (new Friends())->getFriendsByStatus($currentUserId, 'accepted');
+        $userCurrent = Users::find($currentUserId);
+        $posts = Posts::getHomePosts();
+        $create_comment = Comments::latest()->get();
+        $followers = Friends::getFriendsByStatus($currentUserId, ['pending', 'following']);
+        $friends = Friends::getFriendsByStatus($currentUserId, 'accepted');
 
         return view('home', compact('posts', 'userCurrent', 'create_comment', 'followers', 'friends'));
     }
 
-    function showFriendsRequest()
+    public function showFriendsRequest()
     {
         $currentUserId = Session::get('user_id');
-
-        // Lấy danh sách user_id của những người đã gửi yêu cầu kết bạn
-        $userIds = Friends::where('friend_id', $currentUserId)->where('status', 'pending')->pluck('user_id');
-
-        // Nếu có yêu cầu kết bạn, lấy danh sách người dùng tương ứng
-        $users = $userIds->isNotEmpty() ? Users::whereIn('user_id', $userIds)->get() : 'request';
-        $userCurrent = Users::where('user_id', $currentUserId)->first();
-        // $users = (new Friends)->getFriendsByStatus($currentUserId, ['pending']);
+        $userIds = Friends::getPendingRequests($currentUserId);
+        $users = $userIds->isNotEmpty() ? Users::getUsersByIds($userIds) : collect();
+        $userCurrent = Users::find($currentUserId);
 
         return view('friends', compact('users', 'userCurrent'));
     }
