@@ -206,33 +206,15 @@ class UserController extends Controller
             ->where('friend_id', $currentUserId)
             ->first();
 
-
         if ($existingFriendRequest) {
-            // Nếu tồn tại, cập nhật trạng thái thành 'accepted'
-            Friends::where('user_id', $id)
-                ->where('friend_id', $currentUserId)
-                ->update(['status' => 'accepted']);
+            // Nếu yêu cầu kết bạn đã tồn tại, cập nhật trạng thái thành 'accepted'
+            $this->updateFriendRequest($id, $currentUserId, 'accepted');
 
-            $mutualFriend = new Friends();
-            $mutualFriend->user_id = $currentUserId;
-            $mutualFriend->friend_id = $id;
-            $mutualFriend->status = 'accepted';
-            $mutualFriend->save();
+            // Tạo bạn bè ngược lại
+            $this->updateFriendRequest($currentUserId, $id, 'accepted');
 
-            $newGroupChat = new GroupChat();
-            $newGroupChat->save();
-            $groupId = $newGroupChat->group_id;
-
-            $newGroupMember1 = GroupMember::create([
-                'group_id' => $groupId,
-                'user_id' => $currentUserId,
-            ]);
-
-            $newGroupMember2 = GroupMember::create([
-                'group_id' => $groupId,
-                'user_id' => $id,
-            ]);
-
+            // Tạo nhóm chat mới và thêm các thành viên
+            $groupId = $this->createGroupChat($currentUserId, $id);
 
             return redirect()->route('friends.request');
         } else {
@@ -245,6 +227,36 @@ class UserController extends Controller
 
             return redirect()->route('friends');
         }
+    }
+
+    // Cập nhật trạng thái kết bạn
+    private function updateFriendRequest($userId, $friendId, $status)
+    {
+        Friends::where('user_id', $userId)
+            ->where('friend_id', $friendId)
+            ->update(['status' => $status]);
+    }
+
+    // Tạo nhóm chat mới và thêm thành viên
+    private function createGroupChat($currentUserId, $friendId)
+    {
+        // Tạo nhóm chat mới
+        $newGroupChat = new GroupChat();
+        $newGroupChat->save();
+        $groupId = $newGroupChat->group_id;
+
+        // Thêm thành viên vào nhóm chat
+        GroupMember::create([
+            'group_id' => $groupId,
+            'user_id' => $currentUserId,
+        ]);
+
+        GroupMember::create([
+            'group_id' => $groupId,
+            'user_id' => $friendId,
+        ]);
+
+        return $groupId;
     }
 
     public function sendOtp(Request $request)
