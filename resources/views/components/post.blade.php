@@ -4,8 +4,9 @@
             @csrf
             <div class="top-post-bar">
                 <div class="img-avatar">
+                    <a href="{{ route('profile', ['userId' =>  $userCurrent->user_id]) }}">
                     <img src="{{ $userCurrent->profile_pic_url == null ? asset('images/none-avatar.jpg') : $userCurrent->profile_pic_url }}"
-                        alt="" style="oject-fit: cover;">
+                        alt="" style="oject-fit: cover;"></a>
                 </div>
                 <div class="form-text-post">
                     <input type="text" name="input-content" id="input-content" placeholder="Bạn đang nghĩ gì thế?"
@@ -43,8 +44,9 @@
                 <div class="top-post">
                     <div class="top-post-tp1">
                         <div class="avarta-post">
+                            <a href="{{ route('profile', ['userId' =>  $userCurrent->user_id]) }}">
                             <img src="{{ $post->profile_pic_url == null ? asset('images/none-avatar.jpg') : $post->profile_pic_url }}"
-                                alt="">
+                                alt=""></a>
                         </div>
                         <div class="content-top-post">
                             <span class="name">{{ $post->username }}</span>
