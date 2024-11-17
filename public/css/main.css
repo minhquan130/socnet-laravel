@@ -639,6 +639,13 @@ main .container_posts .posts .post-bar #show-media-post>.close:hover {
     padding: 0 1rem 1rem 1rem;
 }
 
+.text-comment button {
+    border: none;
+    background-color: white;
+    margin-left: 10px;
+
+}
+
 input#input-comment {
     border: 1px solid #ced4da;
     border-radius: 20px;
