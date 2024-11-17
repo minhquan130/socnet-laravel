@@ -58,4 +58,9 @@ class Users extends Model
 
         return null;
     }
+
+    public static function getUsersByIds($userIds)
+    {
+        return self::whereIn('user_id', $userIds)->get();
+    }
 }
