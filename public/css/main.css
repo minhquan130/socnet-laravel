@@ -39,9 +39,10 @@ main .navbar-content {
     border-radius: 1rem;
 }
 
-main .container_posts{
+main .container_posts {
     max-width: 700px;
     margin: 0 auto;
+    width: 100%;
 }
 
 main .sidebar {
@@ -500,6 +501,16 @@ main .container_posts .posts .post-bar #show-media-post>.close:hover {
     justify-content: center;
 }
 
+.list-posts .post-item .metrics-post .count-comments a {
+    color: #000;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.list-posts .post-item .metrics-post .count-comments a:hover {
+    text-decoration: underline;
+}
+
 .list-posts .post-item hr {
     margin: 0;
 }
@@ -626,6 +637,13 @@ main .container_posts .posts .post-bar #show-media-post>.close:hover {
     align-items: center;
     /* Căn giữa các mục theo chiều dọc */
     padding: 0 1rem 1rem 1rem;
+}
+
+.text-comment button {
+    border: none;
+    background-color: white;
+    margin-left: 10px;
+
 }
 
 input#input-comment {

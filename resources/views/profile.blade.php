@@ -52,6 +52,11 @@
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Chỉnh sửa thông tin</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
+                    @if(session('updatedUser'))
+                        @php
+                            $userCurrent = session('updatedUser');
+                        @endphp
+                    @endif
                     <div class="modal-body">
                         <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data" id="profileUpdateForm">
                             @csrf
@@ -79,9 +84,9 @@
                                 <div class="edit-gender">
                                     <span>Giới tính</span>
                                     <select name="gender" id="gender">
-                                        <option value="male" {{ $userCurrent->gender == "male" ? 'selected' : '' }}>Nam</option>
-                                        <option value="female" {{ $userCurrent->gender == "female" ? 'selected' : '' }}>Nữ</option>
-                                        <option value="other" {{ $userCurrent->gender == "other" ? 'selected' : '' }}>Giới tính khác</option>
+                                        <option value="male" {{ old('gender', $userCurrent->gender) == "male" ? 'selected' : '' }}>Nam</option>
+                                        <option value="female" {{ old('gender', $userCurrent->gender) == "female" ? 'selected' : '' }}>Nữ</option>
+                                        <option value="other" {{ old('gender', $userCurrent->gender) == "other" ? 'selected' : '' }}>Giới tính khác</option>
                                     </select>
                                 </div>
                                 <div class="edit-date">

@@ -11,10 +11,14 @@ use App\Models\GroupMember;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use App\Mail\OtpMail;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
-    function getUserId() {
+    function getUserId()
+    {
         return response()->json([
             'userId' => Session::get('user_id')
         ]);
@@ -25,7 +29,7 @@ class UserController extends Controller
     public function register(Request $request)
     {
         // Validate the request data
-        $request->validate([
+        $validatedData = $request->validate([
             'email' => 'required|email|unique:users,email',
             'name' => 'required|string',
             'password' => 'required|min:6|regex:/^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]*$/',
@@ -34,25 +38,12 @@ class UserController extends Controller
             'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:10240'
         ]);
 
-        // Create a new user instance
-        $user = new Users();
-        $user->username = $request->input('name');
-        $user->email = $request->input('email');
-        $user->password_hash = Hash::make($request->input('password'));
-        $user->gender = $request->input('gender');
-        $user->date_of_birth = $request->input('birth_date');
-        $user->created_at = now();
-        $user->updated_at = now();
+        $user = Users::createNewUser($validatedData);
 
-        // Handle avatar as Base64
-        if ($request->hasFile('avatar') && $request->file('avatar')->isValid()) {
-            $image = $request->file('avatar');
-            $extension = $image->getClientOriginalExtension();
-            $imageData = base64_encode(file_get_contents($image->getRealPath()));
-            $user->profile_pic_url = 'data:image/' . $extension . ';base64,' . $imageData;
+        // Xử lý avatar nếu có
+        if ($request->hasFile('avatar')) {
+            $user->handleAvatar($request->file('avatar'));
         }
-
-        $user->save(); // Save the user to the database
 
         // Hủy session của người dùng
         Session::invalidate();
@@ -126,7 +117,7 @@ class UserController extends Controller
     function login(Request $request)
     {
         // Xác thực đầu vào với thông điệp lỗi tùy chỉnh
-        $request->validate([
+        $validatedData = $request->validate([
             'email' => 'required|email',
             'password' => 'required|min:6',
         ], [
@@ -140,7 +131,8 @@ class UserController extends Controller
         $password = $request->input('password');
 
         // Tìm người dùng theo email
-        $user = Users::where('email', $email)->first();
+        // Gọi phương thức authenticate từ model
+        $user = Users::authenticate($email, $password);
 
         if (!$user) {
             // Nếu người dùng không tồn tại
@@ -164,32 +156,22 @@ class UserController extends Controller
     function showHome()
     {
         $currentUserId = Session::get('user_id');
-        $create_comment = Comments::orderBy('created_at', 'desc')->get();
 
-        $posts = Posts::orderBy('posts.created_at', 'desc')
-            ->Join('users', 'users.user_id', '=', 'posts.user_id')
-            ->select('posts.*', 'users.username', 'users.email', 'users.profile_pic_url')
-            ->get();
-
-        $userCurrent = Users::where('user_id', $currentUserId)->first();
-        $followers = (new Friends)->getFriendsByStatus($currentUserId, ['pending', 'following']);
-
-        $friends = (new Friends())->getFriendsByStatus($currentUserId, 'accepted');
+        $userCurrent = Users::find($currentUserId);
+        $posts = Posts::getHomePosts();
+        $create_comment = Comments::latest()->get();
+        $followers = Friends::getFriendsByStatus($currentUserId, ['pending', 'following']);
+        $friends = Friends::getFriendsByStatus($currentUserId, 'accepted');
 
         return view('home', compact('posts', 'userCurrent', 'create_comment', 'followers', 'friends'));
     }
 
-    function showFriendsRequest()
+    public function showFriendsRequest()
     {
         $currentUserId = Session::get('user_id');
-
-        // Lấy danh sách user_id của những người đã gửi yêu cầu kết bạn
-        $userIds = Friends::where('friend_id', $currentUserId)->where('status', 'pending')->pluck('user_id');
-
-        // Nếu có yêu cầu kết bạn, lấy danh sách người dùng tương ứng
-        $users = $userIds->isNotEmpty() ? Users::whereIn('user_id', $userIds)->get() : 'request';
-        $userCurrent = Users::where('user_id', $currentUserId)->first();
-        // $users = (new Friends)->getFriendsByStatus($currentUserId, ['pending']);
+        $userIds = Friends::getPendingRequests($currentUserId);
+        $users = $userIds->isNotEmpty() ? Users::getUsersByIds($userIds) : collect();
+        $userCurrent = Users::find($currentUserId);
 
         return view('friends', compact('users', 'userCurrent'));
     }
@@ -199,13 +181,15 @@ class UserController extends Controller
         $currentUserId = Session::get('user_id');
 
         // Lấy danh sách friend_id từ bảng friends
-        $userIds = Friends::all()->where('friend_id', $currentUserId)->pluck('user_id'); // Sử dụng pluck để lấy trực tiếp các friend_id
-        $friendIds = Friends::all()->where('user_id', $currentUserId)->pluck('friend_id'); // Sử dụng pluck để lấy trực tiếp các friend_id
+        $userIds = Friends::where('friend_id', $currentUserId)->pluck('user_id');
+        $friendIds = Friends::where('user_id', $currentUserId)->pluck('friend_id');
+
+        // Kết hợp cả userIds và friendIds để tìm tất cả các bạn bè của người dùng
+        $allFriendsIds = $userIds->merge($friendIds)->unique();
 
         // Lấy danh sách người dùng, loại trừ người dùng đang đăng nhập và các friend_id
         $users = Users::where('user_id', '!=', $currentUserId) // Loại trừ người dùng đang đăng nhập
-            ->whereNotIn('user_id', $friendIds) // Loại trừ friend_id
-            ->whereNotIn('user_id', $userIds) // Loại trừ user_id
+            ->whereNotIn('user_id', $allFriendsIds) // Loại trừ tất cả bạn bè
             ->get();
 
         $userCurrent = Users::where('user_id', $currentUserId)->first();
@@ -222,33 +206,15 @@ class UserController extends Controller
             ->where('friend_id', $currentUserId)
             ->first();
 
-
         if ($existingFriendRequest) {
-            // Nếu tồn tại, cập nhật trạng thái thành 'accepted'
-            Friends::where('user_id', $id)
-                ->where('friend_id', $currentUserId)
-                ->update(['status' => 'accepted']);
+            // Nếu yêu cầu kết bạn đã tồn tại, cập nhật trạng thái thành 'accepted'
+            $this->updateFriendRequest($id, $currentUserId, 'accepted');
 
-                $mutualFriend = new Friends();
-                $mutualFriend->user_id = $currentUserId;
-                $mutualFriend->friend_id = $id;
-                $mutualFriend->status = 'accepted';
-                $mutualFriend->save();
+            // Tạo bạn bè ngược lại
+            $this->updateFriendRequest($currentUserId, $id, 'accepted');
 
-                $newGroupChat = new GroupChat();
-                $newGroupChat->save();
-                $groupId = $newGroupChat->group_id;
-                
-                $newGroupMember1 = GroupMember::create([
-                    'group_id' => $groupId,
-                    'user_id' => $currentUserId,
-                ]);
-
-                $newGroupMember2 = GroupMember::create([
-                    'group_id' => $groupId,
-                    'user_id' => $id,
-                ]);
-                
+            // Tạo nhóm chat mới và thêm các thành viên
+            $groupId = $this->createGroupChat($currentUserId, $id);
 
             return redirect()->route('friends.request');
         } else {
@@ -261,5 +227,78 @@ class UserController extends Controller
 
             return redirect()->route('friends');
         }
+    }
+
+    // Cập nhật trạng thái kết bạn
+    private function updateFriendRequest($userId, $friendId, $status)
+    {
+        Friends::where('user_id', $userId)
+            ->where('friend_id', $friendId)
+            ->update(['status' => $status]);
+    }
+
+    // Tạo nhóm chat mới và thêm thành viên
+    private function createGroupChat($currentUserId, $friendId)
+    {
+        // Tạo nhóm chat mới
+        $newGroupChat = new GroupChat();
+        $newGroupChat->save();
+        $groupId = $newGroupChat->group_id;
+
+        // Thêm thành viên vào nhóm chat
+        GroupMember::create([
+            'group_id' => $groupId,
+            'user_id' => $currentUserId,
+        ]);
+
+        GroupMember::create([
+            'group_id' => $groupId,
+            'user_id' => $friendId,
+        ]);
+
+        return $groupId;
+    }
+
+    public function sendOtp(Request $request)
+    {
+        // dd(true);
+        // Validate email
+        $request->validate([
+            'email' => 'required|email',
+        ]);
+
+        // Tạo mã OTP ngẫu nhiên
+        $otpCode = Str::random(6); // Hoặc sử dụng mt_rand(100000, 999999) cho mã số 6 chữ số
+
+        // Lưu mã OTP vào session hoặc cơ sở dữ liệu để kiểm tra sau
+        $request->session()->put('otp_code', $otpCode);
+        $request->session()->put('otp_expires_at', now()->addMinutes(5)); // Đặt thời gian hết hạn OTP
+
+        // Gửi email
+        Mail::to($request->email)->send(new OtpMail($otpCode));
+
+        return response()->json(['message' => 'OTP code has been sent to your email.']);
+    }
+
+    public function verifyOtp(Request $request)
+    {
+        $request->validate([
+            'otp_code' => 'required',
+        ]);
+
+        $otpCode = $request->session()->get('otp_code');
+        $otpExpiresAt = $request->session()->get('otp_expires_at');
+
+        if ($otpCode && $otpExpiresAt && now()->lessThanOrEqualTo($otpExpiresAt)) {
+            if ($request->otp_code == $otpCode) {
+                // OTP hợp lệ
+                $request->session()->forget(['otp_code', 'otp_expires_at']);
+                return response()->json(['message' => 'OTP verified successfully.']);
+            } else {
+                return response()->json(['message' => 'Invalid OTP code.'], 400);
+            }
+        }
+
+        return response()->json(['message' => 'OTP code has expired.'], 400);
     }
 }
