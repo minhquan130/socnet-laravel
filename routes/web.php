@@ -73,8 +73,15 @@ Route::get('/profile/{userId}', [PostController::class, 'postProfile'])->name('p
 // Route::get('/post/{id}', [CommentController::class, 'show'])->name('post.show');
 
 
-Route::get('/forgetpassword', [PasswordResetController::class, 'showforgotpasswordForm'])->name('password.request');
-Route::post('/forgetpassword', [PasswordResetController::class, 'forgetpasswordEmail'])->name('password.forgetpasswordEmail');
-// Route::post('/verify-otp', [PasswordResetController::class, 'verifyOtp'])->name('password.verifyOtp');
-// // Route::post('/resetpassword', [PasswordResetController::class, 'resetPassword'])->name('password.reset');
-Route::get('/get-forgetpassword/{user}/{token}', [PasswordResetController::class, 'getPass'])->name('password.getPass');
+// Hiển thị form nhập email để yêu cầu đặt lại mật khẩu
+Route::get('passwords/forgot', [PasswordResetController::class, 'showForgotForm'])->name('passwords.forgot');
+
+// Xử lý gửi email đặt lại mật khẩu
+Route::post('passwords/forgot', [PasswordResetController::class, 'sendResetLink'])->name('password.sendResetLink');
+
+// Hiển thị form để đặt lại mật khẩu mới
+Route::get('passwords/reset/{token}', [PasswordResetController::class, 'showResetForm'])->name('passwords.reset');
+
+// Xử lý cập nhật mật khẩu mới
+Route::post('passwords/reset', [PasswordResetController::class, 'resetPassword'])->name('password.update');
+

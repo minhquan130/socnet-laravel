@@ -16,24 +16,25 @@ class PasswordReset extends Model
     // Các trường có thể được gán giá trị
     protected $fillable = [
         'email',
-        'otp',
+        'token',
         'created_at',
     ];
 
-    // Tạo một phương thức để kiểm tra OTP và cập nhật thông tin
-    public static function validateOtp($email, $otp)
-    { // Kiểm tra bản ghi trong bảng password_resets
-        $passwordReset = PasswordReset::where('email', $email)
-            ->where('otp', $otp)
-            ->where('created_at', '>=', now()->subMinutes(15)) // OTP có hiệu lực trong 15 phút
+    /**
+     * Phương thức kiểm tra tính hợp lệ của token.
+     * 
+     * @param string $email
+     * @param string $token
+     * @return mixed Trả về bản ghi nếu hợp lệ, ngược lại trả về null
+     */
+    public static function validateToken($email, $token)
+    {
+        // Kiểm tra xem có bản ghi token hợp lệ cho email này không
+        $passwordReset = self::where('email', $email)
+            ->where('token', $token)
+            ->where('created_at', '>=', Carbon::now()->subMinutes(15)) // Token có hiệu lực trong 15 phút
             ->first();
-    
-        // // Kiểm tra xem có bản ghi hợp lệ hay không
-        // if (!$passwordReset) {
-        //     return back()->withErrors(['otp' => 'OTP không hợp lệ hoặc đã hết hạn.']);
-        // }
-    
-        // Trả về bản ghi hợp lệ
+        
         return $passwordReset;
-}
+    }
 }

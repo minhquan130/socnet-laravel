@@ -1,14 +1,16 @@
+<!-- resources/views/auth/passwords/forgot.blade.php -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Quên mật khẩu</title>
+    <title>Quên Mật Khẩu</title>
     <link rel="stylesheet" href="{{ asset('css/forgetpassword.css') }}">
 </head>
+
 <body>
-    <div class="forgetPassword-contaiter">
+<div class="forgetPassword-contaiter">
         <h2>Lấy lại mật khẩu</h2>
   
         <form action="" method="post" class="form-forgetpassword">
@@ -43,5 +45,7 @@
                  <input type="submit" value="Gửi">
         </form>
     </div>
+
 </body>
+
 </html>

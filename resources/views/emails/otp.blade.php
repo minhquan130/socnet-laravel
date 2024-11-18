@@ -12,7 +12,9 @@
     <p>Vui lòng click vào link dưới đây để đặt lại mật khẩu </p>
     <p>Chú ý: Mã xác nhận trong link chỉ có hiệu lực trong vòng 24 giờ</p>
     <p>
-        <a href="{{route('password.getPass',['user' =>$user ->id ,'token' => $user ->token])}}"></a>
+        <a href="{{route('password.getPass',['user' =>$user ->id ,'token' => $user ->token])}}">
+            Đặt lại mật khẩu
+        </a>
     </p>
    
 
