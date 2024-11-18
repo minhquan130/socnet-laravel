@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comments;
 use App\Models\Likes;
 use App\Models\Posts;
 use App\Models\Users;
@@ -71,7 +72,7 @@ class PostController extends Controller
     {
         $post = Posts::findOrFail($post_id);
 
-        $comments = new \App\Models\Comments();
+        $comments = new Comments();
         $countComments = $comments->getCountCommentByPostId($post_id);
 
         return view('post.show', compact('post', 'countComments'));
