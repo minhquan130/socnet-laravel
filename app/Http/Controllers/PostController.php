@@ -120,14 +120,14 @@ class PostController extends Controller
             ->where('posts.user_id', $userId)
             ->get();
 
-        if ($userCurrent) {
-            $userCurrent->gender = match($userCurrent->gender) {
-                'male' => 'Nam',
-                'female' => 'Nữ',
-                'other' => 'Giới tính khác',
-                default => 'Chưa cập nhật',
-            };
-        }
+        // if ($userCurrent) {
+        //     $userCurrent->gender = match($userCurrent->gender) {
+        //         'male' => 'Nam',
+        //         'female' => 'Nữ',
+        //         'other' => 'Giới tính khác',
+        //         default => 'Chưa cập nhật',
+        //     };
+        // }
 
         if ($userCurrent && $userCurrent->date_of_birth) {
             $userCurrent->date_of_birth = date('d/m/Y', strtotime($userCurrent->date_of_birth));
