@@ -41,7 +41,7 @@
                             } elseif ($userCurrent->gender == 'female') {
                                 echo 'Nữ';
                             } elseif ($userCurrent->gender == 'other') {
-                                echo 'Khác';
+                                echo 'Giới tính khác';
                             } else {
                                 echo 'Chưa cập nhật';
                             };

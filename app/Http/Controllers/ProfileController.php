@@ -46,7 +46,7 @@ class ProfileController extends Controller
             'username' => 'required|string|max:255',
             'gender' => 'required|string',
             'date_of_birth' => 'nullable|date',
-            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:10240',
             'address' => 'nullable|string|max:255',
             'company' => 'nullable|string|max:255',
             'relationship' => 'nullable|string|max:255',
