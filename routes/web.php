@@ -74,6 +74,7 @@ Route::get('/profile/{userId}', [PostController::class, 'postProfile'])->name('p
 
 
 Route::get('/forgetpassword', [PasswordResetController::class, 'showforgotpasswordForm'])->name('password.request');
-Route::post('/forgetpassword', [PasswordResetController::class, 'sendResetOtp'])->name('password.sendOtp');
-Route::post('/verify-otp', [PasswordResetController::class, 'verifyOtp'])->name('password.verifyOtp');
-// Route::post('/resetpassword', [PasswordResetController::class, 'resetPassword'])->name('password.reset');
+Route::post('/forgetpassword', [PasswordResetController::class, 'forgetpasswordEmail'])->name('password.forgetpasswordEmail');
+// Route::post('/verify-otp', [PasswordResetController::class, 'verifyOtp'])->name('password.verifyOtp');
+// // Route::post('/resetpassword', [PasswordResetController::class, 'resetPassword'])->name('password.reset');
+Route::get('/get-forgetpassword/{user}/{token}', [PasswordResetController::class, 'getPass'])->name('password.getPass');
