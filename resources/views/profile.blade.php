@@ -83,10 +83,10 @@
                                 </div>
                                 <div class="edit-gender">
                                     <span>Giới tính</span>
-                                    <select name="gender" id="gender">
-                                        <option value="male" {{ old('gender', $userCurrent->gender) == "male" ? 'selected' : '' }}>Nam</option>
-                                        <option value="female" {{ old('gender', $userCurrent->gender) == "female" ? 'selected' : '' }}>Nữ</option>
-                                        <option value="other" {{ old('gender', $userCurrent->gender) == "other" ? 'selected' : '' }}>Giới tính khác</option>
+                                    <select name="gender" id="gender" class="form-control">
+                                        <option value="male" {{ $userCurrent->gender == "male" ? 'selected' : '' }}>Nam</option>
+                                        <option value="female" {{ $userCurrent->gender == "female" ? 'selected' : '' }}>Nữ</option>
+                                        <option value="other" {{ $userCurrent->gender == "other" ? 'selected' : '' }}>Giới tính khác</option>
                                     </select>
                                 </div>
                                 <div class="edit-date">
@@ -253,7 +253,10 @@
                                 $commentsModel = new \App\Models\Comments();
                                 $countComments = $commentsModel->getCountCommentByPostId($post->post_id);
                             @endphp
+                            <a class="option option-comment" data-bs-toggle="modal"
+                            data-bs-target="#commentModal{{ $post->post_id }}">
                             <span id="qty-comments-post-{{ $post->post_id }}">{{ $countComments }} bình luận</span>
+                        </a>
                         </div>
                     </div>
                     <hr>
@@ -322,7 +325,7 @@
                                 <img src="{{ $userCurrent->profile_pic_url == null ? asset('images/none-avatar.jpg') : $userCurrent->profile_pic_url }}"
                                     alt="Avatar" class="img-fluid rounded-circle me-2" style="width: 40px; height: 40px;">
                                 <input type="text" name="comment" id="input-comment"
-                                    placeholder=" Bình luận dưới tên Văn Đạt" style="width: 100%; height:30px;">
+                                    placeholder=" Bình luận..." style="width: 100%; height:30px;">
                                 <input type="hidden" name="post-id" value="{{ $post->post_id }}">
                                 <button type="button" class="submit-comment">➤</button>
                             </div>

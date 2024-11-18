@@ -20,7 +20,6 @@ class ProfileController extends Controller
         if ($userCurrent->date_of_birth) {
             $userCurrent->date_of_birth = date('d/m/Y', strtotime($userCurrent->date_of_birth));
         }
-
         // Cập nhật giới tính
         $userCurrent->gender = match ($userCurrent->gender) {
             'male' => 'Nam',
@@ -86,6 +85,13 @@ class ProfileController extends Controller
 
         // Lưu thông tin vào cơ sở dữ liệu
         $user->save(); 
+
+        $user->gender_label = match ($user->gender) {
+            'male' => 'Nam',
+            'female' => 'Nữ',
+            'other' => 'Giới tính khác',
+            default => 'Chưa cập nhật',
+        };
 
         // Trả về lại trang profile với thông báo thành công
         return redirect()->route('profile', ['userId' => $user->user_id])->with('success', 'Cập nhật thông tin thành công!')->with('updatedUser', $user);
