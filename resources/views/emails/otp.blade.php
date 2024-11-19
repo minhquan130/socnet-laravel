@@ -1,12 +1,21 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="vi">
 <head>
-    <title>Your OTP Code</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xác Nhận OTP</title>
 </head>
 <body>
-    <h2>Hello,</h2>
-    <p>Your OTP code is: <strong>{{ $otpCode }}</strong></p>
-    <p>Please use this code to complete your authentication process.</p>
-    <p>This code will expire in 5 minutes.</p>
+  <h2>Xin Chào {{$user->name}}</h2>
+    <p>Email này sẽ giúp bạn lấy lại mật khẩu </p>
+    <p>Vui lòng click vào link dưới đây để đặt lại mật khẩu </p>
+    <p>Chú ý: Mã xác nhận trong link chỉ có hiệu lực trong vòng 24 giờ</p>
+    <p>
+        <a href="{{route('password.getPass',['user' =>$user ->id ,'token' => $user ->token])}}">
+            Đặt lại mật khẩu
+        </a>
+    </p>
+   
 </body>
 </html>

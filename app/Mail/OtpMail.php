@@ -3,7 +3,7 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-// use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
@@ -12,36 +12,35 @@ use Illuminate\Queue\SerializesModels;
 class OtpMail extends Mailable
 {
     use Queueable, SerializesModels;
-
-    public $otpCode;
-
+    public $otp;
     /**
      * Create a new message instance.
      */
-    public function __construct($otpCode)
+    public function __construct($otp)
     {
-        $this->otpCode = $otpCode;
+        $this->otp = $otp;
     }
-
     /**
      * Get the message envelope.
      */
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Your OTP Code',
+            subject: 'Otp Mail',
         );
     }
 
     /**
      * Get the message content definition.
      */
-    public function content(): Content
-    {
-        return new Content(
-            view: 'emails.otp',
-        );
-    }
+    public function build()
+{
+    return $this->subject('OTP Xác Nhận Quên Mật Khẩu')
+                ->view('emails.otp') // View đúng tên
+                ->with([
+                    'otp' => $this->otp, // Truyền đúng giá trị OTP vào view
+                ]);
+}
 
     /**
      * Get the attachments for the message.

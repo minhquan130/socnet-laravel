@@ -8,7 +8,7 @@ use App\Http\Controllers\ForgetPasswordController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CommentController;
-
+use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\CheckUser;
 
@@ -72,3 +72,17 @@ Route::post('/sendotp', [UserController::class, 'sendOtp'])->name('sendotp');
 // Route::post('/posts/{id}/comments', [CommentController::class, 'store'])->name('post.store');
 
 // Route::get('/post/{id}', [CommentController::class, 'show'])->name('post.show');
+
+
+// Hiển thị form nhập email để yêu cầu đặt lại mật khẩu
+Route::get('passwords/forgot', [PasswordResetController::class, 'showForgotForm'])->name('passwords.forgot');
+
+// Xử lý gửi email đặt lại mật khẩu
+Route::post('passwords/forgot', [PasswordResetController::class, 'sendResetLink'])->name('password.sendResetLink');
+
+// Hiển thị form để đặt lại mật khẩu mới
+Route::get('passwords/reset/{token}', [PasswordResetController::class, 'showResetForm'])->name('passwords.reset');
+
+// Xử lý cập nhật mật khẩu mới
+Route::post('passwords/reset', [PasswordResetController::class, 'resetPassword'])->name('password.update');
+
