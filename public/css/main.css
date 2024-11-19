@@ -332,6 +332,7 @@ main .container_posts .posts .post-bar #show-media-post>.close:hover {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    max-width: 700px;
 }
 
 .list-posts .post-item {

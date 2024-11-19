@@ -2,13 +2,12 @@
 
 use App\Http\Controllers\ChatController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LogoutController;
-use App\Http\Controllers\ForgetPasswordController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PasswordResetController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\CheckUser;
 
@@ -48,6 +47,8 @@ Route::middleware([CheckUser::class])->group(function () {
 
     Route::get('/like/post-{id}', [PostController::class, 'like'])->name('post.like');
     Route::post('/like/post-{id}', [PostController::class, 'like'])->name('post.like');
+
+    Route::post('/search', [SearchController::class, 'search'])->name('search');
 });
 
 Route::get('/register', [UserController::class, 'showRegister'])->name('register');
