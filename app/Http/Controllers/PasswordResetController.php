@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\PasswordReset;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\OtpMail;
 use App\Models\Users;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB; 
@@ -24,7 +22,6 @@ public function showForgotForm()
 // Xử lý gửi email đặt lại mật khẩu
 public function sendResetLink(Request $request)
 {
-    DB::table('password_resets')->where(['email' => $request->email])->delete();
     $request->validate([
         'email' => 'required|email|exists:users,email',
     ]);
@@ -45,6 +42,9 @@ public function sendResetLink(Request $request)
         $message->to($request->email);
         $message->subject('Đặt lại mật khẩu');
     });
+    if (!Users::where('email', $request->email)->first()) {
+        DB::table('password_resets')->where(['email' => $request->email])->delete();
+    }
 
     return back()->with('message', 'Link đặt lại mật khẩu đã được gửi tới email của bạn.');
 }
