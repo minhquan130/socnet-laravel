@@ -47,9 +47,11 @@
                     <img src="{{ asset('images/logo.png') }}" alt="" height="54">
                 </a>
             </div>
-            <form action="" method="get" class="search">
+            <form action="{{ route('search') }}" method="post" class="search">
+                @csrf
                 <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" placeholder="Tìm kiếm...">
+                <input name="search" type="text" placeholder="Tìm kiếm...">
+                {{-- <button type="submit">Tìm kiếm</button> --}}
             </form>
             <!-- Mavigation -->
             <div class="navigation">
