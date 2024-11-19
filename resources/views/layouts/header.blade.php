@@ -47,10 +47,10 @@
                     <img src="{{ asset('images/logo.png') }}" alt="" height="54">
                 </a>
             </div>
-            <div class="search">
+            <form action="" method="get" class="search">
                 <i class="fa-solid fa-magnifying-glass"></i>
                 <input type="text" placeholder="Tìm kiếm...">
-            </div>
+            </form>
             <!-- Mavigation -->
             <div class="navigation">
                 <a href="{{ route('home') }}" class="home {{ asset('') == url()->current().'/' ? 'active' : '' }}">
