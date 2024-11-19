@@ -25,7 +25,7 @@ class UserController extends Controller
     }
 
     //CRUD
-    // Creater
+    // Createrss
     public function register(Request $request)
     {
         // Validate the request data
@@ -275,7 +275,7 @@ class UserController extends Controller
         $request->session()->put('otp_expires_at', now()->addMinutes(5)); // Đặt thời gian hết hạn OTP
 
         // Gửi email
-        Mail::to($request->email)->send(new OtpMail($otpCode));
+        // Mail::to($request->email)->send(new OtpMail($otpCode));
 
         return response()->json(['message' => 'OTP code has been sent to your email.']);
     }
