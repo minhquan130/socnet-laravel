@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thay đổi mật khẩu</title>
+    <link rel="stylesheet" href="{{ asset('css/reset.css') }}">
 </head>
 
 <body>
@@ -16,7 +17,7 @@
             @csrf
             <input type="hidden" name="token" value="{{ $token }}">
             <label>Email:</label>
-            <input type="email" name="email" required>
+            <input type="email" name="email" value="{{ $email }}" required>
             <label>Mật khẩu mới:</label>
             <input type="password" name="password" required>
             <label>Nhập lại mật khẩu mới:</label>

@@ -24,20 +24,22 @@ public function showForgotForm()
 // Xử lý gửi email đặt lại mật khẩu
 public function sendResetLink(Request $request)
 {
+    DB::table('password_resets')->where(['email' => $request->email])->delete();
     $request->validate([
         'email' => 'required|email|exists:users,email',
     ]);
-
+    
     // Tạo token reset mật khẩu
     $token = Str::random(64);
-
+    
     // Lưu token vào bảng password_resets
     DB::table('password_resets')->insert([
         'email' => $request->email,
         'token' => $token,
         'created_at' => Carbon::now()
     ]);
-
+    
+    // dd('true');
     // Gửi email chứa link đặt lại mật khẩu
     Mail::send('auth.passwords.reset_email', ['token' => $token], function($message) use($request) {
         $message->to($request->email);
@@ -48,12 +50,14 @@ public function sendResetLink(Request $request)
 }
 
 // Hiển thị form để đặt lại mật khẩu mới
-public function showResetForm($token)
+public function showResetForm(Request $request, $token)
 {
-    return view('auth.passwords.reset', ['token' => $token]);
+    return view('auth.passwords.reset', [
+        'token' => $token,
+        'email' => $request->email // truyền email từ request vào view
+    ]);
 }
 
-// Xử lý cập nhật mật khẩu mới
 public function resetPassword(Request $request)
 {
     $request->validate([
@@ -64,23 +68,26 @@ public function resetPassword(Request $request)
 
     // Kiểm tra token trong bảng password_resets
     $passwordReset = DB::table('password_resets')
-        ->where([
-            'email' => $request->email,
-            'token' => $request->token
-        ])->first();
-
+    ->where('email', $request->email)
+    ->where('token', $request->token)
+    ->first();
+        
     if (!$passwordReset) {
-        return back()->withErrors(['email' => 'Token không hợp lệ!']);
-    }
-
-    // Cập nhật mật khẩu mới cho user
-    $user = User::where('email', $request->email)->first();
-    $user->password = Hash::make($request->password);
-    $user->save();
+            return back()->withErrors(['email' => 'Token không hợp lệ!']);
+        }
+        
+        // Cập nhật mật khẩu mới cho user
+        $user = Users::where('email', $request->email)->first();
+        if (!$user) {
+            return back()->withErrors(['email' => 'Không tìm thấy người dùng với email này!']);
+        }
+        
+        $user->password_hash = Hash::make($request->password);
+        $user->save();
 
     // Xóa token sau khi sử dụng
     DB::table('password_resets')->where(['email' => $request->email])->delete();
 
     return redirect()->route('login')->with('message', 'Mật khẩu của bạn đã được cập nhật thành công!');
-}
+    }
 }

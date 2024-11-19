@@ -8,7 +8,7 @@
  </head>
  <body>
     <p>Bạn đã yêu cầu đặt lại mật khẩu cho tài khoản của mình. Nhấn vào link dưới đây để đặt lại mật khẩu:</p>
-<a href="{{ url('password/reset/' . $token) }}">Đặt lại mật khẩu</a>
+<a href="{{ route('passwords.reset', ['token' => $token]) }}">Đặt lại mật khẩu</a>
  </body>
  </html>
 
