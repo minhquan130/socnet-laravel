@@ -10,14 +10,15 @@
 <body>
     <div class="forgetPassword-contaiter">
         <h2>Quên mật Khẩu</h2>
-        <form action="#" method="post" class="form-forgetpassword">
+        <form action="{{ route('sendotp') }}" method="post" class="form-forgetpassword">
+            @csrf
             <label for>
                 <i class="fa-solid fa-envelope"></i>
                 <input type="text" name="email" id="email"
                     placeholder="Nhập Email hoặc SĐT đã đăng ký" required>
             </label>
            
-            <label for>
+            {{-- <label for>
                 <i class="fa-solid fa-user"></i>
                 <input type="text" name="Otp" id="name" placeholder="Nhập mã OTP"
                     required>
@@ -33,7 +34,7 @@
                 <i class="fa-solid fa-rotate-right"></i>
                 <input type="password" name="agin_password"
                     id="again_password" placeholder="Xác thực mật khẩu" required>
-            </label>
+            </label> --}}
           
             <label for="" class="btn-changepass">
                  <input type="submit" value="Thay Đổi">

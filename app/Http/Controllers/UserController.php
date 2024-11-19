@@ -41,7 +41,7 @@ class UserController extends Controller
         $user = Users::createNewUser($validatedData);
 
         // Xử lý avatar nếu có
-        if ($request->hasFile(key: 'avatar')) {
+        if ($request->hasFile('avatar')) {
             $user->handleAvatar($request->file('avatar'));
         }
 

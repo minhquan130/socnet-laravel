@@ -25,9 +25,15 @@ class Friends extends Model
     {
         return $this->belongsTo(GroupMember::class, 'user_id', 'user_id');
     }
-
     static function getFriendsByStatus($currentUserId, $status)
     {
         return self::where('friend_id', $currentUserId)->whereIn('status', (array) $status)->with('users', 'groupMembers')->get();
+    }
+
+    public static function getPendingRequests($currentUserId)
+    {
+        return self::where('friend_id', $currentUserId)
+            ->where('status', 'pending')
+            ->pluck('user_id');
     }
 }
