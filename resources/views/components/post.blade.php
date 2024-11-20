@@ -5,8 +5,8 @@
             <div class="top-post-bar">
                 <div class="img-avatar">
                     <a href="{{ route('profile', ['userId' =>  $userCurrent->user_id]) }}">
-                    <img src="{{ $userCurrent->profile_pic_url == null ? asset('images/none-avatar.jpg') : $userCurrent->profile_pic_url }}"
-                        alt="" style="oject-fit: cover;"></a>
+                        <img src="{{ $userCurrent->profile_pic_url == null ? asset('images/none-avatar.jpg') : $userCurrent->profile_pic_url }}"
+                            alt="" style="oject-fit: cover;"></a>
                 </div>
                 <div class="form-text-post">
                     <input type="text" name="input-content" id="input-content" placeholder="Bạn đang nghĩ gì thế?"
@@ -45,8 +45,8 @@
                     <div class="top-post-tp1">
                         <div class="avarta-post">
                             <a href="{{ route('profile', ['userId' =>  $userCurrent->user_id]) }}">
-                            <img src="{{ $post->profile_pic_url == null ? asset('images/none-avatar.jpg') : $post->profile_pic_url }}"
-                                alt=""></a>
+                                <img src="{{ $post->profile_pic_url == null ? asset('images/none-avatar.jpg') : $post->profile_pic_url }}"
+                                    alt=""></a>
                         </div>
                         <div class="content-top-post">
                             <span class="name">{{ $post->username }}</span>
@@ -114,7 +114,7 @@
                         </div>
                     </div>
                     <!-- modal -->
-                     
+
                 </div>
                 <div class="content-post">
                     <div class="content-text">
@@ -142,8 +142,8 @@
                     </div>
                     <div class="count-comments">
                         @php
-                            $commentsModel = new \App\Models\Comments();
-                            $countComments = $commentsModel->getCountCommentByPostId($post->post_id);
+                        $commentsModel = new \App\Models\Comments();
+                        $countComments = $commentsModel->getCountCommentByPostId($post->post_id);
                         @endphp
                         <a class="option option-comment" data-bs-toggle="modal"
                             data-bs-target="#commentModal{{ $post->post_id }}">
@@ -179,6 +179,11 @@
                             <i class="fa-solid fa-share"></i>
                         </span>
                         <span>Chia sẻ</span>
+                        <div class="share-options">
+                            <a href="{{ route('share.facebook',  $post->post_id) }}" target="_blank">Facebook</a>
+                            <a href="{{ route('share.twitter',  $post->post_id) }}" target="_blank">Twitter</a>
+                            <a href="#" onclick="copyLink('{{ route('share.copy',  $post->post_id) }}')">Sao chép liên kết</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -216,8 +221,8 @@
                             @csrf
                             <img src="{{ $userCurrent->profile_pic_url == null ? asset('images/none-avatar.jpg') : $userCurrent->profile_pic_url }}"
                                 alt="Avatar" class="img-fluid rounded-circle me-2" style="width: 40px; height: 40px;">
-                            <input type="text" name="comment" id="input-comment"
-                                placeholder=" Bình luận..." style="width: 100%; height:30px;">
+                            <input type="text" name="comment" id="input-comment" placeholder=" Bình luận..."
+                                style="width: 100%; height:30px;">
                             <input type="hidden" name="post-id" value="{{ $post->post_id }}">
                             <button type="button" class="submit-comment">➤</button>
                         </div>

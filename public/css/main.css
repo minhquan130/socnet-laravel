@@ -881,3 +881,64 @@ main .container_navbar .navbar-content .list-friends .item-friend span {
         font-size: 1rem;
     }
 }
+/* option share */
+/* CSS cho nút chia sẻ */
+.option-share {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.option-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+  
+   
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.option-icon i {
+    margin-right: 5px;
+}
+
+.option-share span {
+    font-size: 14px;
+    color: #000;
+    margin-left: 5px;
+}
+
+/* CSS cho menu chia sẻ */
+.share-options {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 8px;
+    padding: 8px 0;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+}
+
+.share-options a {
+    display: block;
+    padding: 8px 16px;
+    color: #333;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.share-options a:hover {
+    background-color: #f0f0f0;
+    
+}
+
+/* Hiển thị menu khi hover vào nút chia sẻ */
+.option-share:hover .share-options {
+    display: block;
+}
