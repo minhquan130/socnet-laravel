@@ -17,18 +17,18 @@
                 <span>
                     <b><i class="fa-solid fa-location-dot"></i> Địa chỉ: </b>
                 </span>
-                <span>{{ $userCurrent->address ?? 'Chưa cập nhật' }}</span>
+                <span>{{ $userProfile->address ?? 'Chưa cập nhật' }}</span>
             </div>
             <div class="info">
                 <span>
                     <b><i class="fa-solid fa-building"></i> Làm việc ở: </b>
-                    <span>{{ $userCurrent->company ?? 'Chưa cập nhật' }}</span>
+                    <span>{{ $userProfile->company ?? 'Chưa cập nhật' }}</span>
                 </span>
             </div>
             <div class="info">
                 <span>
                     <b><i class="fa-solid fa-heart"></i> Tình trạng: </b>
-                    <span>{{ $userCurrent->relationship ?? 'Chưa cập nhật' }}</span>
+                    <span>{{ $userProfile->relationship ?? 'Chưa cập nhật' }}</span>
                 </span>
             </div>
             <div class="info">
@@ -36,11 +36,11 @@
                     <b><i class="fa-solid fa-venus-mars"></i> Giới tính: </b>
                     <span>
                         @php
-                            if ($userCurrent->gender == 'male') {
+                            if ($userProfile->gender == 'male') {
                                 echo 'Nam';
-                            } elseif ($userCurrent->gender == 'female') {
+                            } elseif ($userProfile->gender == 'female') {
                                 echo 'Nữ';
-                            } elseif ($userCurrent->gender == 'other') {
+                            } elseif ($userProfile->gender == 'other') {
                                 echo 'Giới tính khác';
                             } else {
                                 echo 'Chưa cập nhật';
@@ -52,7 +52,7 @@
             <div class="info">
                 <span>
                     <b><i class="fa-solid fa-cake-candles"></i> Ngày sinh: </b>
-                    <span>{{ $userCurrent->date_of_birth ?? 'Chưa cập nhật' }}</span>
+                    <span>{{ $userProfile->date_of_birth ?? 'Chưa cập nhật' }}</span>
                 </span>
             </div>
         </div>
@@ -139,17 +139,17 @@
     <div class="profile-container">
         <div class="profile-right">
             <div class="avatar">
-                <img src="{{ $userCurrent->profile_pic_url ?? asset('images/none-avatar.jpg') }}" alt="">
+                <img src="{{ $userProfile->profile_pic_url ?? asset('images/none-avatar.jpg') }}" alt="">
             </div>
             <div class="info-right">
-                <h2>{{ $userCurrent->username }}</h2>
+                <h2>{{ $userProfile->username }}</h2>
                 <div class="user-post-follow">
                     <span class="post">{{ $countPost }} Bài viết</span>
                     <span class="follower">300 Người theo dõi</span>
                     <span class="following">50000 Đang theo dõi</span>
                 </div>
                 <div class="user-bio">
-                    <span>{{ $userCurrent->bio }}</span>
+                    <span>{{ $userProfile->bio }}</span>
                 </div>
             </div>
         </div>

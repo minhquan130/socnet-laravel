@@ -15,8 +15,7 @@ class ProfileController extends Controller
     {
         // Lấy thông tin người dùng hiện tại
         $userCurrent = Users::findOrFail(Session::get('user_id'));
-        $countPost = Posts::find('user_id', Session::get('user_id'));
-        dd($countPost);
+        
 
         // Cập nhật lại ngày sinh nếu có
         if ($userCurrent->date_of_birth) {

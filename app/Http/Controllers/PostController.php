@@ -114,6 +114,8 @@ class PostController extends Controller
     public function postProfile($userId)
     {
         $userCurrent = Users::where('user_id', Session::get('user_id'))->first();
+
+        $userProfile = Users::where('user_id', $userId)->first();
         // Lấy tất cả các bài đăng của người dùng cụ thể, sắp xếp từ mới đến cũ
         $posts = Posts::orderBy('posts.created_at', 'desc')
             ->Join('users', 'users.user_id', '=', 'posts.user_id')
@@ -121,16 +123,7 @@ class PostController extends Controller
             ->where('posts.user_id', $userId)
             ->get();
 
-            $countPost = Posts::where('user_id',$userId)->get()->count();
-
-        // if ($userCurrent) {
-        //     $userCurrent->gender = match($userCurrent->gender) {
-        //         'male' => 'Nam',
-        //         'female' => 'Nữ',
-        //         'other' => 'Giới tính khác',
-        //         default => 'Chưa cập nhật',
-        //     };
-        // }
+        $countPost = Posts::where('user_id',$userId)->get()->count();
 
         if ($userCurrent && $userCurrent->date_of_birth) {
             $userCurrent->date_of_birth = date('d/m/Y', strtotime($userCurrent->date_of_birth));
@@ -139,12 +132,12 @@ class PostController extends Controller
         // Kiểm tra xem $posts có dữ liệu không
         if ($posts->isEmpty()) {
             // Nếu không có bài đăng nào
-            return view('profile', compact('posts', 'userCurrent', 'countPost'));
+            return view('profile', compact('posts', 'userCurrent', 'countPost', 'userProfile'));
         }
 
 
         // Truyền bài đăng vào view profile
-        return view('profile', compact('posts', 'userCurrent', 'countPost'));
+        return view('profile', compact('posts', 'userCurrent', 'countPost', 'userProfile'));
     }
 
 
