@@ -44,6 +44,7 @@ class ProfileController extends Controller
         // Validate dữ liệu
         $request->validate([
             'username' => 'required|string|max:255',
+            'bio' => 'nullable|string|max:255',
             'gender' => 'required|string',
             'date_of_birth' => 'nullable|date',
             'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:10240',
@@ -63,6 +64,7 @@ class ProfileController extends Controller
         // Cập nhật các trường cần thiết
         $user->username = $request->input('username');
         $user->address = $request->input('address', $user->address);
+        $user->bio = $request->input('bio', $user->bio);
         $user->company = $request->input('company', $user->company);
         $user->relationship = $request->input('relationship', $user->relationship);
         $user->gender = $request->input('gender');
