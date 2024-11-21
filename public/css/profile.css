@@ -72,6 +72,12 @@
     gap: 2rem;
     justify-content: center;
     margin-top: 0.5rem;
+    margin-left: 5px;
+}
+
+.profile .profile-right .info-right .user-bio {
+    margin-top: 5px;
+    margin-left: 5px;
 }
 
 .profile .profile-container .story {

@@ -85,6 +85,10 @@
                                     <input type="text" name="username" id="name" placeholder="Nhập tên của bạn"
                                         value="{{ old('username', $userCurrent->username) }}">
                                 </div>
+                                <div class="edit-bio">
+                                    <span>Tiểu sử</span>
+                                    <input type="text" name="bio" id="bio" placeholder="Nhập tiểu sử của bạn" value="{{ old('bio', $userCurrent->bio) }}">
+                                </div>
                                 <div class="edit-address">
                                     <span>Địa chỉ</span>
                                     <input type="text" name="address" id="address" placeholder="Nhập địa chỉ"
@@ -143,6 +147,9 @@
                     <span class="post">0 Bài viết</span>
                     <span class="follower">300 Người theo dõi</span>
                     <span class="following">50000 Đang theo dõi</span>
+                </div>
+                <div class="user-bio">
+                    <span>{{ $userCurrent->bio }}</span>
                 </div>
             </div>
         </div>
