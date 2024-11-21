@@ -69,6 +69,10 @@
                                     <span>Tên người dùng</span>
                                     <input type="text" name="username" id="name" placeholder="Nhập tên của bạn" value="{{ old('username', $userCurrent->username) }}">
                                 </div>
+                                <div class="edit-bio">
+                                    <span>Tiểu sử</span>
+                                    <input type="text" name="bio" id="bio" placeholder="Nhập tiểu sử của bạn" value="">
+                                </div>
                                 <div class="edit-address">
                                     <span>Địa chỉ</span>
                                     <input type="text" name="address" id="address" placeholder="Nhập địa chỉ" value="{{ old('address', $userCurrent->address) }}">
