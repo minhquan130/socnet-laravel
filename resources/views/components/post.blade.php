@@ -175,18 +175,76 @@
                         <span>Sao chép</span>
                     </div> --}}
                     <div class="option option-share">
-                        <span class="option-icon icon-share">
+                        <span class="option-icon icon-share" data-bs-toggle="modal" data-bs-target="#shareModal">
                             <i class="fa-solid fa-share"></i>
                         </span>
-                        <span>Chia sẻ</span>
-                        <div class="share-options">
-                            <a href="{{ route('share.facebook',  $post->post_id) }}" target="_blank">Facebook</a>
-                            <a href="{{ route('share.twitter',  $post->post_id) }}" target="_blank">Twitter</a>
-                            <a href="#" onclick="copyLink('{{ route('share.copy',  $post->post_id) }}')">Sao chép liên kết</a>
+                        <span data-bs-toggle="modal" data-bs-target="#shareModal">Chia sẻ</span>
+                    </div>
+
+                    <!-- Modal chia sẻ -->
+                    <div class="modal fade" id="shareModal" tabindex="-1" aria-labelledby="shareModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="shareModalLabel">Chia sẻ bài viết</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <!-- Copy link -->
+                                    <div class="mb-3">
+                                        <label for="shareLink" class="form-label">Sao chép liên kết:</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="shareLink"
+                                                value="https://example.com/post/123" readonly>
+                                            <button class="btn btn-outline-secondary" onclick="copyToClipboard()">Sao
+                                                chép</button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Chia sẻ với bạn bè -->
+                                    <form id="shareForm" action="{{ route('posts.share', $post->post_id) }}" method="POST">
+                                        @csrf
+                                        <div class="mb-3">
+                                            <label for="friend_id" class="form-label">Chia sẻ với bạn bè:</label>
+                                            <select class="form-select" id="friend_id" name="friend_id" required>
+                                                <option value="" selected disabled>Chọn bạn bè</option>
+                                                @foreach ($friends as $friend)
+                                                <option value="{{ $friend->id }}">{{  $friend->users->username }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Chia sẻ</button>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
                     </div>
+
                 </div>
             </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             <!-- Modal comment-->
             <div class="modal fade" id="commentModal{{ $post->post_id }}" tabindex="-1"
                 aria-labelledby="commentModalLabel" aria-hidden="true">

@@ -92,7 +92,6 @@ Route::post('passwords/reset', [PasswordResetController::class, 'resetPassword']
 // làm chức năng share
 
 
-Route::get('/share/facebook/{id}', [ShareController::class, 'shareOnFacebook'])->name('share.facebook');
-Route::get('/share/twitter/{id}', [ShareController::class, 'shareOnTwitter'])->name('share.twitter');
-Route::get('/share/copy/{id}', [ShareController::class, 'copyLink'])->name('share.copy');
+Route::post('/posts/{post}/share', [ShareController::class, 'share'])->name('posts.share');
+
 
