@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Comments;
+use App\Models\Share;
 
 class Posts extends Model
 {
@@ -27,4 +28,15 @@ class Posts extends Model
             ->select('posts.*', 'users.username', 'users.email', 'users.profile_pic_url')
             ->get();
     }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+    
+    public function shares()
+    {
+        return $this->hasMany(Share::class, 'post_id');
+    }
+    
+
 }

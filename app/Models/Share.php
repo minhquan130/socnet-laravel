@@ -7,21 +7,23 @@ use Illuminate\Database\Eloquent\Model;
 class Share extends Model
 {
     //
-    protected $table = 'share';
-    protected $fillable = ['user_id', 'post_id', 'friend_id'];
+    protected $table = 'shares';
+    protected $fillable = ['user_id', 'post_id', 'friend_id', 'visibility'];
+
 
     public function user()
     {
-        return $this->belongsTo(Users::class, 'user_id');
+        return $this->belongsTo(User::class, 'user_id'); // Người nhận chia sẻ
     }
-
+    
+    public function sharedBy()
+    {
+        return $this->belongsTo(User::class, 'shared_by'); // Người chia sẻ
+    }
+    
     public function post()
     {
-        return $this->belongsTo(Posts::class, 'post_id');
+        return $this->belongsTo(Post::class, 'post_id'); // Bài viết được chia sẻ
     }
-
-    public function friend()
-    {
-        return $this->belongsTo(friends::class, 'friend_id');
-    }
+    
 }

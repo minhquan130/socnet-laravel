@@ -181,46 +181,49 @@
                         <span data-bs-toggle="modal" data-bs-target="#shareModal">Chia sẻ</span>
                     </div>
 
+                   
                     <!-- Modal chia sẻ -->
                     <div class="modal fade" id="shareModal" tabindex="-1" aria-labelledby="shareModalLabel"
                         aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="shareModalLabel">Chia sẻ bài viết</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <!-- Copy link -->
-                                    <div class="mb-3">
-                                        <label for="shareLink" class="form-label">Sao chép liên kết:</label>
-                                        <div class="input-group">
-                                            <input type="text" class="form-control" id="shareLink"
-                                                value="https://example.com/post/123" readonly>
-                                            <button class="btn btn-outline-secondary" onclick="copyToClipboard()">Sao
-                                                chép</button>
-                                        </div>
+                                <form id="shareForm" action="{{ route('posts.share', $post->post_id) }}" method="POST">
+                                    @csrf
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="shareModalLabel">Chia sẻ bài viết</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
                                     </div>
-
-                                    <!-- Chia sẻ với bạn bè -->
-                                    <form id="shareForm" action="{{ route('posts.share', $post->post_id) }}" method="POST">
-                                        @csrf
+                                    <div class="modal-body">
+                                        <!-- Chế độ chia sẻ -->
                                         <div class="mb-3">
-                                            <label for="friend_id" class="form-label">Chia sẻ với bạn bè:</label>
-                                            <select class="form-select" id="friend_id" name="friend_id" required>
-                                                <option value="" selected disabled>Chọn bạn bè</option>
+                                            <label for="visibility" class="form-label">Chế độ:</label>
+                                            <select class="form-select" id="visibility" name="visibility" required>
+                                                <option value="public">Công khai</option>
+                                                <option value="friends">Chỉ bạn bè</option>
+                                                <option value="private">Riêng tư</option>
+                                            </select>
+                                        </div>
+
+                                        <!-- Chọn bạn bè (nếu cần) -->
+                                        <div class="mb-3" id="friendSelect" style="display: none;">
+                                            <label for="friend_id" class="form-label">Chia sẻ với bạn:</label>
+                                            <select class="form-select" id="friend_id" name="friend_id">
+                                                <option value="" selected>-- Chọn bạn bè --</option>
                                                 @foreach ($friends as $friend)
                                                 <option value="{{ $friend->id }}">{{  $friend->users->username }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
+                                    </div>
+                                    <div class="modal-footer">
                                         <button type="submit" class="btn btn-primary">Chia sẻ</button>
-                                    </form>
-                                </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
+
 
                 </div>
             </div>
