@@ -2,13 +2,12 @@
 
 use App\Http\Controllers\ChatController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LogoutController;
-use App\Http\Controllers\ForgetPasswordController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CommentController;
-
+use App\Http\Controllers\PasswordResetController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\CheckUser;
 
@@ -48,6 +47,8 @@ Route::middleware([CheckUser::class])->group(function () {
 
     Route::get('/like/post-{id}', [PostController::class, 'like'])->name('post.like');
     Route::post('/like/post-{id}', [PostController::class, 'like'])->name('post.like');
+
+    Route::post('/search', [SearchController::class, 'search'])->name('search');
 });
 
 Route::get('/register', [UserController::class, 'showRegister'])->name('register');
@@ -72,3 +73,17 @@ Route::post('/sendotp', [UserController::class, 'sendOtp'])->name('sendotp');
 // Route::post('/posts/{id}/comments', [CommentController::class, 'store'])->name('post.store');
 
 // Route::get('/post/{id}', [CommentController::class, 'show'])->name('post.show');
+
+
+// Hiển thị form nhập email để yêu cầu đặt lại mật khẩu
+Route::get('passwords/forgot', [PasswordResetController::class, 'showForgotForm'])->name('passwords.forgot');
+
+// Xử lý gửi email đặt lại mật khẩu
+Route::post('passwords/forgot', [PasswordResetController::class, 'sendResetLink'])->name('password.sendResetLink');
+
+// Hiển thị form để đặt lại mật khẩu mới
+Route::get('passwords/reset/{token}', [PasswordResetController::class, 'showResetForm'])->name('passwords.reset');
+
+// Xử lý cập nhật mật khẩu mới
+Route::post('passwords/reset', [PasswordResetController::class, 'resetPassword'])->name('password.update');
+

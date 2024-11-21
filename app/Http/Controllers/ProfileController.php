@@ -46,7 +46,7 @@ class ProfileController extends Controller
             'username' => 'required|string|max:255',
             'gender' => 'required|string',
             'date_of_birth' => 'nullable|date',
-            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:10240',
             'address' => 'nullable|string|max:255',
             'company' => 'nullable|string|max:255',
             'relationship' => 'nullable|string|max:255',
@@ -59,13 +59,14 @@ class ProfileController extends Controller
             return redirect()->route('profile')->with('error', 'Không tìm thấy người dùng.');
         }
 
+        
         // Cập nhật các trường cần thiết
         $user->username = $request->input('username');
         $user->address = $request->input('address', $user->address);
         $user->company = $request->input('company', $user->company);
         $user->relationship = $request->input('relationship', $user->relationship);
         $user->gender = $request->input('gender');
-
+        
         // Cập nhật ngày sinh nếu có
         if ($request->filled('date_of_birth')) {
             $user->date_of_birth = $request->input('date_of_birth');
@@ -73,16 +74,17 @@ class ProfileController extends Controller
         // Xử lý avatar nếu có
         if ($request->hasFile('avatar')) {
             $image = $request->file('avatar');
-
+            
             if ($image->isValid()) {  // Kiểm tra tính hợp lệ của file
                 $extension = $image->getClientOriginalExtension();
                 $imageData = base64_encode(file_get_contents($image->getRealPath()));
-                $user->profile_pic_url = 'data:image/' . $extension . ';base64,' . $imageData;
+                // $this->profile_pic_url = 
+                $user->profile_pic_url = sprintf('data:image/%s;base64,%s', $extension, $imageData);
             } else {
                 return redirect()->back()->withErrors(['avatar' => 'Ảnh không hợp lệ.']);
             }
         }
-
+        
         // Lưu thông tin vào cơ sở dữ liệu
         $user->save(); 
 
