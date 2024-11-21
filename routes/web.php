@@ -10,6 +10,7 @@ use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\CheckUser;
+use App\Http\Controllers\ShareController;
 
 Route::middleware([CheckUser::class])->group(function () {
     // Home
@@ -86,4 +87,11 @@ Route::get('passwords/reset/{token}', [PasswordResetController::class, 'showRese
 
 // Xử lý cập nhật mật khẩu mới
 Route::post('passwords/reset', [PasswordResetController::class, 'resetPassword'])->name('password.update');
+
+
+// làm chức năng share
+
+
+Route::post('/posts/{post}/share', [ShareController::class, 'share'])->name('posts.share');
+
 
