@@ -144,7 +144,7 @@
             <div class="info-right">
                 <h2>{{ $userCurrent->username }}</h2>
                 <div class="user-post-follow">
-                    <span class="post">0 Bài viết</span>
+                    <span class="post">{{ $countPost }} Bài viết</span>
                     <span class="follower">300 Người theo dõi</span>
                     <span class="following">50000 Đang theo dõi</span>
                 </div>

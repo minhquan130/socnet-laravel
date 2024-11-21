@@ -121,6 +121,8 @@ class PostController extends Controller
             ->where('posts.user_id', $userId)
             ->get();
 
+            $countPost = Posts::where('user_id',$userId)->get()->count();
+
         // if ($userCurrent) {
         //     $userCurrent->gender = match($userCurrent->gender) {
         //         'male' => 'Nam',
@@ -137,12 +139,12 @@ class PostController extends Controller
         // Kiểm tra xem $posts có dữ liệu không
         if ($posts->isEmpty()) {
             // Nếu không có bài đăng nào
-            return view('profile', compact('posts', 'userCurrent'));
+            return view('profile', compact('posts', 'userCurrent', 'countPost'));
         }
 
 
         // Truyền bài đăng vào view profile
-        return view('profile', compact('posts', 'userCurrent'));
+        return view('profile', compact('posts', 'userCurrent', 'countPost'));
     }
 
 
