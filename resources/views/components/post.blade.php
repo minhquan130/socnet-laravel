@@ -44,9 +44,10 @@
                 <div class="top-post">
                     <div class="top-post-tp1">
                         <div class="avarta-post">
-                            <a href="{{ route('profile', ['userId' =>  $userCurrent->user_id]) }}">
-                            <img src="{{ $post->profile_pic_url == null ? asset('images/none-avatar.jpg') : $post->profile_pic_url }}"
-                                alt=""></a>
+                        <a href="{{ route('profile', ['userId' => $post->user_id]) }}">
+                            <img src="{{ $post->profile_pic_url == null ? asset('images/none-avatar.jpg') : $post->profile_pic_url }}" alt="">
+                        </a>
+
                         </div>
                         <div class="content-top-post">
                             <span class="name">{{ $post->username }}</span>
