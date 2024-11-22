@@ -10,10 +10,10 @@ use App\Models\Comments;
 use App\Models\GroupMember;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Session;
-use App\Mail\OtpMail;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
+use PHPMailer\PHPMailer\PHPMailer;
 
 class UserController extends Controller
 {
@@ -37,6 +37,20 @@ class UserController extends Controller
             'birth_date' => 'required|date',
             'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:10240'
         ]);
+
+        $email = $request->input('email');
+        $apiKey = '6b2b5faf35c495e62314e66045e8d121280b8c11';
+
+        $response = Http::get('https://api.hunter.io/v2/email-verifier', [
+            'email' => $email,
+            'api_key' => $apiKey
+        ]);
+
+        $data = $response->json();
+
+        if ($data['data']['result'] !== 'deliverable') {
+            return back()->with('error', 'Email không tồn tại hoặc không khả dụng.');
+        }
 
         $user = Users::createNewUser($validatedData);
 

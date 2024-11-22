@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Friends;
 use App\Models\Posts;
 use App\Models\Users;
 use Illuminate\Http\Request;
@@ -13,14 +14,28 @@ class SearchController extends Controller
     //
     static function search(Request $request)
     {
-        $userCurrent = Users::find(Session::get('user_id'));
+        $userCurrentId = Session::get('user_id');
+        $userCurrent = Users::find($userCurrentId);
         $resultContentPost = Posts::select('*')
-            ->whereRaw("MATCH(content) AGAINST(? IN NATURAL LANGUAGE MODE)", [$request->input('keyword')])
+            ->where('content', 'LIKE', '%' . $request->input('keyword') . '%')
             ->get();
 
         $resultUsername = Users::select('*')
             ->where('username', 'LIKE', '%' . $request->input('keyword') . '%')
+            ->whereNot('user_id', $userCurrentId)
             ->get();
+
+        foreach ($resultUsername as $user) {
+            $isFriend = Friends::where('user_id', $userCurrentId)
+                ->where('friend_id', $user->user_id)
+                ->first();
+
+            if ($isFriend) {
+                $user->isFriend = true;
+            } else {
+                $user->isFriend = false;
+            }
+        }
 
         return view('search', compact('userCurrent', 'resultContentPost', 'resultUsername'));
     }
