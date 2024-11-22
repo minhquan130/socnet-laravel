@@ -67,25 +67,62 @@
                         </ul>
                     </div>
 
-                        <!-- Modal of chỉnh sửa bài biết  -->
-                        <!-- Modal -->
-                        <div class="modal fade" id="updatePostModal{{ $post->post_id }}" tabindex="-1"
-                            aria-labelledby="updatePostModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="updatePostModalLabel">Sửa bài viết</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                    </div>
-                                    <form action="{{ route('post.edit', ['id' => $post->post_id]) }}" method="POST"
-                                        enctype="multipart/form-data">
-                                        @csrf
-                                        <div class="modal-body">
+                    <!-- Modal of chỉnh sửa bài biết  -->
+                    <!-- Modal -->
+                    <div class="modal fade" id="updatePostModal{{ $post->post_id }}" tabindex="-1"
+                        aria-labelledby="updatePostModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="updatePostModalLabel">Sửa bài viết</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <form action="{{ route('post.edit', ['id' => $post->post_id]) }}" method="POST"
+                                    enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="modal-body">
+                                        <div class="modal-body-post" style="display: flex;  align-items: center; ">
+                                            <img src="{{ $post->profile_pic_url == null ? asset('images/none-avatar.jpg') : $post->profile_pic_url }}"
+                                                alt="" style="width: 50px; height: 50px; border-radius: 50%">
                                             <span class="name">{{ $post->username }}</span>
+                                        </div>
 
-                                            <!-- Nội dung bài viết -->
-                                            <textarea name="input-content" class="form-control">{{ $post->content }}</textarea>
+                                        <!-- Nội dung bài viết -->
+                                        <textarea name="input-content" class="form-control">{{ $post->content }}   
+                                       </textarea>
+
+                                        @if($post->sharedPost)
+                                        <div class="modal-body-share"style="display: flex;  align-items: center; ">
+                                            <img src="{{ $post->sharedPost->profile_pic_url == null ? asset('images/none-avatar.jpg') : $post->sharedPost->profile_pic_url }}"
+                                                alt="" style="width: 50px; height: 50px; border-radius: 50%">
+                                            <span class="name">{{$post->sharedPost->username }}</span>
+                                        </div>
+                                        <!-- Nội dung bài viết dược chia sẽ -->
+                                        <p name="input-content" class="form-control">{{ $post->sharedPost->content }}
+                                               
+                                       </p>
+
+                                        <!-- Hiển thị ảnh hiện tại nếu có -->
+                                        @if ($post->sharedPost->media_url)
+                                        <div class="current-image my-3">
+
+                                            <img src="{{ $post->sharedPost->media_url }}" alt="Ảnh hiện tại"
+                                                style="width: 100%; max-height: 200px; object-fit: cover;">
+                                        </div>
+                                        @endif
+
+
+                                        @endif
+
+                                        <!-- Hiển thị ảnh hiện tại nếu có -->
+                                        @if ($post->media_url)
+                                        <div class="current-image my-3">
+                                            <label>Ảnh hiện tại:</label>
+                                            <img src="{{ $post->media_url }}" alt="Ảnh hiện tại"
+                                                style="width: 100%; max-height: 200px; object-fit: cover;">
+                                        </div>
+                                        @endif
 
                                             <!-- Hiển thị ảnh hiện tại nếu có -->
                                             @if ($post->media_url)
@@ -95,6 +132,8 @@
                                                         style="width: 100%; max-height: 200px; object-fit: cover;">
                                                 </div>
                                             @endif
+
+                                     
 
                                         <!-- Input để tải ảnh mới -->
                                         <div class="mt-3">
@@ -126,10 +165,11 @@
                     </div>
                     @endif
                     @if($post->sharedPost)
-                    <div class="share" style="padding: 1rem; border: 2px solid #696969 ; border-radius:20px" >
+                    <div class="share" style="padding: 1rem; border: 2px solid #696969 ; border-radius:20px">
                         <div class="info-share" style="display: flex; ">
                             <div class="avatar">
-                                <img src="{{ $post->sharedPost->profile_pic_url == null ? asset('images/none-avatar.jpg') : $post->sharedPost->profile_pic_url }}" alt="" style="width: 50px; height: 50px; border-radius: 50%">
+                                <img src="{{ $post->sharedPost->profile_pic_url == null ? asset('images/none-avatar.jpg') : $post->sharedPost->profile_pic_url }}"
+                                    alt="" style="width: 50px; height: 50px; border-radius: 50%">
                             </div>
                             <div class="name-share" style="font-weight: bold;">
                                 {{ $post->sharedPost->username }}
@@ -141,7 +181,7 @@
                             <img src="{{ $post->sharedPost->media_url }}" alt="Hình ảnh bài viết">
                         </div>
                         @endif
-                        </div>
+                    </div>
                     @endif
                 </div>
                 <hr>
