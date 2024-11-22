@@ -18,7 +18,10 @@ class SearchController extends Controller
         $userCurrent = Users::find($userCurrentId);
         $resultContentPost = Posts::select('*')
             ->where('content', 'LIKE', '%' . $request->input('keyword') . '%')
+            ->join('users', 'users.user_id', '=', 'posts.user_id')
             ->get();
+
+        // dd($resultContentPost);
 
         $resultUsername = Users::select('*')
             ->where('username', 'LIKE', '%' . $request->input('keyword') . '%')
@@ -29,7 +32,6 @@ class SearchController extends Controller
             $isFriend = Friends::where('user_id', $userCurrentId)
                 ->where('friend_id', $user->user_id)
                 ->first();
-
             if ($isFriend) {
                 $user->isFriend = true;
             } else {
