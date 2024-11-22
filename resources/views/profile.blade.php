@@ -124,9 +124,8 @@
                                     <span>Ngày sinh</span>
                                     {{-- @dd(date('Y-m-d', strtotime(str_replace('/', '-', $userCurrent->date_of_birth)))) --}}
                                     <input type="date" name="date_of_birth" id="date_of_birth"
-                                        value="{{ date('Y-m-d', strtotime(str_replace('/', '-', $userCurrent->date_of_birth))) }}">
-
-
+                                    value="{{ date('Y-m-d', strtotime(str_replace('/', '-', $userCurrent->date_of_birth))) }}"
+                                    max="{{ date('Y-m-d') }}">
                                 </div>
                             </div>
                     </div>
