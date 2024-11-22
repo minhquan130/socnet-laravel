@@ -12,11 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('shares', function (Blueprint $table) {
-            $table->id(); // ID tự tăng
+            $table->id();
             $table->unsignedBigInteger('user_id'); // Người chia sẻ
             $table->unsignedBigInteger('post_id'); // Bài viết được chia sẻ
-            $table->unsignedBigInteger('friend_id'); // Bạn bè nhận bài viết
-            $table->timestamps(); // created_at, updated_at
+            $table->unsignedBigInteger('friend_id')->nullable(); // Người nhận chia sẻ (nếu có)
+            $table->enum('visibility', ['public', 'friends', 'private'])->default('public'); // Chế độ chia sẻ
+            $table->timestamps();
         });
     }
 

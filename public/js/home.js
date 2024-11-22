@@ -167,4 +167,28 @@ $('.submit-edit').on('click', function (e) {
     });
 });
 
+// chia sẽ bài viết
+document.getElementById('visibility').addEventListener('change', function() {
+    document.getElementById('friendSelect').style.display = this.value === 'friends' ? 'block' : 'none';
+});
+
+document.getElementById('shareForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const formData = new FormData(this);
+    fetch(this.action, {
+        method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+        },
+        body: formData,
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(data.message || 'Chia sẻ thành công!');
+        const modal = bootstrap.Modal.getInstance(document.querySelector('#shareModal'));
+        modal.hide();
+    })
+    .catch(error => console.error(error));
+});
 
