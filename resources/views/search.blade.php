@@ -2,7 +2,7 @@
 <div class="wrapper-search">
     <div class="filter-search"></div>
     <div class="result-search">
-        @if ($resultUsername)
+        @if ($resultUsername->count() !== 0)
             <div class="friend-search">
                 <h1>Mọi người</h1>
                 @foreach ($resultUsername as $user)
