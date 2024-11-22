@@ -56,7 +56,7 @@ class PostController extends Controller
         }
 
         $post->delete();
-        return redirect()->route('home')->with('success', 'Bài viết đã được xóa.');
+        return back();
     }
 
     public function like(Request $request, $id)
@@ -125,16 +125,11 @@ class PostController extends Controller
 
         $countPost = Posts::where('user_id',$userId)->get()->count();
 
-        if ($userCurrent && $userCurrent->date_of_birth) {
-            $userCurrent->date_of_birth = date('d/m/Y', strtotime($userCurrent->date_of_birth));
-        }
-
         // Kiểm tra xem $posts có dữ liệu không
         if ($posts->isEmpty()) {
             // Nếu không có bài đăng nào
             return view('profile', compact('posts', 'userCurrent', 'countPost', 'userProfile'));
         }
-
 
         // Truyền bài đăng vào view profile
         return view('profile', compact('posts', 'userCurrent', 'countPost', 'userProfile'));

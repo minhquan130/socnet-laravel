@@ -11,16 +11,16 @@ use Illuminate\Support\Facades\Session;
 
 class ProfileController extends Controller
 {
-    public function index()
+    public function index($userId)
     {
-        // Lấy thông tin người dùng hiện tại
-        $userCurrent = Users::findOrFail(Session::get('user_id'));
+        // Lấy thông tin người dùng theo $userId (không phải Session)
+        $userCurrent = Users::findOrFail($userId); 
         
-
         // Cập nhật lại ngày sinh nếu có
         if ($userCurrent->date_of_birth) {
             $userCurrent->date_of_birth = date('d/m/Y', strtotime($userCurrent->date_of_birth));
         }
+        
         // Cập nhật giới tính
         $userCurrent->gender = match ($userCurrent->gender) {
             'male' => 'Nam',
@@ -29,14 +29,16 @@ class ProfileController extends Controller
             default => 'Chưa cập nhật',
         };
 
-        // Lấy tất cả các bài đăng của người dùng hiện tại, sắp xếp từ mới đến cũ
+        // Lấy tất cả các bài đăng của người dùng
         $posts = Posts::where('user_id', $userCurrent->user_id)
             ->orderBy('created_at', 'desc')
             ->get();
 
+        $isCurrentUser = $userCurrent->user_id == Session::get('user_id');
         // Truyền cả thông tin người dùng và bài đăng vào view profile
-        return view('profile', compact('userCurrent', 'posts'));
+        return view('profile', compact('userCurrent', 'posts', 'isCurrentUser'));
     }
+
 
 
 
