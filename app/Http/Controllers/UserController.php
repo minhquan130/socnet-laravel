@@ -212,11 +212,8 @@ class UserController extends Controller
             $newFriendRequest->friend_id = $id;
             $newFriendRequest->status = 'accepted';
             $newFriendRequest->save();
-
             // Tạo nhóm chat mới và thêm các thành viên
             $groupId = $this->createGroupChat($currentUserId, $id);
-
-            return redirect()->route('friends.request');
         } else {
             // Nếu chưa tồn tại, tạo yêu cầu kết bạn mới với trạng thái 'pending'
             $newFriendRequest = new Friends();
@@ -224,9 +221,8 @@ class UserController extends Controller
             $newFriendRequest->friend_id = $id;
             $newFriendRequest->status = 'pending';
             $newFriendRequest->save();
-
-            return redirect()->route('friends');
         }
+        return back();
     }
 
     // Cập nhật trạng thái kết bạn

@@ -15,11 +15,11 @@ class SearchController extends Controller
     {
         $userCurrent = Users::find(Session::get('user_id'));
         $resultContentPost = Posts::select('*')
-            ->whereRaw("MATCH(content) AGAINST(? IN NATURAL LANGUAGE MODE)", [$request->input('search')])
+            ->whereRaw("MATCH(content) AGAINST(? IN NATURAL LANGUAGE MODE)", [$request->input('keyword')])
             ->get();
 
         $resultUsername = Users::select('*')
-            ->where('username', 'LIKE', '%' . $request->input('search') . '%')
+            ->where('username', 'LIKE', '%' . $request->input('keyword') . '%')
             ->get();
 
         return view('search', compact('userCurrent', 'resultContentPost', 'resultUsername'));

@@ -13,9 +13,11 @@
                         <p class="name">
                             {{ $user->username }}
                         </p>
-                        <button class="button-add-friend">
-                            Thêm bạn bè 
-                        </button>
+                        <a href="{{ route('friends.add', ['id' => $user->user_id]) }}">
+                            <button class="button-add-friend">
+                                Thêm bạn bè 
+                            </button>
+                        </a>
                     </div>
                 @endforeach
             </div>
