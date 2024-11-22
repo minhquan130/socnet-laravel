@@ -6,6 +6,7 @@ use App\Models\Comments;
 use App\Models\Likes;
 use App\Models\Posts;
 use App\Models\Users;
+use App\Models\Friends;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -114,8 +115,12 @@ class PostController extends Controller
     public function postProfile($userId)
     {
         $userCurrent = Users::where('user_id', Session::get('user_id'))->first();
-
+        $followersCount = Friends::countFollowers($userId);
+        $followingCount = Friends::countFollowing($userId);
+        $isCurrentUser = $userCurrent->user_id == Session::get('user_id');
         $userProfile = Users::where('user_id', $userId)->first();
+
+     
         // Lấy tất cả các bài đăng của người dùng cụ thể, sắp xếp từ mới đến cũ
         $posts = Posts::orderBy('posts.created_at', 'desc')
             ->Join('users', 'users.user_id', '=', 'posts.user_id')
@@ -126,13 +131,13 @@ class PostController extends Controller
         $countPost = Posts::where('user_id',$userId)->get()->count();
 
         // Kiểm tra xem $posts có dữ liệu không
-        if ($posts->isEmpty()) {
-            // Nếu không có bài đăng nào
-            return view('profile', compact('posts', 'userCurrent', 'countPost', 'userProfile'));
-        }
+        // if ($posts->isEmpty()) {
+        //     // Nếu không có bài đăng nào
+        //     return view('profile', compact('posts', 'userCurrent', 'countPost', 'userProfile'));
+        // }
 
         // Truyền bài đăng vào view profile
-        return view('profile', compact('posts', 'userCurrent', 'countPost', 'userProfile'));
+        return view('profile', compact('posts', 'userCurrent', 'countPost', 'userProfile','followersCount','followingCount', 'isCurrentUser'));
     }
 
 //  làm phần chia sẽ bài viết 

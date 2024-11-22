@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Users;
 use App\Models\Posts;
+use App\Models\Friends;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
@@ -28,15 +29,15 @@ class ProfileController extends Controller
             'other' => 'Giới tính khác',
             default => 'Chưa cập nhật',
         };
+        
 
         // Lấy tất cả các bài đăng của người dùng
         $posts = Posts::where('user_id', $userCurrent->user_id)
             ->orderBy('created_at', 'desc')
             ->get();
-
-        $isCurrentUser = $userCurrent->user_id == Session::get('user_id');
+        
         // Truyền cả thông tin người dùng và bài đăng vào view profile
-        return view('profile', compact('userCurrent', 'posts', 'isCurrentUser'));
+        return view('profile', compact('userCurrent', 'posts'));
     }
 
 
@@ -63,7 +64,6 @@ class ProfileController extends Controller
             return redirect()->route('profile')->with('error', 'Không tìm thấy người dùng.');
         }
 
-        
         // Cập nhật các trường cần thiết
         $user->username = $request->input('username');
         $user->address = $request->input('address', $user->address);
@@ -103,4 +103,5 @@ class ProfileController extends Controller
         // Trả về lại trang profile với thông báo thành công
         return redirect()->route('profile', ['userId' => $user->user_id])->with('success', 'Cập nhật thông tin thành công!')->with('updatedUser', $user);
     }
+
 }

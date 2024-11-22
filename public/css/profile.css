@@ -80,6 +80,30 @@
     margin-left: 5px;
 }
 
+.profile .profile-right .info-right .profile-button {
+    margin-top: 10px;
+}
+
+.profile .profile-right .info-right .profile-button button {
+    background: #ff7e7e;
+    color: #fff;
+    padding: 0.25rem 1rem;
+    border-radius: 0.5rem;
+    font-weight: bold;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    transition: .3s;
+    width: 110px;
+    text-align: center;
+}
+
+.profile .profile-right .info-right .profile-button button:hover {
+    background: #fffd80;
+    color: #000;
+    box-shadow: 0 0 5px #696969;
+}
+
 .profile .profile-container .story {
     display: flex;
     gap: 3rem;
