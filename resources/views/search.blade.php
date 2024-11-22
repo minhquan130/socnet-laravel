@@ -1,10 +1,17 @@
 @include('layouts.header')
 <div class="wrapper-search">
-    <div class="filter-search"></div>
+    <div class="filter-search">
+        <ul class="options-filter">
+            <h4>Bộ lọc</h4>
+            <li class="item-option-filter active-filter">Tất cả</li>
+            <li class="item-option-filter">Mọi người</li>
+            <li class="item-option-filter">Bài viết</li>
+        </ul>
+    </div>
     <div class="result-search">
         @if ($resultUsername->count() !== 0)
             <div class="friend-search">
-                <h1>Mọi người</h1>
+                <h2>Mọi người</h2>
                 @foreach ($resultUsername as $user)
                     <div class="item-friend">
                         <p class="avatar">
@@ -28,7 +35,7 @@
             </div>
         @endif
         <div class="post-search">
-            <h1>Bài viết</h1>
+            <h2>Bài viết</h2>
             <div class="list-posts">
                 @foreach ($resultContentPost as $post)
                     <div class="post-item">
