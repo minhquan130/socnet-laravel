@@ -19,7 +19,7 @@
             <label for>
                 <i class="fa-solid fa-envelope"></i>
                 <input type="text" name="email" id="email"
-                    placeholder="Nhập Email hoặc SĐT đã đăng ký" required>
+                    placeholder="Nhập Email đã đăng ký" required>
                 @error('email') <small class="help-block">{{$message}}</small>@enderror
             </label>
            
