@@ -12,7 +12,7 @@ class Posts extends Model
     protected $primaryKey = 'post_id';
 
 
-    protected $fillable = ['user_id', 'content', 'media_url', 'created_at', 'updated_at'];
+    protected $fillable = ['user_id', 'content', 'media_url', 'created_at', 'updated_at','shared_post_id'];
 
     // Định nghĩa quan hệ với Comments
     public function comments()
@@ -28,15 +28,22 @@ class Posts extends Model
             ->select('posts.*', 'users.username', 'users.email', 'users.profile_pic_url')
             ->get();
     }
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'user_id');
-    }
-    
-    public function shares()
-    {
-        return $this->hasMany(Share::class, 'post_id');
-    }
-    
-
+      // Người tạo bài viết
+     // Quan hệ người dùng
+     public function user()
+     {
+         return $this->belongsTo(Users::class, 'user_id'); // user_id là khóa ngoại trong bảng posts
+     }
+  
+      // Bài viết được chia sẻ
+      public function sharedPost()
+      {
+          return $this->belongsTo(Posts::class, 'shared_post_id')->join('users', 'users.user_id', '=', 'posts.user_id');
+      }
+  
+      // Danh sách bài viết chia sẻ bài gốc
+      public function sharedByPosts()
+      {
+          return $this->hasMany(Posts::class, 'shared_post_id');
+      }
 }

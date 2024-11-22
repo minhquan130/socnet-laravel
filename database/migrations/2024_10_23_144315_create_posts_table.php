@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id('post_id'); // PRIMARY KEY AUTO_INCREMENT
             $table->unsignedBigInteger('user_id'); // INT không dấu cho user_id
             $table->text('content')->nullable(); // TEXT cho nội dung bài viết, có thể null
+            $table->unsignedBigInteger('shared_post_id')->nullable(); // Bài viết được chia sẻ
             $table->longText('media_url')->nullable(); // VARCHAR(255) cho đường dẫn media, có thể null
             $table->timestamps(); // Thêm cả created_at và updated_at
 

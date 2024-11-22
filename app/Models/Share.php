@@ -8,22 +8,15 @@ class Share extends Model
 {
     //
     protected $table = 'shares';
-    protected $fillable = ['user_id', 'post_id', 'friend_id', 'visibility'];
-
+    protected $fillable = ['user_id', 'post_id'];
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id'); // Người nhận chia sẻ
+        return $this->belongsTo(Users::class);
     }
-    
-    public function sharedBy()
-    {
-        return $this->belongsTo(User::class, 'shared_by'); // Người chia sẻ
-    }
-    
+
     public function post()
     {
-        return $this->belongsTo(Post::class, 'post_id'); // Bài viết được chia sẻ
+        return $this->belongsTo(Posts::class);
     }
-    
 }

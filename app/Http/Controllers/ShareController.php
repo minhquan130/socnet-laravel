@@ -9,32 +9,22 @@ use App\Models\Share;
 
 class ShareController extends Controller
 {
-    public function share(Request $request, $postId)
+    public function sharePost(Request $request, $postId)
     {
-        $request->validate([
-          'post_id' => 'required|exists:posts,id',
-        'user_id' => 'required|exists:users,id',
-        'shared_by' => 'required|exists:users,id',
-        ]);
+        $post = Posts::find($postId);
     
-        $post = Posts::findOrFail($postId);
+        if (!$post) {
+            return redirect()->back()->with('error', 'Bài viết không tồn tại!');
+        }
     
         Share::create([
-            'user_id' => session('user_id'), // Người chia sẻ
+            'user_id' => auth()->id(), // Hoặc lấy user_id từ session
             'post_id' => $postId,
-            'friend_id' => $request->friend_id,
-            'visibility' => $request->visibility,
         ]);
     
-        return response()->json(['message' => 'Đã chia sẻ bài viết thành công!']);
+        return redirect()->back()->with('success', 'Chia sẻ bài viết thành công!');
     }
-
-    public function sharedWith($postId)
-{
-    $post = Posts::with(['shares.user', 'shares.friend'])->findOrFail($postId);
-
-    return view('posts.shared_with', compact('post'));
-}
+    
 
     
 

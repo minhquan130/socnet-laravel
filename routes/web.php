@@ -75,9 +75,4 @@ Route::post('passwords/reset', [PasswordResetController::class, 'resetPassword']
 
 
 // làm chức năng share
-
-
-Route::middleware('auth.session')->group(function () {
-    Route::post('/posts/{post}/share', [ShareController::class, 'share'])->name('posts.share');
-    Route::get('/posts/{post}/shares', [ShareController::class, 'sharedWith'])->name('posts.sharedWith');
-});
+Route::post('/posts/share/{post}', [PostController::class, 'share'])->name('posts.share');
