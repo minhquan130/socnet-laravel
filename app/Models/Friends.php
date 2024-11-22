@@ -39,4 +39,16 @@ class Friends extends Model
             ->where('status', 'pending')
             ->pluck('user_id');
     }
+    public static function countFollowers($userId)
+    {
+        return self::where('friend_id', $userId)
+            ->where('status', 'accepted')
+            ->count();
+    }
+    public static function countFollowing($userId)
+    {
+        return self::where('user_id', $userId)
+            ->where('status', 'accepted')
+            ->count();
+    }
 }

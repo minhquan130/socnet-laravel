@@ -10,11 +10,11 @@
             <div class="info-head">
                 <h4><i class="fa-solid fa-user"></i> Thông tin người dùng</h4>
                 
-                {{-- @if($isCurrentUser) --}}
+                @if($isCurrentUser)
                     <a data-bs-toggle="modal" data-bs-target="#exampleModal" style="z-index: 10">
                         <i class="fa-solid fa-pen-to-square"></i>
                     </a>
-                {{-- @endif --}}
+                @endif
             </div>
             <div class="info">
                 <span>
@@ -148,11 +148,15 @@
                 <h2>{{ $userProfile->username }}</h2>
                 <div class="user-post-follow">
                     <span class="post">{{ $countPost }} Bài viết</span>
-                    <span class="follower">300 Người theo dõi</span>
-                    <span class="following">50000 Đang theo dõi</span>
+                    <span class="follower">{{ $followersCount }} Người theo dõi</span>
+                    <span class="following">{{ $followingCount }} Đang theo dõi</span>
                 </div>
                 <div class="user-bio">
                     <span>{{ $userProfile->bio }}</span>
+                </div>
+                <div class="profile-button">
+                    <button class="btn-add-friend">Kết bạn</button>
+                    <button class="btn-follow">Theo dõi</button>
                 </div>
             </div>
         </div>
