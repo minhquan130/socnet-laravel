@@ -46,7 +46,8 @@
                         <div class="avarta-post">
                             <a href="{{ route('profile', ['userId' =>  $userCurrent->user_id]) }}">
                                 <img src="{{ $post->profile_pic_url == null ? asset('images/none-avatar.jpg') : $post->profile_pic_url }}"
-                                    alt=""></a>
+                                    alt="">
+                            </a>
                         </div>
                         <div class="content-top-post">
                             <span class="name">{{ $post->username }}</span>
@@ -125,6 +126,24 @@
                         <img src="{{ $post->media_url }}" alt="Hình ảnh bài viết">
                     </div>
                     @endif
+                    @if($post->sharedPost)
+                    <div class="share" style="padding: 1rem; border: 2px solid #696969 ; border-radius:20px" >
+                        <div class="info-share" style="display: flex; ">
+                            <div class="avatar">
+                                <img src="{{ $post->sharedPost->profile_pic_url == null ? asset('images/none-avatar.jpg') : $post->sharedPost->profile_pic_url }}" alt="" style="width: 50px; height: 50px; border-radius: 50%">
+                            </div>
+                            <div class="name-share" style="font-weight: bold;">
+                                {{ $post->sharedPost->username }}
+                            </div>
+                        </div>
+                        <p>{{ $post->sharedPost->content }}</p>
+                        @if ($post->sharedPost->media_url)
+                        <div class="content-media">
+                            <img src="{{ $post->sharedPost->media_url }}" alt="Hình ảnh bài viết">
+                        </div>
+                        @endif
+                        </div>
+                    @endif
                 </div>
                 <hr>
                 <div class="metrics-post">
@@ -174,61 +193,60 @@
                         </span>
                         <span>Sao chép</span>
                     </div> --}}
+                    <!--  -->
                     <div class="option option-share">
-                        <span class="option-icon icon-share" data-bs-toggle="modal" data-bs-target="#shareModal">
+                        <span class="option-icon icon-share" data-bs-toggle="modal"
+                            data-bs-target="#sharePostModal{{ $post->post_id }}">
                             <i class="fa-solid fa-share"></i>
                         </span>
-                        <span data-bs-toggle="modal" data-bs-target="#shareModal">Chia sẻ</span>
-                    </div>
-
-                   
-                    <!-- Modal chia sẻ -->
-                    <div class="modal fade" id="shareModal" tabindex="-1" aria-labelledby="shareModalLabel"
-                        aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <form id="shareForm" action="{{ route('posts.share', $post->post_id) }}" method="POST">
-                                    @csrf
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="shareModalLabel">Chia sẻ bài viết</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <!-- Chế độ chia sẻ -->
-                                        <div class="mb-3">
-                                            <label for="visibility" class="form-label">Chế độ:</label>
-                                            <select class="form-select" id="visibility" name="visibility" required>
-                                                <option value="public">Công khai</option>
-                                                <option value="friends">Chỉ bạn bè</option>
-                                                <option value="private">Riêng tư</option>
-                                            </select>
-                                        </div>
-
-                                        <!-- Chọn bạn bè (nếu cần) -->
-                                        <div class="mb-3" id="friendSelect" style="display: none;">
-                                            <label for="friend_id" class="form-label">Chia sẻ với bạn:</label>
-                                            <select class="form-select" id="friend_id" name="friend_id">
-                                                <option value="" selected>-- Chọn bạn bè --</option>
-                                                @foreach ($friends as $friend)
-                                                <option value="{{ $friend->id }}">{{  $friend->users->username }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="submit" class="btn btn-primary">Chia sẻ</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
+                        <span data-bs-toggle="modal" data-bs-target="#sharePostModal{{ $post->post_id }}">Chia sẻ</span>
                     </div>
 
 
                 </div>
             </div>
 
+            <!-- Modal Chia sẻ -->
+            <div class="modal fade" id="sharePostModal{{ $post->post_id }}" tabindex="-1"
+                aria-labelledby="sharePostModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="sharePostModalLabel">Chia sẻ bài viết</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form action="{{ route('posts.share', $post->post_id) }}" method="POST"
+                            enctype="multipart/form-data">
+                            @csrf
+                            <div class="modal-body">
+                                <!-- Hiển thị nội dung bài viết gốc -->
+                                <p><strong>Bài viết chia sẻ từ:</strong> {{ $post->username }}</p>
+                                <p>{{ $post->content }}</p>
 
+                                <!-- Nội dung mới của bài viết (nếu có) -->
+                                <div class="form-group mt-3">
+                                    <label for="share-content">Nội dung chia sẻ (tuỳ chọn):</label>
+                                    <textarea class="form-control" name="content" id="share-content" rows="3"
+                                        placeholder="Viết gì đó..."></textarea>
+                                </div>
+
+                                <!-- Ảnh của bài viết chia sẻ -->
+                                @if ($post->media_url)
+                                <div class="mt-3">
+                                    <label>Ảnh chia sẻ:</label>
+                                    <img src="{{ $post->media_url }}" alt="Hình ảnh bài viết" class="img-fluid">
+                                </div>
+                                @endif
+                            </div>
+                            <input type="hidden" name="shared_post_id" value="{{$post->post_id }}">
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                                <button type="submit" class="btn btn-primary">Chia sẻ</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
 
 
 

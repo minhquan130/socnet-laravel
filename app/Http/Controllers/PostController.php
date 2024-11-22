@@ -145,5 +145,45 @@ class PostController extends Controller
         return view('profile', compact('posts', 'userCurrent'));
     }
 
+//  làm phần chia sẽ bài viết 
+public function share(Request $request, $postId)
+{
+    $validated = $request->validate([
+        'content' => 'nullable|string|max:500',
+        'shared_post_id' => 'required|exists:posts,post_id',
+    ]);
+
+    $post = new Posts();
+    $post->user_id = Session::get('user_id'); // ID người dùng hiện tại
+    $post->shared_post_id = $request->shared_post_id; // Liên kết với bài viết gốc
+    $post->content = $request->content; // Nội dung mới (nếu có)
+
+    if ($request->hasFile('media_url')) {
+        $path = $request->file('media_url')->store('posts', 'public');
+        $post->media_url = $path;
+    }
+
+    $post->save();
+
+    return redirect()->back()->with('success', 'Bài viết đã được chia sẻ!');
+}
+
+// public function postShare($userId)
+// {
+//     $userCurrent = Users::where('user_id', Session::get('user_id'))->first();
+
+//     // Lấy bài viết cùng bài viết được chia sẻ
+//     $posts = Posts::with(['user', 'sharedPost.user'])
+//         ->orderBy('created_at', 'desc')
+//         ->where('user_id', $userId)
+//         ->get();
+
+//     if ($userCurrent && $userCurrent->date_of_birth) {
+//         $userCurrent->date_of_birth = date('d/m/Y', strtotime($userCurrent->date_of_birth));
+//     }
+
+//     return view('profile', compact('posts', 'userCurrent'));
+// }
+
 
 }

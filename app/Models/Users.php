@@ -63,4 +63,10 @@ class Users extends Model
     {
         return self::whereIn('user_id', $userIds)->get();
     }
+
+    public function sharedPosts()
+    {
+        return $this->hasMany(Share::class);
+    }
+
 }
