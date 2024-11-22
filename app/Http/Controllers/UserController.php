@@ -210,8 +210,11 @@ class UserController extends Controller
             // Nếu yêu cầu kết bạn đã tồn tại, cập nhật trạng thái thành 'accepted'
             $this->updateFriendRequest($id, $currentUserId, 'accepted');
 
-            // Tạo bạn bè ngược lại
-            $this->updateFriendRequest($currentUserId, $id, 'accepted');
+            $newFriendRequest = new Friends();
+            $newFriendRequest->user_id = $currentUserId;
+            $newFriendRequest->friend_id = $id;
+            $newFriendRequest->status = 'accepted';
+            $newFriendRequest->save();
 
             // Tạo nhóm chat mới và thêm các thành viên
             $groupId = $this->createGroupChat($currentUserId, $id);
