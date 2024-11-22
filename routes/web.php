@@ -49,6 +49,8 @@ Route::middleware([CheckUser::class])->group(function () {
     Route::post('/like/post-{id}', [PostController::class, 'like'])->name('post.like');
 
     Route::get('/search', [SearchController::class, 'search'])->name('search');
+    Route::get('/search/all-users', [SearchController::class, 'searchUser'])->name('search.allUsers');
+    Route::get('/search/all-posts', [SearchController::class, 'searchPost'])->name('search.allPosts');
 });
 
 Route::get('/register', [UserController::class, 'showRegister'])->name('register');

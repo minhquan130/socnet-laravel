@@ -55,16 +55,18 @@
                             </div>
                         </div>
                         <div class="top-post-tp2">
-                            <div class="other-post">
-                                <i class="fa-solid fa-ellipsis"></i>
-                            </div>
-                            <ul class="options-item-post">
-                                <li><a href="{{ route('post.delete', ['id' => $post->post_id]) }}"><i
-                                            class="fa-solid fa-trash"></i>Xóa bài viết</a></li>
-                                <li data-bs-toggle="modal" data-bs-target="#updatePostModal{{ $post->post_id }}">
-                                    <i class="fa-solid fa-pen"></i>Sửa bài viết
-                                </li>
-                            </ul>
+                            @if ($userCurrent->user_id === $post->user_id)
+                                <div class="other-post">
+                                    <i class="fa-solid fa-ellipsis"></i>
+                                </div>
+                                <ul class="options-item-post">
+                                    <li><a href="{{ route('post.delete', ['id' => $post->post_id]) }}"><i
+                                                class="fa-solid fa-trash"></i>Xóa bài viết</a></li>
+                                    <li data-bs-toggle="modal" data-bs-target="#updatePostModal{{ $post->post_id }}">
+                                        <i class="fa-solid fa-pen"></i>Sửa bài viết
+                                    </li>
+                                </ul>
+                            @endif
                         </div>
 
                         <!-- Modal of chỉnh sửa bài biết  -->

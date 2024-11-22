@@ -46,8 +46,6 @@ socket.on('receive_msg', data1 => {
             return response.json();
         })
         .then(data2 => {
-            console.log('data1: ', data1);
-            console.log('data2: ', data2);
             if (data1.currentUserId === data2.userId) {
                 InputChatMessage.value = ''
                 chatMessages.innerHTML += `
