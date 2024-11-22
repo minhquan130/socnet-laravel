@@ -17,6 +17,9 @@ return new class extends Migration
             $table->text('content')->nullable(); // TEXT cho nội dung bài viết, có thể null
             $table->longText('media_url')->nullable(); // VARCHAR(255) cho đường dẫn media, có thể null
             $table->timestamps(); // Thêm cả created_at và updated_at
+
+            // Thêm chỉ mục Full-Text cho cột 'content'
+            $table->index('content', 'fulltext_content', 'FULLTEXT');
         });
     }
 
