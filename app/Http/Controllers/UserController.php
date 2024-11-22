@@ -56,13 +56,10 @@ class UserController extends Controller
     function showRegister()
     {
         // for ($i = 0; $i < 10; $i++) {
-        //     # code...
-        //     $newUser = new Users();
         //     Users::create([
         //         'username' => 'Quân ' . $i,
         //         'email' => 'quan' . $i . '@gmail.com',
         //         'password_hash' => Hash::make('123456'),
-        //         'gender' => 'male',
         //         'date_of_birth' => now(),
         //     ]);
         // }

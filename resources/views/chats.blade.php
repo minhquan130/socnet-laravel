@@ -13,7 +13,7 @@
             <div class="list-chats">
                 <div class="list-chats-wrapper" style="margin-right: 1rem">
                     @foreach ($friends as $friend)
-                        <a href="{{ route('chats', ['id' => $friend->groupMembers->group_id]) }}"
+                        <a href="{{ route('chats', ['id' => $friend->groupMembers[0]->group_id]) }}"
                             style="text-decoration: none; color: #000" class="chat-item">
                             <img src="{{ $friend->users->profile_pic_url == null ? asset('images/none-avatar.jpg') : $friend->users->profile_pic_url }}"
                                 alt="" class="avatar-chat">

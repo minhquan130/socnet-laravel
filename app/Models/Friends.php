@@ -23,11 +23,14 @@ class Friends extends Model
 
     public function groupMembers()
     {
-        return $this->belongsTo(GroupMember::class, 'user_id', 'user_id');
+        return $this->hasMany(GroupMember::class, 'user_id', 'user_id');
     }
     static function getFriendsByStatus($currentUserId, $status)
     {
-        return self::where('friend_id', $currentUserId)->whereIn('status', (array) $status)->with('users', 'groupMembers')->get();
+        return self::where('friend_id', $currentUserId)
+            ->whereIn('status', (array) $status)
+            ->with('users', 'groupMembers') // Load quan hệ
+            ->get();
     }
 
     public static function getPendingRequests($currentUserId)

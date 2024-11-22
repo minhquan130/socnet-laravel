@@ -19,13 +19,19 @@ class ChatController extends Controller
     {
         $currentUserId = Session::get('user_id');
         $userCurrent = Users::where('user_id', $currentUserId)->first();
-        $friends = (new Friends())->getFriendsByStatus($currentUserId, 'accepted');
+        $friends = Friends::getFriendsByStatus($currentUserId, 'accepted');
+        // dd($friends);
+        foreach ($friends as $friend) {
+            $friend->groupMembers = GroupMember::whereIn('user_id', [$currentUserId, $friend->users->user_id])
+                ->select('group_id')
+                ->groupBy('group_id')
+                ->havingRaw('COUNT(DISTINCT user_id) = 2')
+                ->get();
+        }
         $otherUser = null;
         $messages = null;
         if (GroupMember::where('group_id', $id)->where('user_id', $currentUserId)->first()) {
             # code...
-
-
             $otherUserIds = GroupMember::where('group_id', $id)->where('user_id', '!=', $currentUserId)->pluck('user_id');
             $otherUser = Users::whereIn('user_id', $otherUserIds)->first();
 
