@@ -26,7 +26,10 @@
            
             <label for="name">
                 <i class="fa-solid fa-user"></i>
-                <input type="text" name="name" id="name" placeholder="Tên" required>
+                <input type="text" name="name" id="name" placeholder="Tên" 
+                title="Tên không vượt quá 30 kí tự"
+                required> 
+                <span style="color: red; font-size: 0.9em;"></span>
             </label>
 
             <!-- Trường giới tính với checkbox -->
@@ -49,9 +52,10 @@
             <label for="password">
                 <i class="fa-solid fa-lock"></i>
                 <input type="password" name="password" id="password" placeholder="Mật khẩu" 
-                pattern="^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{6,}$" 
-                title="Mật khẩu phải có ít nhất 6 ký tự, bao gồm ít nhất 1 chữ cái viết hoa, 1 chữ số và không có khoảng trắng" 
-                required>
+                    pattern="^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{6,15}$" 
+                    title="Mật khẩu phải ít nhất 6 kí tự, tối đa 15 ký tự, bao gồm ít nhất 1 chữ cái viết hoa, 1 chữ số và không có khoảng trắng" 
+                    maxlength="15" 
+                    required>
             </label>
 
 
@@ -84,6 +88,21 @@
             if (password !== confirmPassword) {
                 event.preventDefault();
                 alert("Mật khẩu xác nhận không khớp.");
+            }
+        });
+    </script>
+
+    <script>
+        const inputField = document.getElementById("name");
+        const errorSpan = inputField.parentElement.querySelector("span");
+
+        inputField.addEventListener("input", function (event) {
+            const input = event.target.value;
+
+            if (input.length > 30) {
+                errorSpan.textContent = "Tên không được vượt quá 30 ký tự.";
+            } else {
+                errorSpan.textContent = ""; // Xóa thông báo nếu không có lỗi
             }
         });
     </script>

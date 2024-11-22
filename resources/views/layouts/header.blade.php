@@ -51,7 +51,6 @@
                 @csrf
                 <i class="fa-solid fa-magnifying-glass"></i>
                 <input name="search" type="text" placeholder="Tìm kiếm...">
-                {{-- <button type="submit">Tìm kiếm</button> --}}
             </form>
             <!-- Mavigation -->
             <div class="navigation">
