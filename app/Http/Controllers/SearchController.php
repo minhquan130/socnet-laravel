@@ -6,21 +6,22 @@ use App\Http\Controllers\Controller;
 use App\Models\Posts;
 use App\Models\Users;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class SearchController extends Controller
 {
     //
     static function search(Request $request)
     {
+        $userCurrent = Users::find(Session::get('user_id'));
         $resultContentPost = Posts::select('*')
             ->whereRaw("MATCH(content) AGAINST(? IN NATURAL LANGUAGE MODE)", [$request->input('search')])
             ->get();
 
         $resultUsername = Users::select('*')
-            ->whereRaw("MATCH(username) AGAINST(? IN NATURAL LANGUAGE MODE)", [$request->input('search')])
+            ->where('username', 'LIKE', '%' . $request->input('search') . '%')
             ->get();
 
-        $result = $resultContentPost->merge($resultUsername);
-        dd($result);
+        return view('search', compact('userCurrent', 'resultContentPost', 'resultUsername'));
     }
 }

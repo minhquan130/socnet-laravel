@@ -16,7 +16,7 @@ Route::middleware([CheckUser::class])->group(function () {
     // Home
     Route::get('/get-user-id', [UserController::class, 'getUserId']);
     Route::get('/', [UserController::class, 'showHome'])->name('home');
-    
+
     // Loguot
     Route::get('/logout', [LogoutController::class, 'index'])->name('logout');
     Route::post('/logout', [LogoutController::class, 'store'])->name('logout.store');
@@ -27,12 +27,12 @@ Route::middleware([CheckUser::class])->group(function () {
 
     // post-edit-post
     Route::post('/edit-post/{id}', [PostController::class, 'updatePost'])->name('post.edit');
-    
+
     // Profile
     // Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
     Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
     Route::get('/profile/{userId}', [PostController::class, 'postProfile'])->name('profile');
-    
+
 
     Route::get('/chats/message/{id}', [ChatController::class, 'index'])->name('chats');
     Route::post('/chats/message/{id}', [ChatController::class, 'store'])->name('chats');
@@ -40,11 +40,11 @@ Route::middleware([CheckUser::class])->group(function () {
     Route::get('/friends', [UserController::class, 'showFriends'])->name('friends');
     Route::get('/friends/request', [UserController::class, 'showFriendsRequest'])->name('friends.request');
     Route::get('/friends/add/{id}', [UserController::class, 'addFriends'])->name('friends.add');
-        
+
     // Route cho việc bình luận
     Route::post('/comment/add', [CommentController::class, 'addComment'])->name('comment.add');
     // Route::get('/post/{id}', [CommentController::class, 'show'])->name('post.show');
-    
+
 
     Route::get('/like/post-{id}', [PostController::class, 'like'])->name('post.like');
     Route::post('/like/post-{id}', [PostController::class, 'like'])->name('post.like');
@@ -60,20 +60,6 @@ Route::post('/login', [UserController::class, 'login'])->name('login.store');
 
 Route::get('/forgetpassword', [UserController::class, 'ShowForgetPassword'])->name('forgetpassword');
 Route::post('/sendotp', [UserController::class, 'sendOtp'])->name('sendotp');
-
-
-
-
-// Route::post('/post', [PostController::class, 'addPost'])->name('post.add');
-
-// Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
-
-// Route::get('/delete-post/{id}', [PostController::class, 'deletePost'])->name('post.delete');
-
-// // Route cho việc bình luận
-// Route::post('/posts/{id}/comments', [CommentController::class, 'store'])->name('post.store');
-
-// Route::get('/post/{id}', [CommentController::class, 'show'])->name('post.show');
 
 
 // Hiển thị form nhập email để yêu cầu đặt lại mật khẩu
@@ -93,5 +79,3 @@ Route::post('passwords/reset', [PasswordResetController::class, 'resetPassword']
 
 
 Route::post('/posts/{post}/share', [ShareController::class, 'share'])->name('posts.share');
-
-

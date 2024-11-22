@@ -1,12 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Instacon | Tìm kiếm</title>
-</head>
-<body>
-    
+@include('layouts.header')
+<div class="wrapper-search">
+    <div class="filter-search"></div>
+    <div class="result-search">
+        @if ($resultUsername)
+            <div class="friend-search">
+                @foreach ($resultUsername as $user)
+                    <div class="item-friend">
+                        <p class="avatar">
+                            <img src="{{ $user->profile_pic_url == null ? asset('images/none-avatar.jpg') : $user->profile_pic_url }}"
+                                alt="">
+                        </p>
+                        <p class="name">
+                            {{ $user->username }}
+                        </p>
+                        <button class="button-add-friend">
+                            Thêm bạn bè 
+                        </button>
+                    </div>
+                @endforeach
+            </div>
+        @endif
+        <div class="post-search">
+        </div>
+    </div>
+</div>
 </body>
+
 </html>
