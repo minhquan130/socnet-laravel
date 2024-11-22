@@ -1,12 +1,9 @@
 const showMediaPost = document.getElementById('show-media-post');
 const imgShowMediaPost = document.getElementById('img-show-media-post');
 const inputPicture = document.getElementById('input-picture');
-const btnClosePreview = showMediaPost.querySelector('.close') ?? '';
 const arrOtherPost = document.querySelectorAll('.other-post');
 const optionLikes = document.querySelectorAll('.option-like');
 
-inputPicture.addEventListener('change', chooseFile);
-btnClosePreview.addEventListener('click', closeFile);
 arrOtherPost.forEach(otherPost => {
     // console.log(otherPost.parentElement.querySelector('.options-item-post'));
 

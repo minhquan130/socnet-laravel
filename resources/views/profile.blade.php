@@ -9,9 +9,12 @@
         <div class="info-card">
             <div class="info-head">
                 <h4><i class="fa-solid fa-user"></i> Thông tin người dùng</h4>
-                <a data-bs-toggle="modal" data-bs-target="#exampleModal" style="z-index: 10">
-                    <i class="fa-solid fa-pen-to-square"></i>
-                </a>
+                
+                {{-- @if($isCurrentUser) --}}
+                    <a data-bs-toggle="modal" data-bs-target="#exampleModal" style="z-index: 10">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </a>
+                {{-- @endif --}}
             </div>
             <div class="info">
                 <span>
@@ -52,7 +55,7 @@
             <div class="info">
                 <span>
                     <b><i class="fa-solid fa-cake-candles"></i> Ngày sinh: </b>
-                    <span>{{ $userProfile->date_of_birth ?? 'Chưa cập nhật' }}</span>
+                    <span>{{ $userProfile->date_of_birth ? date('d/m/Y', strtotime($userProfile->date_of_birth)) : 'Chưa cập nhật' }}</span>
                 </span>
             </div>
         </div>
