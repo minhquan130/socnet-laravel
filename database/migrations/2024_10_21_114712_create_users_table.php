@@ -1,7 +1,7 @@
 <?php
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -26,6 +26,9 @@ return new class extends Migration
             $table->string('relationship')->nullable(); // Cột 'relationship' có thể null
             $table->timestamps(); // created_at và updated_at
         });
+
+        // Thêm chỉ mục FULLTEXT cho cột 'username' sau khi bảng đã được tạo
+        DB::statement('ALTER TABLE users ADD FULLTEXT fulltext_username (username)');
     }
 
     /**
@@ -33,6 +36,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+        // Xóa bảng users nếu migration rollback
         Schema::dropIfExists('users');
     }
 };
