@@ -69,28 +69,28 @@ class UserController extends Controller
 
     function showRegister()
     {
-        for ($i = 1; $i <= 40; $i++) {
-            Users::create([
-                'username' => 'Quân ' . $i,
-                'email' => 'quan' . $i . '@gmail.com',
-                'password_hash' => Hash::make('123456'),
-                'date_of_birth' => now(),
-            ]);
-        }
+        // for ($i = 1; $i <= 40; $i++) {
+        //     Users::create([
+        //         'username' => 'Quân ' . $i,
+        //         'email' => 'quan' . $i . '@gmail.com',
+        //         'password_hash' => Hash::make('123456'),
+        //         'date_of_birth' => now(),
+        //     ]);
+        // }
 
-        Users::create([
-            'username' => 'Minh Quân',
-            'email' => 'minhq130@gmail.com',
-            'password_hash' => Hash::make('Quan123'),
-            'date_of_birth' => now(),
-        ]);
+        // Users::create([
+        //     'username' => 'Minh Quân',
+        //     'email' => 'minhq130@gmail.com',
+        //     'password_hash' => Hash::make('Quan123'),
+        //     'date_of_birth' => now(),
+        // ]);
 
-        for ($i = 1; $i < 20; $i++) {
-            $newFriend = new Friends();
-            $newFriend->user_id = $i;
-            $newFriend->friend_id = 41;
-            $newFriend->save();
-        }
+        // for ($i = 1; $i < 20; $i++) {
+        //     $newFriend = new Friends();
+        //     $newFriend->user_id = $i;
+        //     $newFriend->friend_id = 41;
+        //     $newFriend->save();
+        // }
 
         return view('register');
     }
